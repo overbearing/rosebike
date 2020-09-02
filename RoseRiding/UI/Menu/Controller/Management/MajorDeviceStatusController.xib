@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MajorDeviceStatusController">
+            <connections>
+                <outlet property="battery_remain" destination="3jy-65-ESh" id="bhh-qO-TLg"/>
+                <outlet property="battery_view" destination="VeX-8Z-Std" id="fSd-uA-4Kk"/>
+                <outlet property="status" destination="VJe-UC-VAi" id="57h-SM-JA9"/>
+                <outlet property="view" destination="wmy-7N-KdD" id="Dlg-nN-LL6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wmy-7N-KdD">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online or not" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjr-1L-75r">
+                    <rect key="frame" x="33" y="108" width="83.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Y1-Yd-Pgf">
+                    <rect key="frame" x="0.0" y="135" width="414" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJe-UC-VAi">
+                            <rect key="frame" x="33" y="13.5" width="40.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RC-02-Ebz">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="0RC-02-Ebz" firstAttribute="top" secondItem="9Y1-Yd-Pgf" secondAttribute="top" id="Awf-7M-5BU"/>
+                        <constraint firstAttribute="bottom" secondItem="0RC-02-Ebz" secondAttribute="bottom" id="GjK-If-VVU"/>
+                        <constraint firstAttribute="trailing" secondItem="0RC-02-Ebz" secondAttribute="trailing" id="Mu9-8m-lny"/>
+                        <constraint firstAttribute="height" constant="44" id="frO-MW-0fU"/>
+                        <constraint firstItem="VJe-UC-VAi" firstAttribute="centerY" secondItem="9Y1-Yd-Pgf" secondAttribute="centerY" id="kuF-gT-dfB"/>
+                        <constraint firstItem="VJe-UC-VAi" firstAttribute="leading" secondItem="9Y1-Yd-Pgf" secondAttribute="leading" constant="33" id="vdF-YF-xHt"/>
+                        <constraint firstItem="0RC-02-Ebz" firstAttribute="leading" secondItem="9Y1-Yd-Pgf" secondAttribute="leading" id="wEd-Qp-wuE"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiQ-zB-EQT">
+                    <rect key="frame" x="33" y="189" width="90.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekn-eR-PcT">
+                    <rect key="frame" x="0.0" y="216" width="414" height="44"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100%" translatesAutoresizingMaskIntoConstraints="NO" id="VeX-8Z-Std">
+                            <rect key="frame" x="33" y="15.5" width="89" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="TOf-pb-5gg"/>
+                                <constraint firstAttribute="width" constant="89" id="bCr-QJ-x37"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 100 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jy-65-ESh">
+                            <rect key="frame" x="343" y="13.5" width="43" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="VeX-8Z-Std" firstAttribute="leading" secondItem="ekn-eR-PcT" secondAttribute="leading" constant="33" id="1Dj-89-QAu"/>
+                        <constraint firstItem="VeX-8Z-Std" firstAttribute="centerY" secondItem="ekn-eR-PcT" secondAttribute="centerY" id="IZC-Qz-rwR"/>
+                        <constraint firstItem="3jy-65-ESh" firstAttribute="centerY" secondItem="ekn-eR-PcT" secondAttribute="centerY" id="JBh-Of-2W4"/>
+                        <constraint firstAttribute="trailing" secondItem="3jy-65-ESh" secondAttribute="trailing" constant="28" id="UlM-dJ-FfG"/>
+                        <constraint firstAttribute="height" constant="44" id="ZbM-3u-XSb"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ekn-eR-PcT" firstAttribute="leading" secondItem="BV7-9D-DuB" secondAttribute="leading" id="22o-Rf-nw0"/>
+                <constraint firstItem="Mjr-1L-75r" firstAttribute="top" secondItem="BV7-9D-DuB" secondAttribute="top" constant="64" id="Jjg-YM-yTP"/>
+                <constraint firstItem="9Y1-Yd-Pgf" firstAttribute="top" secondItem="Mjr-1L-75r" secondAttribute="bottom" constant="10" id="Rwz-fc-KcU"/>
+                <constraint firstItem="IiQ-zB-EQT" firstAttribute="top" secondItem="9Y1-Yd-Pgf" secondAttribute="bottom" constant="10" id="Sua-uF-6Tu"/>
+                <constraint firstItem="9Y1-Yd-Pgf" firstAttribute="leading" secondItem="BV7-9D-DuB" secondAttribute="leading" id="WfI-ZN-Qpo"/>
+                <constraint firstItem="ekn-eR-PcT" firstAttribute="top" secondItem="IiQ-zB-EQT" secondAttribute="bottom" constant="10" id="a9X-eQ-Jiy"/>
+                <constraint firstItem="Mjr-1L-75r" firstAttribute="leading" secondItem="BV7-9D-DuB" secondAttribute="leading" constant="33" id="bHN-L9-ZKI"/>
+                <constraint firstItem="IiQ-zB-EQT" firstAttribute="leading" secondItem="BV7-9D-DuB" secondAttribute="leading" constant="33" id="ghg-nP-Y33"/>
+                <constraint firstItem="BV7-9D-DuB" firstAttribute="trailing" secondItem="9Y1-Yd-Pgf" secondAttribute="trailing" id="gzk-IX-Pls"/>
+                <constraint firstItem="ekn-eR-PcT" firstAttribute="trailing" secondItem="BV7-9D-DuB" secondAttribute="trailing" id="ieC-9m-2Rg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="BV7-9D-DuB"/>
+            <point key="canvasLocation" x="137.68115942028987" y="81.696428571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="100%" width="49.5" height="9"/>
+    </resources>
+</document>

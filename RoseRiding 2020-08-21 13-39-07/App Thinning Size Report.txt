@@ -1,0 +1,246 @@
+
+App Thinning Size Report for All Variants of RoseRiding
+
+Variant: RoseRiding-0953DE94-8AF0-452F-9E65-6DEB16D83A93.ipa
+Supported variant descriptors: [device: iPad8,7, os-version: 12.0], [device: iPad8,2, os-version: 12.0], [device: iPad7,4, os-version: 12.0], [device: iPad8,5, os-version: 12.0], [device: iPad7,3, os-version: 12.0], [device: iPad8,1, os-version: 12.0], [device: iPad8,4, os-version: 12.0], [device: iPad8,3, os-version: 12.0], [device: iPad8,8, os-version: 12.0], [device: iPad7,1, os-version: 12.0], [device: iPad7,2, os-version: 12.0], and [device: iPad8,6, os-version: 12.0]
+App + On Demand Resources size: 10.3 MB compressed, 26.4 MB uncompressed
+App size: 10.3 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-10C78AE8-8507-425A-A1B2-F8406EF0D331.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 12.2] and [device: iPhone7,1, os-version: 12.2]
+App + On Demand Resources size: 8.6 MB compressed, 20.6 MB uncompressed
+App size: 8.6 MB compressed, 20.6 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-164D9637-109B-4864-846E-CCDF01CF463D.ipa
+Supported variant descriptors: [device: iPhone10,3, os-version: 13.0], [device: iPhone11,6, os-version: 13.0], [device: iPhone12,5, os-version: 13.0], [device: iPhone9,4, os-version: 13.0], [device: iPhone10,5, os-version: 13.0], [device: iPhone10,6, os-version: 13.0], [device: iPhone10,2, os-version: 13.0], [device: iPhone12,3, os-version: 13.0], [device: iPhone11,4, os-version: 13.0], [device: iPhone9,2, os-version: 13.0], and [device: iPhone11,2, os-version: 13.0]
+App + On Demand Resources size: 8.7 MB compressed, 20.6 MB uncompressed
+App size: 8.7 MB compressed, 20.6 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-2334C59D-5427-46F3-B7E3-E8166296CB57.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.2]
+App + On Demand Resources size: 8 MB compressed, 20 MB uncompressed
+App size: 8 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-2EEDD026-7063-463C-B637-6C5E0E21A798.ipa
+Supported variant descriptors: [device: iPhone9,1, os-version: 12.2], [device: iPhone9,3, os-version: 12.2], [device: iPhone10,1, os-version: 12.2], and [device: iPhone10,4, os-version: 12.2]
+App + On Demand Resources size: 8 MB compressed, 20 MB uncompressed
+App size: 8 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-3860B4CD-D8A7-453C-A1F9-0D3A64B34ED3.ipa
+Supported variant descriptors: [device: iPad3,3, os-version: 9.0], [device: iPad3,2, os-version: 9.0], [device: iPad3,1, os-version: 9.0], [device: iPad3,5, os-version: 9.0], [device: iPad3,4, os-version: 9.0], and [device: iPad3,6, os-version: 9.0]
+App + On Demand Resources size: 11.3 MB compressed, 23.3 MB uncompressed
+App size: 11.3 MB compressed, 23.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-421D7BC5-72E3-4D4F-BAEC-AB44C8DFB02B.ipa
+Supported variant descriptors: [device: iPhone9,2, os-version: 10.0], [device: iPhone9,4, os-version: 10.0], [device: iPhone10,3, os-version: 11.0], [device: iPhone10,6, os-version: 11.0], [device: iPhone10,2, os-version: 11.0], and [device: iPhone10,5, os-version: 11.0]
+App + On Demand Resources size: 11.2 MB compressed, 27.3 MB uncompressed
+App size: 11.2 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-4803BECD-C316-405B-B40F-D0FC9541097B.ipa
+Supported variant descriptors: [device: iPhone6,1, os-version: 12.2], [device: iPhone6,2, os-version: 12.2], [device: iPod7,1, os-version: 12.2], [device: iPod9,1, os-version: 12.2], [device: iPhone8,4, os-version: 12.2], [device: iPhone8,1, os-version: 12.2], and [device: iPhone7,2, os-version: 12.2]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-4961C06E-8C92-4BE3-B0D9-2A18050B2093.ipa
+Supported variant descriptors: [device: iPad6,3, os-version: 12.0] and [device: iPad6,4, os-version: 12.0]
+App + On Demand Resources size: 10.4 MB compressed, 26.4 MB uncompressed
+App size: 10.4 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-57767252-E3E4-4780-8AA4-EB6B7990AAF7.ipa
+Supported variant descriptors: [device: iPhone11,2, os-version: 12.2], [device: iPhone10,2, os-version: 12.2], [device: iPhone9,2, os-version: 12.2], [device: iPhone10,6, os-version: 12.2], [device: iPhone9,4, os-version: 12.2], [device: iPhone10,5, os-version: 12.2], [device: iPhone11,4, os-version: 12.2], [device: iPhone11,6, os-version: 12.2], and [device: iPhone10,3, os-version: 12.2]
+App + On Demand Resources size: 8.6 MB compressed, 20.6 MB uncompressed
+App size: 8.6 MB compressed, 20.6 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-5C0E380E-949A-4FD9-AC79-F8939F2FA40C.ipa
+Supported variant descriptors: [device: iPad2,7, os-version: 9.0], [device: iPad2,4, os-version: 9.0], [device: iPad2,3, os-version: 9.0], [device: iPad2,6, os-version: 9.0], [device: iPad2,2, os-version: 9.0], [device: iPad2,1, os-version: 9.0], and [device: iPad2,5, os-version: 9.0]
+App + On Demand Resources size: 11.3 MB compressed, 23.3 MB uncompressed
+App size: 11.3 MB compressed, 23.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-63EFE3EF-4351-4508-888E-BFC8D1C491DC.ipa
+Supported variant descriptors: [device: iPhone7,1, os-version: 12.0] and [device: iPhone8,2, os-version: 12.0]
+App + On Demand Resources size: 10.9 MB compressed, 27 MB uncompressed
+App size: 10.9 MB compressed, 27 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-78584C6D-D7C3-45BF-9C0B-303A61CC9182.ipa
+Supported variant descriptors: [device: iPhone9,1, os-version: 12.0], [device: iPhone9,3, os-version: 12.0], [device: iPhone10,1, os-version: 12.0], and [device: iPhone10,4, os-version: 12.0]
+App + On Demand Resources size: 10.3 MB compressed, 26.4 MB uncompressed
+App size: 10.3 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-7AEF0807-D64D-42E2-9DCC-584DBB6AD184.ipa
+Supported variant descriptors: [device: iPod5,1, os-version: 9.0], [device: iPhone5,4, os-version: 9.0], [device: iPhone5,1, os-version: 9.0], [device: iPhone5,3, os-version: 9.0], [device: iPhone5,2, os-version: 9.0], and [device: iPhone4,1, os-version: 9.0]
+App + On Demand Resources size: 11.3 MB compressed, 23.3 MB uncompressed
+App size: 11.3 MB compressed, 23.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-7E8C9C3C-81C8-47CE-86E4-DB5E35300B33.ipa
+Supported variant descriptors: [device: iPad5,3, os-version: 12.0], [device: iPad4,8, os-version: 12.0], [device: iPad4,3, os-version: 12.0], [device: iPad6,8, os-version: 12.0], [device: iPad4,4, os-version: 12.0], [device: iPad7,6, os-version: 12.0], [device: iPad4,6, os-version: 12.0], [device: iPad6,7, os-version: 12.0], [device: iPad4,5, os-version: 12.0], [device: iPad6,12, os-version: 12.0], [device: iPad5,1, os-version: 12.0], [device: iPad5,2, os-version: 12.0], [device: iPad5,4, os-version: 12.0], [device: iPad7,5, os-version: 12.0], [device: iPad4,1, os-version: 12.0], [device: iPad4,2, os-version: 12.0], [device: iPad4,7, os-version: 12.0], [device: iPad6,11, os-version: 12.0], and [device: iPad4,9, os-version: 12.0]
+App + On Demand Resources size: 10.3 MB compressed, 26.4 MB uncompressed
+App size: 10.3 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-88EB563A-26DE-4270-B4EA-30179EBAD4CA.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 13.0] and [device: iPhone12,1, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-8B1AD3ED-871A-4D82-B7A5-17E66FBDE297.ipa
+Supported variant descriptors: [device: iPhone6,1, os-version: 9.0], [device: iPod7,1, os-version: 9.0], [device: iPhone6,2, os-version: 9.0], [device: iPhone8,1, os-version: 9.0], [device: iPhone7,2, os-version: 9.0], and [device: iPhone8,4, os-version: 9.0]
+App + On Demand Resources size: 10.5 MB compressed, 26.5 MB uncompressed
+App size: 10.5 MB compressed, 26.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-963D7860-CF44-4187-A570-9FE9F5B715CD.ipa
+Supported variant descriptors: [device: iPad6,4, os-version: 13.0] and [device: iPad6,3, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-9C805A0E-E9F2-4BE7-BB26-88C387F6CFA7.ipa
+Supported variant descriptors: [device: iPhone7,1, os-version: 9.0] and [device: iPhone8,2, os-version: 9.0]
+App + On Demand Resources size: 11.2 MB compressed, 27.3 MB uncompressed
+App size: 11.2 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-A8001B03-E871-4C74-951F-78D286C5D25B.ipa
+Supported variant descriptors: [device: iPad7,11, os-version: 13.0], [device: iPad5,1, os-version: 13.0], [device: iPad6,8, os-version: 13.0], [device: iPad6,12, os-version: 13.0], [device: iPad6,7, os-version: 13.0], [device: iPad6,11, os-version: 13.0], [device: iPad7,6, os-version: 13.0], [device: iPad5,4, os-version: 13.0], [device: iPad5,2, os-version: 13.0], [device: iPad5,3, os-version: 13.0], [device: iPad7,5, os-version: 13.0], and [device: iPad7,12, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-B1E025A8-271F-4DEB-999E-310B6BA5F89D.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 13.0]
+App + On Demand Resources size: 8.6 MB compressed, 20.6 MB uncompressed
+App size: 8.6 MB compressed, 20.6 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-B1FB9250-9C35-45C7-B62A-85CA742321FE.ipa
+Supported variant descriptors: [device: iPad11,3, os-version: 12.2], [device: iPad7,3, os-version: 12.2], [device: iPad8,4, os-version: 12.2], [device: iPad8,6, os-version: 12.2], [device: iPad8,3, os-version: 12.2], [device: iPad8,2, os-version: 12.2], [device: iPad11,4, os-version: 12.2], [device: iPad11,2, os-version: 12.2], [device: iPad8,5, os-version: 12.2], [device: iPad7,4, os-version: 12.2], [device: iPad8,1, os-version: 12.2], [device: iPad8,7, os-version: 12.2], [device: iPad7,2, os-version: 12.2], [device: iPad8,8, os-version: 12.2], [device: iPad11,1, os-version: 12.2], and [device: iPad7,1, os-version: 12.2]
+App + On Demand Resources size: 8 MB compressed, 20 MB uncompressed
+App size: 8 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-B3224384-BFE0-488B-9EC2-4999DB9B35F5.ipa
+Supported variant descriptors: [device: iPad7,3, os-version: 10.0], [device: iPad7,2, os-version: 10.0], [device: iPad7,4, os-version: 10.0], and [device: iPad7,1, os-version: 10.0]
+App + On Demand Resources size: 10.4 MB compressed, 26.5 MB uncompressed
+App size: 10.4 MB compressed, 26.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-B7F8A9E2-7E4E-4EDA-9BC2-B6BDB5E11B6C.ipa
+Supported variant descriptors: [device: iPad4,3, os-version: 9.0], [device: iPad4,9, os-version: 9.0], [device: iPad4,8, os-version: 9.0], [device: iPad5,1, os-version: 9.0], [device: iPad4,5, os-version: 9.0], [device: iPad6,7, os-version: 9.0], [device: iPad4,6, os-version: 9.0], [device: iPad4,2, os-version: 9.0], [device: iPad4,7, os-version: 9.0], [device: iPad6,8, os-version: 9.0], [device: iPad7,5, os-version: 11.0], [device: iPad4,1, os-version: 9.0], [device: iPad4,4, os-version: 9.0], [device: iPad5,4, os-version: 9.0], [device: iPad7,6, os-version: 11.0], [device: iPad5,2, os-version: 9.0], [device: iPad6,12, os-version: 10.0], [device: iPad6,11, os-version: 10.0], and [device: iPad5,3, os-version: 9.0]
+App + On Demand Resources size: 10.5 MB compressed, 26.5 MB uncompressed
+App size: 10.5 MB compressed, 26.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-BAA67F37-579E-4730-B50F-94CFC4C68C9A.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.0]
+App + On Demand Resources size: 10.3 MB compressed, 26.4 MB uncompressed
+App size: 10.3 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-C797B8A4-CFF7-45CC-BCC5-13C34A5244F4.ipa
+Supported variant descriptors: [device: iPad6,7, os-version: 12.2], [device: iPad4,4, os-version: 12.2], [device: iPad4,8, os-version: 12.2], [device: iPad7,6, os-version: 12.2], [device: iPad5,1, os-version: 12.2], [device: iPad4,7, os-version: 12.2], [device: iPad7,5, os-version: 12.2], [device: iPad4,3, os-version: 12.2], [device: iPad5,3, os-version: 12.2], [device: iPad4,5, os-version: 12.2], [device: iPad4,9, os-version: 12.2], [device: iPad5,2, os-version: 12.2], [device: iPad5,4, os-version: 12.2], [device: iPad6,8, os-version: 12.2], [device: iPad4,6, os-version: 12.2], [device: iPad4,1, os-version: 12.2], [device: iPad6,11, os-version: 12.2], [device: iPad4,2, os-version: 12.2], and [device: iPad6,12, os-version: 12.2]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-CC6E4A20-7BA9-49D4-9DC3-22B3A51CED5F.ipa
+Supported variant descriptors: [device: iPhone12,8, os-version: 13.0], [device: iPhone10,1, os-version: 13.0], [device: iPhone9,1, os-version: 13.0], [device: iPhone9,3, os-version: 13.0], and [device: iPhone10,4, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-CECF12CE-AE3B-4476-A2EE-3A693F37C3B1.ipa
+Supported variant descriptors: [device: iPad6,3, os-version: 9.0] and [device: iPad6,4, os-version: 9.0]
+App + On Demand Resources size: 10.5 MB compressed, 26.5 MB uncompressed
+App size: 10.5 MB compressed, 26.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-D36FC17F-1663-4C29-8DED-0D8347563606.ipa
+Supported variant descriptors: [device: iPhone10,6, os-version: 12.0], [device: iPhone9,4, os-version: 12.0], [device: iPhone10,5, os-version: 12.0], [device: iPhone10,3, os-version: 12.0], [device: iPhone11,4, os-version: 12.0], [device: iPhone11,2, os-version: 12.0], [device: iPhone10,2, os-version: 12.0], [device: iPhone9,2, os-version: 12.0], and [device: iPhone11,6, os-version: 12.0]
+App + On Demand Resources size: 10.9 MB compressed, 27 MB uncompressed
+App size: 10.9 MB compressed, 27 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-D3E26663-C7B3-43F9-A12A-9609F34D8124.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 10.0], [device: iPhone10,1, os-version: 11.0], [device: iPhone10,4, os-version: 11.0], and [device: iPhone9,1, os-version: 10.0]
+App + On Demand Resources size: 10.4 MB compressed, 26.5 MB uncompressed
+App size: 10.4 MB compressed, 26.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-DA44F9B6-4A72-496D-8550-F20765867A1F.ipa
+Supported variant descriptors: [device: iPad6,4, os-version: 12.2] and [device: iPad6,3, os-version: 12.2]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-DDED7153-96D8-4381-A29B-50B700872931.ipa
+Supported variant descriptors: [device: iPad7,3, os-version: 13.0], [device: iPad8,12, os-version: 13.0], [device: iPad8,10, os-version: 13.0], [device: iPad8,1, os-version: 13.0], [device: iPad8,4, os-version: 13.0], [device: iPad8,9, os-version: 13.0], [device: iPad7,2, os-version: 13.0], [device: iPad8,8, os-version: 13.0], [device: iPad8,7, os-version: 13.0], [device: iPad11,4, os-version: 13.0], [device: iPad11,2, os-version: 13.0], [device: iPad8,11, os-version: 13.0], [device: iPad11,3, os-version: 13.0], [device: iPad7,4, os-version: 13.0], [device: iPad7,1, os-version: 13.0], [device: iPad8,2, os-version: 13.0], [device: iPad8,5, os-version: 13.0], [device: iPad11,1, os-version: 13.0], [device: iPad8,3, os-version: 13.0], and [device: iPad8,6, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-E95487A2-4A36-4597-A971-A5D8B5A00475.ipa
+Supported variant descriptors: [device: iPod7,1, os-version: 12.0], [device: iPhone6,1, os-version: 12.0], [device: iPhone8,4, os-version: 12.0], [device: iPhone6,2, os-version: 12.0], [device: iPhone7,2, os-version: 12.0], and [device: iPhone8,1, os-version: 12.0]
+App + On Demand Resources size: 10.3 MB compressed, 26.4 MB uncompressed
+App size: 10.3 MB compressed, 26.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding-F13DB037-79A2-4180-B311-AF65EBA6AF33.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 13.0], [device: iPhone8,1, os-version: 13.0], and [device: iPod9,1, os-version: 13.0]
+App + On Demand Resources size: 8.1 MB compressed, 20 MB uncompressed
+App size: 8.1 MB compressed, 20 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: RoseRiding.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 24.1 MB compressed, 51.6 MB uncompressed
+App size: 24.1 MB compressed, 51.6 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

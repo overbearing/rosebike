@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>RoseRiding.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>8871B93A901C06C5D40DA54B6CE1662E54A1EAE0</string>
+				<key>dateExpires</key>
+				<string>2021/8/26</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>8871B93A901C06C5D40DA54B6CE1662E54A1EAE0</string>
+						<key>dateExpires</key>
+						<string>2021/8/26</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>FBSDKCoreKit.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>RMRDRVGK27</string>
+						<key>name</key>
+						<string>Lockheed Technology Ltd</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>8871B93A901C06C5D40DA54B6CE1662E54A1EAE0</string>
+						<key>dateExpires</key>
+						<string>2021/8/26</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>FBSDKLoginKit.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>RMRDRVGK27</string>
+						<key>name</key>
+						<string>Lockheed Technology Ltd</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>RMRDRVGK27.com.leopard.lockheed</string>
+				<key>aps-environment</key>
+				<string>development</string>
+				<key>com.apple.developer.applesignin</key>
+				<array>
+					<string>Default</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>RMRDRVGK27</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>Leopard IoT.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>6961c5ad-20cc-4cf9-b827-f2bb4dc5e74f</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.leopard.lockheed</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>RMRDRVGK27</string>
+				<key>name</key>
+				<string>Lockheed Technology Ltd</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

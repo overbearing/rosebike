@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="142" id="KGk-i7-Jjw" customClass="ScheduledWorkingCell">
+            <rect key="frame" x="0.0" y="0.0" width="499" height="142"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="499" height="142"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pW8-7v-vst">
+                        <rect key="frame" x="24" y="17" width="451" height="108"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="108" id="ZLt-8V-EtH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="Weekday Mode">
+                            <color key="titleColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="edit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JwP-GF-sKJ"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQK-O6-yWV">
+                        <rect key="frame" x="495" y="57.5" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="Xfb-Sg-SMW"/>
+                            <constraint firstAttribute="width" constant="27" id="fsG-gG-Nb1"/>
+                        </constraints>
+                        <state key="normal" image="del"/>
+                        <connections>
+                            <action selector="del:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VIM-VS-lWW"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="pW8-7v-vst" secondAttribute="trailing" constant="24" id="0lu-bl-7Bs"/>
+                    <constraint firstItem="pW8-7v-vst" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2Kj-gU-B5N"/>
+                    <constraint firstItem="sQK-O6-yWV" firstAttribute="leading" secondItem="pW8-7v-vst" secondAttribute="trailing" constant="20" id="7Tu-aZ-8eX"/>
+                    <constraint firstItem="pW8-7v-vst" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Db9-b0-6hZ"/>
+                    <constraint firstItem="sQK-O6-yWV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jcw-IX-IYA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="delBtn" destination="sQK-O6-yWV" id="caS-qj-RaG"/>
+                <outlet property="name" destination="pW8-7v-vst" id="wfA-i8-Zq1"/>
+                <outlet property="trailingCons" destination="0lu-bl-7Bs" id="vzw-N5-YBC"/>
+            </connections>
+            <point key="canvasLocation" x="72" y="131"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="del" width="24" height="24"/>
+    </resources>
+</document>
