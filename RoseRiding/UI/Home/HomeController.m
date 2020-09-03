@@ -517,7 +517,7 @@
         }];
 }
 - (void)showconnect{
-    
+    [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
     [self.indicate_connect setTitle:[GlobalControlManger enStr:@"Connected" geStr:@"Connected"] forState:UIControlStateNormal];
     self.currentDeviceInfo.isConnecting = YES;
 //    [self.indicate_lock setTitleColor:[UIColor colorWithHexString:@"#4b4b4b"] forState:UIControlStateNormal];

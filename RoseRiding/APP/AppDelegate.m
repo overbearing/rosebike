@@ -36,6 +36,7 @@
 @property (nonatomic) BOOL isLaunchedByNotification;
 @property (nonatomic,strong)MessageListController * mess;
 @property (nonatomic,strong)MainTabbarController * MTabbar;
+@property (nonatomic,strong)NSString * msgid;
 @end
 @implementation AppDelegate
 static NSString * const UMkey = @"5f112d48978eea08cad1355a";
@@ -140,7 +141,12 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
             self.window.backgroundColor = [UIColor whiteColor];
             self.window.rootViewController = [[MainTabbarController alloc] init];
             self.notDic = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
-            NSLog(@"launchOptions--------%@",self.notDic);
+//            NSLog(@"launchOptions--------%@",self.notDic);
+            if (self.notDic[@"msg_id"]!= nil) {
+                 self.msgid = self.notDic[@"msg_id"];
+                           [self recivetime];
+            }
+           
             if (self.notDic) {
                 [self badgenumber];
                [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:self.notDic];
@@ -268,6 +274,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 // iOS 12 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification API_AVAILABLE(ios(10.0)){
      NSDictionary * userInfo = notification.request.content.userInfo;
+//     NSLog(@"ios10userinfo%@",userInfo);
+    if (userInfo[@"msg_id"]!= nil) {
+        self.msgid = userInfo[@"msg_id"];
+        [self recivetime];
+    }
+    
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
   if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
        [JPUSHService handleRemoteNotification:userInfo];
@@ -283,18 +295,28 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   }
 }
 - (void)badgenumber{
-    NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
-    badge += 1;
-    [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"badgenumber"] != nil) {
+        NSInteger badge = [[[NSUserDefaults standardUserDefaults]objectForKey:@"badgenumber"] integerValue];
+        badge += 1;
+        [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
+    }
+   
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
   // Required
   NSDictionary * userInfo = notification.request.content.userInfo;
-   
+    if (userInfo[@"msg_id"]!= nil) {
+          self.msgid = userInfo[@"msg_id"];
+          [self recivetime];
+    }
+  
+//    NSLog(@"ios10userinfo%@",userInfo);
   if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
     [JPUSHService handleRemoteNotification:userInfo];
       NSLog(@"iOS 10 点击通知栏收到远程通知:%@",userInfo);
+      
        [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
+      
 //      [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
       [self badgenumber];
       
@@ -310,9 +332,14 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
   // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
+    
+    if (userInfo[@"msg_id"]!= nil) {
+          self.msgid = userInfo[@"msg_id"];
+          [self recivetime];
+    }
   if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
       [JPUSHService handleRemoteNotification:userInfo];
-      NSLog(@"ios10userinfo%@",userInfo);
+     
        [self badgenumber];
       
      
@@ -455,8 +482,22 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
             return result;
      }
 }
-
-
-
+- (void)recivetime{
+    NSString * url = host(@"users/p_time");
+    [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"id":self.msgid,@"time":[self currentTimeStr]} success:^(NSDictionary * _Nonnull result) {
+//        if (result[@"msg"]!= nil) {
+////            [Toast showToastMessage:result[@"msg"]];
+//        }
+    } fail:^(NSError * _Nonnull error) {
+//        [Toast showToastMessage:error.description];
+    }];
+}
+//获取当前时间戳
+- (NSString *)currentTimeStr{
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
+    NSTimeInterval time=[date timeIntervalSince1970];// *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
+    return timeString;
+}
 @end
 

@@ -72,26 +72,31 @@
     // Configure the view for the selected state
 }
 - (void)setModel:(historyModel *)model{
-    self.firstcity.layer.borderWidth = model.h1 == nil?0:0.5;
-    self.secondcity.layer.borderWidth = model.h2 == nil?0:0.5;
-    self.thirdcity.layer.borderWidth = model.h3 == nil?0:0.5;
-    [self.firstcity setTitle:model.h1 forState:UIControlStateNormal];
-    [self.secondcity setTitle:model.h2 forState:UIControlStateNormal];
-    [self.thirdcity setTitle:model.h3 forState:UIControlStateNormal];
+    if ([self.title.text isEqualToString:@"Used City"]) {
+            self.firstcity.layer.borderWidth = model.h1 == nil?0:0.5;
+        self.secondcity.layer.borderWidth = model.h2 == nil?0:0.5;
+        self.thirdcity.layer.borderWidth = model.h3 == nil?0:0.5;
+        [self.firstcity setTitle:model.h1 forState:UIControlStateNormal];
+        [self.secondcity setTitle:model.h2 forState:UIControlStateNormal];
+        [self.thirdcity setTitle:model.h3 forState:UIControlStateNormal];
+    }
+
 }
 - (void)setHotcity:(NSMutableArray<hotCityModel *> *)hotcity{
-    self.firstcity.layer.borderWidth = hotcity[0].addr == nil?0:0.5;
-    self.secondcity.layer.borderWidth = hotcity[1].addr == nil?0:0.5;
-    self.thirdcity.layer.borderWidth = hotcity[2].addr == nil?0:0.5;
+    if ([self.title.text isEqualToString:@"Popular City"]) {
     if (hotcity.count >0) {
         [self.firstcity setTitle:hotcity[0].addr forState:UIControlStateNormal];
+        self.firstcity.layer.borderWidth = hotcity[0].addr == nil?0:0.5;
     }
     if(hotcity.count >1){
         [self.secondcity setTitle:hotcity[1].addr forState:UIControlStateNormal];
+         self.secondcity.layer.borderWidth = hotcity[1].addr == nil?0:0.5;
     }
     if(hotcity.count >2){
+         self.thirdcity.layer.borderWidth = hotcity[2].addr == nil?0:0.5;
          [self.thirdcity setTitle:hotcity[2].addr forState:UIControlStateNormal];
-    }  
+    }
+    }
 }
 - (IBAction)goriding:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(clickTest:)]) {

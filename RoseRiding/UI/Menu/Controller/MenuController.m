@@ -269,7 +269,6 @@
     [alertVC addAction:sexWoman];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
-
 - (void)syncAirPModelToService{
     [[NetworkingManger shareManger] postDataWithUrl:host(@"users/updateMode") para:@{@"id":@"5",@"inc_type":@"1"} success:^(NSDictionary * _Nonnull result) {
         NSLog(@"%@",result);
@@ -278,12 +277,9 @@
         
     }];
 }
-
-
 //设置飞行模式
 -(void)requestSetWaring
 {
-    
     if (![MyDevicemanger shareManger].mainDevice.isConnecting) {
         NSString *url = host(@"users/setAirplane");
          NSMutableDictionary *para =[[NSMutableDictionary alloc] init];

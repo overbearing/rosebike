@@ -33,6 +33,7 @@ API_AVAILABLE(ios(13.0))
 @property (nonatomic , strong)NSString * level;
 @property (nonatomic , assign)BOOL iscount;
 @property (nonatomic , assign)BOOL isearch;
+@property (nonatomic , assign)BOOL iscancel;
 @property (nonatomic, strong)GMSAutocompleteResultsViewController *resultsViewController;
 @property (strong, nonatomic)  UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *sectionTitlesArray;
@@ -200,7 +201,7 @@ API_AVAILABLE(ios(13.0))
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2"} success:^(NSDictionary * _Nonnull result) {
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":@""} success:^(NSDictionary * _Nonnull result) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 //        NSLog(@"result--------%@",result[@"data"][@"h_addr"]);
         if (result[@"data"][@"h_addr"] != nil) {
@@ -339,15 +340,18 @@ API_AVAILABLE(ios(13.0))
         [textField resignFirstResponder];
     }
     if (textField.text.isNotBlank) {
-        self.keyword = textField.text;
-//       self.iscount = YES;
-       [self.sectionTitlesArray removeAllObjects];
-       [self.sectionArray removeAllObjects];
-       [self.hotCity removeAllObjects];
-       [self.dataArray removeAllObjects];
-       [self loadpopularcity];
-       [self.search resignFirstResponder];
-       self.search.text = @"";
+        if (!self.iscancel) {
+             self.keyword = self.search.text;
+            //       self.iscount = YES;
+                   [self.sectionTitlesArray removeAllObjects];
+                   [self.sectionArray removeAllObjects];
+                   [self.hotCity removeAllObjects];
+                   [self.dataArray removeAllObjects];
+                   [self loadpopularcity];
+                   [self.search resignFirstResponder];
+                   self.search.text = @"";
+        }
+       
        }
    
 }
@@ -359,6 +363,7 @@ API_AVAILABLE(ios(13.0))
    
 }
 - (void)cancelsearch{
+    self.iscancel = YES;
     [self.search resignFirstResponder];
     self.search.text = @"";
     self.keyword = @"";
@@ -426,7 +431,7 @@ API_AVAILABLE(ios(13.0))
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"] != nil) {
+            if (self.historyCity != nil) {
                 return 80;
             }else{
                 return 0;

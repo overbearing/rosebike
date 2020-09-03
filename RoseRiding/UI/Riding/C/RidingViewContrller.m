@@ -356,7 +356,7 @@ if (!self.isCurrenPageBluetoothOperation) {
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2"} success:^(NSDictionary * _Nonnull result) {
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2} success:^(NSDictionary * _Nonnull result) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
        
     } fail:^(NSError * _Nonnull error) {

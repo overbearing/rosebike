@@ -948,7 +948,7 @@ return sixTeenString;
             UILocalNotification *localNotice = [UILocalNotification new];
                         //                localNotice.fireDate = [NSDate dateWithTimeIntervalSinceNow:5.0];
                       localNotice.alertBody = [GlobalControlManger enStr:@"ALERT: Your bike has registered a geofence alarm that your bike has left the designated area." geStr:@"ALERT: Your bike has registered a geofence alarm that your bike has left the designated area."];
-                      localNotice.alertAction =  [GlobalControlManger enStr:@"Geofence Alarm - Bluetooth" geStr:@"Geofence Alarm - Bluetooth"];
+                      localNotice.alertTitle =  [GlobalControlManger enStr:@"Geofence Alarm - Bluetooth" geStr:@"Geofence Alarm - Bluetooth"];
 //                       NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
 //                       badge += 1;
 //                         localNotice.applicationIconBadgeNumber = badge;

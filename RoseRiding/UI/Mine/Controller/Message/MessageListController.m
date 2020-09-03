@@ -42,7 +42,7 @@
 @implementation MessageListController
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self refresh];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -51,23 +51,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.barStyle = NavigationBarStyleWhite;
+    self.title = [GlobalControlManger enStr:@"Messages" geStr:@"Messages"];
+    [self.view bringSubviewToFront:self.navView];
+    
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveJPushNotification:) name:@"didReceiveJPushNotification" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(jpushNotificationCenter:) name:@"jpushNotificationCenter" object:nil];
     // Do any additional setup after loading the view.
+    [self setupUI];
+    [self refresh];
+//    self.isnotify = YES;
+//    [self showWarning];
+}
+- (void)refresh{
     self.list = [NSMutableArray array];
     self.alllist = [NSMutableArray array];
     self.isSystemMesaage = NO;
-    self.barStyle = NavigationBarStyleWhite;
-    self.title = [GlobalControlManger enStr:@"Messages" geStr:@"Messages"];
+
     self.tableviewindex = 0;
     self.messagenumber = 0;
     self.page = 0;
     self.pagesnumber = 20;
-    [self.view bringSubviewToFront:self.navView];
-    [self setupUI];
+    
+    
     [self loadData];
-//    self.isnotify = YES;
-//    [self showWarning];
 }
 - (void)getimei{
     if ([UserInfo shareUserInfo].Id == nil) {
@@ -555,7 +562,8 @@
                 [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
 
                 self.messagenumber = [result[@"msg"] integerValue];
-                NSLog(@"badgenumber------------%@",result[@"msg"]);
+//                NSLog(@"badgenumber------------%@",result[@"msg"]);
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%ld",(long)self.messagenumber] forKey:@"badgenumber"];
                 if ([self.list[0].msgtype isEqualToString:@"4"]||[self.list[0].msgtype isEqualToString:@"6"]) {
                         self.isnotify = YES;
                         self.warningContent.text = self.list[0].value;
