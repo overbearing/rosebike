@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
 
 target 'RoseRiding' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -24,13 +24,14 @@ pod 'IQKeyboardManager'
 pod 'BabyBluetooth'
 pod 'JXCategoryView'
 pod 'GoogleMaps'
-pod 'GooglePlaces'›
+pod 'GooglePlaces'
 pod 'JZLocationConverter'
 pod 'JCore'
 pod 'JPush'
 pod 'FBSDKLoginKit'
 pod 'TwitterKit'
 pod 'UMCShare/Social/Twitter'
+pod 'TwilioVoice', '~> 5.5.0'
 #pod 'WMZDialog'
 
 

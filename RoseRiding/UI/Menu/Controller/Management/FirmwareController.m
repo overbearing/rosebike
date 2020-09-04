@@ -27,7 +27,15 @@
 }
 
 - (IBAction)updateAction:(id)sender {
-    
+    if ([MyDevicemanger shareManger].mainDevice.device_imei == nil) {
+        return;
+    }
+    NSString * url = host(@"users/deviceUpgrades");
+    [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"imei":[MyDevicemanger shareManger].mainDevice.device_imei} success:^(NSDictionary * _Nonnull result) {
+      
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
     
 }
 

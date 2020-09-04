@@ -97,6 +97,8 @@
 @property (strong , nonatomic)NSString * h1;
 @property (strong , nonatomic)NSString * h2;
 @property (strong , nonatomic)NSString * h3;
+@property (strong , nonatomic)NSString * postcode;
+@property (strong , nonatomic)NSString * country;
 @end
 
 @implementation RidingViewContrller
@@ -113,8 +115,10 @@
     self.h1 = @"";
     self.h2 = @"";
     self.h3 = @"";
+    self.postcode = @"";
     self.iscount = NO;
     self.status = @"0";
+    self.country = @"";
     hou = 0;
     min = 0;
     sec = 0;
@@ -356,7 +360,7 @@ if (!self.isCurrenPageBluetoothOperation) {
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2} success:^(NSDictionary * _Nonnull result) {
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2,@"postcode":self.postcode,@"country":self.country} success:^(NSDictionary * _Nonnull result) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
        
     } fail:^(NSError * _Nonnull error) {
@@ -707,6 +711,8 @@ didFailAutocompleteWithError:(NSError *)error {
 }
 */
 - (NSString *)loadCurentLocation:(NSString *)lat andlng:(NSString* )lng{
+//    NSString * lattt = @"51.3026";
+//    NSString * longgg = @"0.0739";
     NSString * lattt = @"";
     NSString * longgg = @"";
     if (lat.isNotBlank && lng.isNotBlank) {
@@ -718,9 +724,12 @@ didFailAutocompleteWithError:(NSError *)error {
         self.currentLocationDetailInfo = [result[@"results"] firstObject];
          NSString *currentLocationName = @"";
          NSArray *locationinfos = [[self.currentLocationDetailInfo[@"address_components"] reverseObjectEnumerator] allObjects];
-//        NSLog(@"%@",locationinfos);
+        NSLog(@"%@",locationinfos);
         for (NSDictionary *dic in locationinfos) {
             if ([dic[@"types"] containsObject:@"postal_code"]){
+                self.postcode = dic[@"long_name"];
+                NSLog(@"%@",self.postcode);
+//                return;
                 continue;
             }
             if ([dic[@"types"] containsObject:@"administrative_area_level_1"]) {
@@ -729,6 +738,7 @@ didFailAutocompleteWithError:(NSError *)error {
             }
             if ([dic[@"types"] containsObject:@"country"]) {
                 self.h1 = dic[@"long_name"];
+                self.country = dic[@"long_name"];
             }
             if ([dic[@"types"] containsObject:@"locality"]) {
                 self.h2 = dic[@"long_name"];

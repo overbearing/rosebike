@@ -56,7 +56,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"WorkModelListCell" bundle:nil] forCellReuseIdentifier:@"WorkModelListCell"];
     self.tableView.separatorColor = [UIColor clearColor];
 }
-
 - (void)viewWillLayoutSubviews{
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
@@ -89,7 +88,6 @@
 //        cell.userInteractionEnabled = YES;
         cell.trans = ^{
             if (indexPath.row == 2) {
-                NSLog(@"进入省电模式");
                 [self PAWERSAVINGMODE];
             }else if(indexPath.row == 3) {
                 if ([MyDevicemanger shareManger].mainDevice.isConnecting) {
@@ -115,7 +113,10 @@
 }
 //安装模式接口
 - (void)enterInstall{
-    [[NetworkingManger shareManger] postDataWithUrl:host(@"users/SetShake") para:@{@"imei":[MyDevicemanger shareManger].mainDevice.device_imei == nil ? @"":[MyDevicemanger shareManger].mainDevice.device_imei } success:^(NSDictionary * _Nonnull result) {
+    if ([MyDevicemanger shareManger].mainDevice.device_imei == nil) {
+        return;
+    }
+    [[NetworkingManger shareManger] postDataWithUrl:host(@"users/SetShake") para:@{@"imei":[MyDevicemanger shareManger].mainDevice.device_imei } success:^(NSDictionary * _Nonnull result) {
         if (![result[@"msg"]isEqualToString:@""]) {
             [Toast showToastMessage:result[@"msg"]];
         }

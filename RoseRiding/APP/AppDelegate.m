@@ -54,8 +54,8 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 //        // U-Share 平台设置
 ////        [self confitUShareSettings];
 //        [self configUSharePlatforms];
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
-    [application registerUserNotificationSettings:settings];
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+//    [application registerUserNotificationSettings:settings];
     
     if (launchOptions) {
             /** 用一个label来显示通知 */
@@ -146,9 +146,9 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
                  self.msgid = self.notDic[@"msg_id"];
                            [self recivetime];
             }
-           
+            [self badgenumber];
             if (self.notDic) {
-                [self badgenumber];
+                
                [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:self.notDic];
 //                 这里就是告诉程序我要跳转到哪里
                 MessageListController *hello = [[MessageListController alloc]init];
@@ -173,7 +173,7 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 - (void)registerAPN {
     if (@available(iOS 10.0, *)) { // iOS10 以上
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UIUserNotificationTypeBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
         }];
     } else {// iOS8.0 以上
         UIUserNotificationSettings *setting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
@@ -284,8 +284,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
        [JPUSHService handleRemoteNotification:userInfo];
       
-      NSLog(@"%@",userInfo);
     //从通知界面直接进入应用
+      
       [self badgenumber];
 //      [JPUSHService setBadge:0];
       NSLog(@"从通知界面直接进入应用");
@@ -295,11 +295,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   }
 }
 - (void)badgenumber{
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"badgenumber"] != nil) {
-        NSInteger badge = [[[NSUserDefaults standardUserDefaults]objectForKey:@"badgenumber"] integerValue];
+        NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
+    
         badge += 1;
         [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
-    }
+    [JPUSHService setBadge:badge];
    
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
@@ -390,8 +390,8 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification
 {
-    NSLog(@"点击了接收到了本地通知");
-    NSLog(@"%@",notification);
+//    NSLog(@"点击了接收到了本地通知");
+//    NSLog(@"%@",notification);
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"checktheBluetooth" object:nil];
@@ -500,4 +500,5 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
     return timeString;
 }
 @end
+
 
