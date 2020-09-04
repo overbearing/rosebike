@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -668,7 +668,7 @@
 		8D9FA59B2451D86A00B1D1AF /* ResetPasswordWithPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordWithPhone.h; sourceTree = "<group>"; };
 		8D9FA59C2451D86A00B1D1AF /* ResetPasswordWithPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordWithPhone.m; sourceTree = "<group>"; };
 		8D9FA59D2451D86A00B1D1AF /* ResetPasswordWithPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordWithPhone.xib; sourceTree = "<group>"; };
-		8DAD1F03241E74AA0088ACA8 /* Rose Bikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rose Bikes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DAD1F03241E74AA0088ACA8 /* Leopard IoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Leopard IoT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DAD1F06241E74AA0088ACA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8DAD1F07241E74AA0088ACA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8DAD1F12241E74AC0088ACA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1670,7 +1670,7 @@
 		8DAD1F04241E74AA0088ACA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DAD1F03241E74AA0088ACA8 /* Rose Bikes.app */,
+				8DAD1F03241E74AA0088ACA8 /* Leopard IoT.app */,
 				8DAD1F1E241E74AD0088ACA8 /* RoseRidingTests.xctest */,
 				8DAD1F29241E74AD0088ACA8 /* RoseRidingUITests.xctest */,
 			);
@@ -1849,7 +1849,7 @@
 			);
 			name = RoseRiding;
 			productName = RoseRiding;
-			productReference = 8DAD1F03241E74AA0088ACA8 /* Rose Bikes.app */;
+			productReference = 8DAD1F03241E74AA0088ACA8 /* Leopard IoT.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8DAD1F1D241E74AD0088ACA8 /* RoseRidingTests */ = {
@@ -2495,7 +2495,7 @@
 				CODE_SIGN_ENTITLEMENTS = RoseRiding/RoseRiding.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 137;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RMRDRVGK27;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2539,7 +2539,7 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 1.3.6.4;
+				MARKETING_VERSION = 1.3.7.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2620,7 +2620,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leopard.lockheed;
-				PRODUCT_NAME = "Rose Bikes";
+				PRODUCT_NAME = "Leopard IoT";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RoseRiding/Public/bridge/RoseRiding-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2639,7 +2639,7 @@
 				CODE_SIGN_ENTITLEMENTS = RoseRiding/RoseRiding.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 137;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RMRDRVGK27;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2683,7 +2683,7 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 1.3.6.4;
+				MARKETING_VERSION = 1.3.7.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2764,7 +2764,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leopard.lockheed;
-				PRODUCT_NAME = "Rose Bikes";
+				PRODUCT_NAME = "Leopard IoT";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RoseRiding/Public/bridge/RoseRiding-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

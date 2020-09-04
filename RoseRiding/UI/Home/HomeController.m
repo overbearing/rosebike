@@ -343,7 +343,7 @@
 }
 - (void)reconnect:(NSTimer*)timer{
     if (times> 0) {
-        if (second < 5) {
+        if (second < 30) {
             second += 1;
             self.isCurrenPageBluetoothOperation = YES;
             if ([self.indicate_connect.currentTitle isEqualToString:[GlobalControlManger enStr:@"Disconnected" geStr:@"Disconnected"]]) {
