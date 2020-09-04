@@ -296,10 +296,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 - (void)badgenumber{
         NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
-    
         badge += 1;
         [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
-    [JPUSHService setBadge:badge];
+        [JPUSHService setBadge:badge];
    
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){

@@ -148,6 +148,7 @@
 		38AA997D24CC502800E1B37D /* NSString+ZXXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AA997C24CC502800E1B37D /* NSString+ZXXExtension.m */; };
 		38B9CAC124DCEB2D006252E8 /* recordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B9CAC024DCEB2D006252E8 /* recordsView.m */; };
 		38B9CAC324DCEB47006252E8 /* recordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38B9CAC224DCEB47006252E8 /* recordsView.xib */; };
+		38F3E05325024BA500D02256 /* historyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3E05225024BA500D02256 /* historyModel.m */; };
 		4630EFD24DA7CCD814509743 /* libPods-RoseRiding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BEDD2971B296F8F8686CAE /* libPods-RoseRiding.a */; };
 		61C947A52445A07D0082B0A2 /* UserDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C947A42445A07D0082B0A2 /* UserDeviceInfo.m */; };
 		61C947A82446DEEF0082B0A2 /* AddNewDeviceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C947A72446DEEF0082B0A2 /* AddNewDeviceAlertView.m */; };
@@ -519,6 +520,8 @@
 		38B9CABF24DCEB2D006252E8 /* recordsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = recordsView.h; sourceTree = "<group>"; };
 		38B9CAC024DCEB2D006252E8 /* recordsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = recordsView.m; sourceTree = "<group>"; };
 		38B9CAC224DCEB47006252E8 /* recordsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = recordsView.xib; sourceTree = "<group>"; };
+		38F3E05125024BA500D02256 /* historyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyModel.h; sourceTree = "<group>"; };
+		38F3E05225024BA500D02256 /* historyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyModel.m; sourceTree = "<group>"; };
 		390BD310B2E351AA58882C51 /* Pods-RoseRidingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRidingUITests.debug.xcconfig"; path = "Target Support Files/Pods-RoseRidingUITests/Pods-RoseRidingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E7046F840B18D7640D0369B /* libPods-RoseRidingUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoseRidingUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C947A32445A07D0082B0A2 /* UserDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDeviceInfo.h; sourceTree = "<group>"; };
@@ -1370,6 +1373,8 @@
 		384C0C5B24D40974008C5AE2 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				38F3E05125024BA500D02256 /* historyModel.h */,
+				38F3E05225024BA500D02256 /* historyModel.m */,
 				384C0C5C24D41606008C5AE2 /* CityModel.h */,
 				384C0C5D24D41606008C5AE2 /* CityModel.m */,
 				384C0C5F24D419E8008C5AE2 /* hotCityModel.h */,
@@ -1836,6 +1841,7 @@
 				37A78B0DAB5A8E9635970286 /* [CP] Copy Pods Resources */,
 				04224A2924A4ACE900FF63DD /* ShellScript */,
 				04A3187024C19B22002242D8 /* Embed Frameworks */,
+				65049B387484AF2111414CE6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2075,20 +2081,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2117,6 +2114,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		65049B387484AF2111414CE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2125,6 +2139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61C947A82446DEEF0082B0A2 /* AddNewDeviceAlertView.m in Sources */,
+				38F3E05325024BA500D02256 /* historyModel.m in Sources */,
 				38790F8A24D144220024A06D /* popularcityViewController.m in Sources */,
 				0426D613248914C60097BC50 /* EditWorkScheduleTimeController.m in Sources */,
 				8D15E901242907D60074B2B0 /* GlobalControlManger.m in Sources */,

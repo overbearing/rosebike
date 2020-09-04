@@ -7,6 +7,16 @@ PODS:
   - AFNetworking/Security (3.2.1)
   - AFNetworking/Serialization (3.2.1)
   - BabyBluetooth (0.7.0)
+  - FBSDKCoreKit (7.1.1):
+    - FBSDKCoreKit/Basics (= 7.1.1)
+    - FBSDKCoreKit/Core (= 7.1.1)
+  - FBSDKCoreKit/Basics (7.1.1)
+  - FBSDKCoreKit/Core (7.1.1):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (7.1.1):
+    - FBSDKLoginKit/Login (= 7.1.1)
+  - FBSDKLoginKit/Login (7.1.1):
+    - FBSDKCoreKit (~> 7.1.1)
   - GoogleMaps (3.8.0):
     - GoogleMaps/Maps (= 3.8.0)
   - GoogleMaps/Base (3.8.0)
@@ -29,6 +39,7 @@ PODS:
     - SDWebImage/Core (= 5.5.2)
   - SDWebImage/Core (5.5.2)
   - Toast (4.0.0)
+  - TwilioVoice (2.1.1)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -39,6 +50,7 @@ DEPENDENCIES:
   - AFNetworking/Security (= 3.2.1)
   - AFNetworking/Serialization (= 3.2.1)
   - BabyBluetooth
+  - FBSDKLoginKit
   - GoogleMaps
   - GooglePlaces
   - IQKeyboardManager
@@ -53,12 +65,15 @@ DEPENDENCIES:
   - ReactiveObjC (~> 3.1.0)
   - SDWebImage (~> 5.5.2)
   - Toast (~> 4.0.0)
+  - TwilioVoice
   - YYKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - BabyBluetooth
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - GoogleMaps
     - GooglePlaces
     - IQKeyboardManager
@@ -73,11 +88,14 @@ SPEC REPOS:
     - ReactiveObjC
     - SDWebImage
     - Toast
+    - TwilioVoice
     - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
+  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
+  FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
   GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
   GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
@@ -92,8 +110,9 @@ SPEC CHECKSUMS:
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TwilioVoice: 8a85ce501ce9fe8900b79beb6a87ebf8c2d5dc1a
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: e77fcadbfc654e90bf0c91ff292d54fb9b5dcced
+PODFILE CHECKSUM: 8c932cafc9c5dcf3ef58f4e71e96ad745742661e
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.3

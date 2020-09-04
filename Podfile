@@ -29,9 +29,7 @@ pod 'JZLocationConverter'
 pod 'JCore'
 pod 'JPush'
 pod 'FBSDKLoginKit'
-pod 'TwitterKit'
-pod 'UMCShare/Social/Twitter'
-pod 'TwilioVoice', '~> 5.5.0'
+pod 'TwilioVoice'
 #pod 'WMZDialog'
 
 
