@@ -14,8 +14,9 @@
 //测试
 //#define host(path) [NSString stringWithFormat:@"http://leopard.hbhb.vip/api/%@", path]
 
-#import <SDWebImage/UIImageView+WebCache.h>
+//#import <SDWebImage/SDWebImage.h>
 #import <YYKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <AFNetworking/AFHTTPSessionManager.h>
 //#import <AFNetworking/Reachability.h>
 //#import <AFNetworking/NSURLSession.h>
@@ -48,5 +49,5 @@
 //#import <WMZDialog.h>
 #import "WMZDialog.h"
 #import "JPUSHService.h"
-
+#import <TwilioVoice/TwilioVoice.h>
 #endif /* RoseRidingHeader_h */

@@ -9,7 +9,7 @@
  * Copyright (c) 2011 ~ 2017 Shenzhen HXHG. All rights reserved.
  */
 
-#define JPUSH_VERSION_NUMBER 3.3.0
+#define JPUSH_VERSION_NUMBER 3.3.6
 
 #import <Foundation/Foundation.h>
 
@@ -22,10 +22,12 @@
 @class UNNotification;
 @protocol JPUSHRegisterDelegate;
 @protocol JPUSHGeofenceDelegate;
+@protocol JPushInMessageDelegate;
 
 typedef void (^JPUSHTagsOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq);
 typedef void (^JPUSHTagValidOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind);
 typedef void (^JPUSHAliasOperationCompletion)(NSInteger iResCode, NSString *iAlias, NSInteger seq);
+typedef void (^JPUSHInMssageCompletion)(NSInteger iResCode);
 
 extern NSString *const kJPFNetworkIsConnectingNotification; // 正在连接中
 extern NSString *const kJPFNetworkDidSetupNotification;     // 建立连接
@@ -219,11 +221,26 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 
 + (void)registerDeviceToken:(NSData *)deviceToken;
 
-
 /*!
  * @abstract 处理收到的 APNs 消息
  */
 + (void)handleRemoteNotification:(NSDictionary *)remoteInfo;
+
+/*!
+ * @abstract  向极光服务器提交Token
+ *
+ * @param voipToken 推送使用的Voip Token
+ */
++ (void)registerVoipToken:(NSData *)voipToken;
+
+
+/*!
+ * @abstract  处理收到的 Voip 消息
+ *
+ * @param remoteInfo 下发的 Voip 内容
+ */
++ (void)handleVoipNotification:(NSDictionary *)remoteInfo;
+
 
 /*!
 * @abstract 检测通知授权状态
@@ -618,6 +635,31 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setLogOFF;
 
+/*!
+ * @abstract 设置SDK地理位置权限开关
+ *
+ * @discussion 关闭地理位置之后，SDK地理围栏的相关功能将受到影响，默认是开启。
+ *
+ */
++ (void)setLocationEanable:(BOOL)isEanble;
+
+/*!
+* @abstract 设置应用内消息的代理
+*
+* @discussion 遵守JPushInMessageDelegate的代理对象
+*
+*/
++ (void)setInMessageDelegate:(id<JPushInMessageDelegate>)inMessageDelegate;
+
+
+/*!
+* @abstract 主动拉取应用内消息的接口
+*
+* @discussion 拉取结果的回调
+*
+*/
++ (void)pullInMessageCompletion:(JPUSHInMssageCompletion)completion;
+
 ///----------------------------------------------------
 ///********************下列方法已过期********************
 ///**************请使用新版tag/alias操作接口**************
@@ -708,5 +750,25 @@ callbackSelector:(SEL)cbSelector
  @param error 错误信息
  */
 - (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error;
+
+@end
+
+@protocol JPushInMessageDelegate <NSObject>
+
+@optional
+/**
+ *是否允许应用内消息弹出,默认为允许
+*/
+- (BOOL)jPushInMessageIsAllowedInMessagePop;
+
+/**
+ *应用内消息已弹出
+*/
+- (void)jPushInMessageAlreadyPop;
+
+/**
+ *应用内消息已消失
+*/
+- (void)jPushInMessageAlreadyDisappear;
 
 @end

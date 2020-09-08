@@ -84,16 +84,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-RoseRidingTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-RoseRidingUITests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ReactiveObjC.xcscheme</key>
 		<dict>
 			<key>isShown</key>

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8DAD1F02241E74A90088ACA8"
-               BuildableName = "Rose Bikes.app"
+               BuildableName = "Leopard IoT.app"
                BlueprintName = "RoseRiding"
                ReferencedContainer = "container:RoseRiding.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DAD1F02241E74A90088ACA8"
-            BuildableName = "Rose Bikes.app"
+            BuildableName = "Leopard IoT.app"
             BlueprintName = "RoseRiding"
             ReferencedContainer = "container:RoseRiding.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DAD1F02241E74A90088ACA8"
-            BuildableName = "Rose Bikes.app"
+            BuildableName = "Leopard IoT.app"
             BlueprintName = "RoseRiding"
             ReferencedContainer = "container:RoseRiding.xcodeproj">
          </BuildableReference>

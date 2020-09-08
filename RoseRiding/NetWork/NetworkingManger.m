@@ -8,7 +8,6 @@
 
 #import "NetworkingManger.h"
 #import "LoginController.h"
-
 @interface NetworkingManger ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -16,7 +15,6 @@
 @end
 
 @implementation NetworkingManger
-
 + (NetworkingManger *)shareManger{
     static NetworkingManger *manger;
     static dispatch_once_t onceToken;

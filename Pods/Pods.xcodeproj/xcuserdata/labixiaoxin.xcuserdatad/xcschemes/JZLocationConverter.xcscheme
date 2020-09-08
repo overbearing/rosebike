@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E8572772A2B42B68FDF351C752B8A238"
-               BuildableName = "libJZLocationConverter.a"
+               BuildableName = "JZLocationConverter.framework"
                BlueprintName = "JZLocationConverter"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

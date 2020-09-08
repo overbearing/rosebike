@@ -1,4 +1,4 @@
-module Pods_RoseRiding {
+framework module Pods_RoseRiding {
   umbrella header "Pods-RoseRiding-umbrella.h"
 
   export *

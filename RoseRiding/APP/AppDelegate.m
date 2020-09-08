@@ -19,8 +19,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "BlueToothAlertManger.h"
-#import <UMShare/UMShare.h>
-#import <UMCommon/UMCommon.h>
 #import "LoginController.h"
 #import <UserNotifications/UserNotifications.h>
 #import <AuthenticationServices/AuthenticationServices.h>
@@ -39,6 +37,7 @@
 @property (nonatomic,strong)NSString * msgid;
 @end
 @implementation AppDelegate
+
 static NSString * const UMkey = @"5f112d48978eea08cad1355a";
 static NSString * const kFacebookAppID = @"273200134099388";
 static NSString * const kClientID =
@@ -109,7 +108,23 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
     
           
 //    [[TWTRTwitter sharedInstance] startWithConsumerKey:@"nw5JVwNKiquqM2ndOIKhCWnXj" consumerSecret:@"HkoIUtpqLKScX8wja0g2SFSbO75GeqbqH9mgahFxbieylVtmPF"];
-  //Jpush
+#pragma mark   //twilio
+    
+      // Override point for customization after application launch.
+//      if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+//                                                           settingsForTypes:(UIUserNotificationTypeSound |
+//                                                             UIUserNotificationTypeAlert |
+//                                                             UIUserNotificationTypeBadge)
+//                                                                 categories:nil]];
+//
+//          [[UIApplication sharedApplication] registerForRemoteNotifications];
+//      } else {
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//      }
+
+
+#pragma mark  //Jpush
   JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
   if (@available(iOS 12.0, *)) {
       entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
@@ -246,7 +261,7 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 //    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Linkedin appKey:@"81t5eiem37d2sc"  appSecret:@"7dgUXPLH8kA8WHMV" redirectURL:@"https://api.linkedin.com/v1/people"];
 
     /* 设置Twitter的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:@"ePFWVkgksASzukq8VFSGCGAVF"  appSecret:@"DHtiPurR6QTkZYdAUuyJiTlUhDWEP2v5wmIvzVAuJjIpz5LJiv" redirectURL:nil];
+//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Twitter appKey:@"ePFWVkgksASzukq8VFSGCGAVF"  appSecret:@"DHtiPurR6QTkZYdAUuyJiTlUhDWEP2v5wmIvzVAuJjIpz5LJiv" redirectURL:nil];
 
     /* 设置Facebook的appKey和UrlString */
 //    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:@"506027402887373"  appSecret:nil redirectURL:@"http://www.umeng.com/social"];
@@ -264,12 +279,73 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   /// Required - 注册 DeviceToken
-  [JPUSHService registerDeviceToken:deviceToken];
+//  [JPUSHService registerDeviceToken:deviceToken];
+    [self createDeviceTokenString:deviceToken];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
   //Optional
   NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
+
+#pragma mark- Twilio
+- (NSString*) createDeviceTokenString:(NSData*) deviceToken {
+    const unsigned char *tokenChars = deviceToken.bytes;
+    
+    NSMutableString *tokenString = [NSMutableString string];
+    for (int i=0; i < deviceToken.length; i++) {
+        NSString *hex = [NSString stringWithFormat:@"%02x", tokenChars[i]];
+        [tokenString appendString:hex];
+    }
+    return tokenString;
+}
+
+//-(void) registerDevice:(NSData *) deviceToken identity:(NSString *) identity {
+//  // Create a POST request to the /register endpoint with device variables to register for Twilio Notifications
+//
+//  NSString *deviceTokenString = [self createDeviceTokenString:deviceToken];
+//
+//
+//  NSURLSession *session = [NSURLSession sharedSession];
+//
+//  NSURL *url = [NSURL URLWithString:serverURL];
+//  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+//  request.HTTPMethod = @"POST";
+//
+//  [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//  [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//
+//  NSDictionary *params = @{@"identity": identity,
+//                        @"BindingType": @"apn",
+//                            @"Address": deviceTokenString};
+//
+//    NSError* err=nil;
+//  NSString *endpoint = [KeychainAccess readEndpoint:identity error:err];
+//  if (err == nil){
+//    [params setObject:endpoint forKey:@"endpoint"];
+//  }
+//
+//  NSError *error;
+//  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+//  request.HTTPBody = jsonData;
+//
+//  NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//
+//    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSLog(@"Response: %@", responseString);
+//
+//    if (error == nil) {
+//      NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//      NSLog(@"JSON: %@", response);
+//
+//      [KeychainAccess saveEndpoint:identity endpoint:response["endpoint"]]
+//
+//    } else {
+//      NSLog(@"Error: %@", error);
+//    }
+//  }];
+//  [task resume];
+//}
+
 #pragma mark- JPUSHRegisterDelegate
 // iOS 12 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification API_AVAILABLE(ios(10.0)){
@@ -312,7 +388,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //    NSLog(@"ios10userinfo%@",userInfo);
   if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
     [JPUSHService handleRemoteNotification:userInfo];
-      NSLog(@"iOS 10 点击通知栏收到远程通知:%@",userInfo);
+//      NSLog(@"iOS 10 点击通知栏收到远程通知:%@",userInfo);
       
        [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
       
@@ -331,7 +407,7 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
   // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
-    
+//     NSLog(@"ios10userinfo%@",userInfo);
     if (userInfo[@"msg_id"]!= nil) {
           self.msgid = userInfo[@"msg_id"];
           [self recivetime];
@@ -474,14 +550,16 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
             }
          return NO;
      }else{
-           BOOL result=[[UMSocialManager defaultManager]handleOpenURL:url];
-            if (!result) {
-                // 其他如支付等SDK的回调
-            }
-            return result;
+//           BOOL result=[[UMSocialManager defaultManager]handleOpenURL:url];
+//            if (!result) {
+//                // 其他如支付等SDK的回调
+//            }
+//            return result;
+         return false;
      }
 }
 - (void)recivetime{
+    
     NSString * url = host(@"users/p_time");
     [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"id":self.msgid,@"time":[self currentTimeStr]} success:^(NSDictionary * _Nonnull result) {
 //        if (result[@"msg"]!= nil) {

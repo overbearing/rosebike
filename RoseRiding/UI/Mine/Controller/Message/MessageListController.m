@@ -71,7 +71,7 @@
 //    [self showWarning];
 }
 - (void)refresh{
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
     [self.list removeAllObjects];
           [self.alllist removeAllObjects];
           self.page = 0;
