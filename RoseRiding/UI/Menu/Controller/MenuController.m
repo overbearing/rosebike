@@ -75,6 +75,7 @@
         return;
     }
     [self AIRPLANEWaring];
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"air" object:nil userInfo:nil];
 }
 - (void)loadMyDevice{
     
@@ -302,7 +303,7 @@
          }];
     }else{
         [[GYBabyBluetoothManager sharedManager] writeState:AIRPLANE_MODE_Bluetooth];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"air" object:nil userInfo:nil];
+       
     }
 }
 

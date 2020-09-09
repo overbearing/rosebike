@@ -23,6 +23,8 @@
     [super viewDidLoad];
     self.barStyle = NavigationBarStyleWhite;
     self.title = @"firmware";
+    self.currentVersion.text = [MyDevicemanger shareManger].mainDevice.version;
+    self.lastVersion.text = [NSString stringWithFormat:@"Update to %@ or not",[MyDevicemanger shareManger].mainDevice.lastversion];
     // Do any additional setup after loading the view from its nib.
 }
 

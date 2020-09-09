@@ -207,7 +207,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-            if ([self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluetootharray[indexPath.row][@"photo"]]) {
+            if ([self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluetootharray[indexPath.row][@"photo"]] ||[self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluename]) {
                    return 0;
                }else{
                  return Adaptive(64);
@@ -219,7 +219,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.blueInfo = self.dataSource[indexPath.row];
     NSLog(@"%@", self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"]);
-        if ([self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluetootharray[indexPath.row][@"photo"]]) {
+    if ([self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluetootharray[indexPath.row][@"photo"]] ||[self.dataSource[indexPath.row].advertisementData[@"kCBAdvDataLocalName"] isEqualToString:self.bluename] ) {
             cell.hidden = YES;
         }else{
             devicenumber += 1;
@@ -228,7 +228,7 @@
             }
         }
     cell.add = ^{
-        NSLog(@"%@",self.activeBike.equipment);
+//        NSLog(@"%@",self.activeBike.equipment);
          self.timer= [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(Timered:) userInfo:nil repeats:YES];
         [self.timer setFireDate:[NSDate distantPast]];
         [weakSelf.maskView removeFromSuperview];
@@ -552,6 +552,7 @@
     [paradic setValue:[[GYBabyBluetoothManager sharedManager] getICCD] forKey:@"iccid"];
     [paradic setValue:[[GYBabyBluetoothManager sharedManager] getIMEI]forKey:@"imei"];
     [paradic setValue:[[GYBabyBluetoothManager sharedManager] getIMEIHash] forKey:@"hash"];
+    NSLog(@"哈希%@",[[GYBabyBluetoothManager sharedManager] getIMEIHash]);
     [paradic setValue:macString forKey:@"mac_id"];
     [[NetworkingManger shareManger] postDataWithUrl:url para:paradic success:^(NSDictionary * _Nonnull result) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -561,7 +562,7 @@
                 [weakSelf activiceDevice];
             }else{
                 if (![msg isEqualToString:@""]) {
-                    NSLog(@"verifyBluetooth---------%@",msg);
+//                    NSLog(@"verifyBluetooth---------%@",msg);
                     [Toast showToastMessage:msg];
                     self->attachBtn.enabled = YES;
                     [self->attachBtn setBackgroundColor:[UIColor blackColor]];

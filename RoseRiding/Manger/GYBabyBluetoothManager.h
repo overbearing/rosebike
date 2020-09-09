@@ -72,6 +72,7 @@ NSUInteger, BluetoothType) {
     CLOSE_CAR_Anti_theft_mode = 31,//关闭防盗模式
     CLOSE_AUTOLOCK_Bluetooth = 32,//关闭自动上锁
     GEOFEN_Bluetooth = 33//电子围栏告警
+    
 };
 
 @protocol GYBabyBluetoothManagerDelegate <NSObject>
@@ -248,7 +249,7 @@ typedef void(^GYBabyBluetoothManagerDidReciveMessage)(BluetoothType bluetoothTyp
 -(NSString *)getICCD;
 -(NSString *)getIMEIHash;
 -(NSString *)getBLUENAME;
-
+- (NSString *)gettimestr:(NSString *)string;
 
 @end
 

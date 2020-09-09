@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -69,8 +69,8 @@
                                 <action selector="timeClickAction:" destination="-1" eventType="valueChanged" id="fll-Wq-qii"/>
                             </connections>
                         </switch>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beeping Timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-Cv-X9f">
-                            <rect key="frame" x="33" y="13.5" width="94" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beeping Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-Cv-X9f">
+                            <rect key="frame" x="33" y="13.5" width="89" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -116,8 +116,8 @@
                         <constraint firstItem="nkh-fS-B0D" firstAttribute="centerY" secondItem="7mj-5T-9uU" secondAttribute="centerY" id="tvv-Cq-cZC"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 - 00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udB-pZ-i9G">
-                    <rect key="frame" x="290.5" y="243" width="91.5" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udB-pZ-i9G">
+                    <rect key="frame" x="30" y="243" width="354" height="17"/>
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                     <color key="textColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -132,7 +132,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Dwf-oa-9rJ" firstAttribute="leading" secondItem="7GD-5q-gvg" secondAttribute="leading" constant="33" id="2by-sL-ZfF"/>
-                <constraint firstItem="7GD-5q-gvg" firstAttribute="trailing" secondItem="udB-pZ-i9G" secondAttribute="trailing" constant="32" id="4AI-fe-NJW"/>
+                <constraint firstItem="7GD-5q-gvg" firstAttribute="trailing" secondItem="udB-pZ-i9G" secondAttribute="trailing" constant="30" id="4AI-fe-NJW"/>
                 <constraint firstItem="Jwr-P2-lDB" firstAttribute="top" secondItem="7GD-5q-gvg" secondAttribute="top" constant="64" id="4I8-CN-uia"/>
                 <constraint firstItem="7mj-5T-9uU" firstAttribute="leading" secondItem="7GD-5q-gvg" secondAttribute="leading" id="6w6-oe-g6y"/>
                 <constraint firstItem="udB-pZ-i9G" firstAttribute="centerY" secondItem="vlM-3I-5pn" secondAttribute="centerY" id="95g-Hj-R3v"/>
@@ -148,6 +148,7 @@
                 <constraint firstItem="NW3-hq-4tg" firstAttribute="trailing" secondItem="7GD-5q-gvg" secondAttribute="trailing" id="t9G-Ub-RDR"/>
                 <constraint firstItem="NW3-hq-4tg" firstAttribute="leading" secondItem="7GD-5q-gvg" secondAttribute="leading" id="tWq-BP-rlV"/>
                 <constraint firstItem="Dwf-oa-9rJ" firstAttribute="top" secondItem="7mj-5T-9uU" secondAttribute="bottom" constant="10" id="vPu-hk-HHg"/>
+                <constraint firstItem="udB-pZ-i9G" firstAttribute="leading" secondItem="7GD-5q-gvg" secondAttribute="leading" constant="30" id="wkZ-lX-eLh"/>
                 <constraint firstItem="7mj-5T-9uU" firstAttribute="top" secondItem="vlM-3I-5pn" secondAttribute="bottom" constant="10" id="x16-qa-hYd"/>
                 <constraint firstItem="WVJ-wx-yLv" firstAttribute="centerY" secondItem="Dwf-oa-9rJ" secondAttribute="centerY" id="ywR-1x-lp5"/>
             </constraints>

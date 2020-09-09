@@ -1,9 +1,10 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
-#source 'https://github.com/cocoapods/specs'
+#source 'https://github.com/CocoaPods/Specs.git'
+
 target 'RoseRiding' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-   use_frameworks!
+  # use_frameworks!
 
   # Pods for RoseRiding
 #pod 'AFNetworking'
@@ -31,16 +32,16 @@ pod 'FBSDKLoginKit'
 pod 'TwilioVoice'
 #pod 'WMZDialog'
 
-#
-#
-#  target 'RoseRidingTests' do
-#    inherit! :search_paths
-#    # Pods for testing
-#  end
-#
-#  target 'RoseRidingUITests' do
-#    inherit! :search_paths
-#    # Pods for testing
-#  end
+
+
+  target 'RoseRidingTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'RoseRidingUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end

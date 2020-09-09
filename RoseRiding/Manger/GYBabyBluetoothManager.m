@@ -13,7 +13,7 @@
 @interface GYBabyBluetoothManager  ()
 {
   
-    NSString * IMEIHash ,*IMEI, * ICCD , *BLUENAME;
+    NSString * IMEIHash ,*IMEI, * ICCD , *BLUENAME , *TIMEString;
     NSString * waringString;
     NSString * levelString;
 }
@@ -539,9 +539,8 @@ return sixTeenString;
             return;
         }
         str = [NSString stringWithFormat:@"55550A030001%@01AAAA",IMEIHash];
-        
         NSData *datas = [self convertHexStrToData:str];
-        
+       
         NSInteger length =datas.length;
         str = [NSString stringWithFormat:@"5555%lx030001%@",(unsigned long)length,IMEIHash];
                
@@ -739,6 +738,18 @@ return sixTeenString;
         str = @"55550A21000101";
         NSInteger ints = [self contentCheckValue:[self convertHexStrToData:str]];
         str = [NSString stringWithFormat:@"55550A21000101%lxAAAA",(long)ints];
+
+    }else if (type ==BEEP_TIME_INTERVAL){
+        /**
+         2.4.6.5 蜂鸣器功率和持续时间
+         请求：0x2F,0x0001, 0x05,0x64, 0x0a,0x01 // 0x64 : 蜂鸣器功率(单位：DB 范围：0~150)，
+         0x0a：持续时间(单位：s 范围：5~255)
+         回复：0x2F,0x0001,0x05,0x01
+         */
+       
+        str = [NSString stringWithFormat: @"55550c2f00010564%@01",TIMEString];
+        NSInteger ints = [self contentCheckValue:[self convertHexStrToData:str]];
+        str = [NSString stringWithFormat:@"55550c2f00010564%@01%lxAAAA",TIMEString,(long)ints];
 
     }else if (type ==OPEN_CAR_Anti_theft_mode){
         /**
@@ -975,7 +986,13 @@ return sixTeenString;
         }else if([readString hasPrefix:@"55550a21"]){
             //飞行模式
             waringString = readString;
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"enterairplanemode" object:nil];
+            NSString *targetStr = [readString substringWithRange:NSMakeRange(12, 2)];
+                        NSLog(@"targetstr%@",targetStr);
+                        if ([targetStr isEqualToString:@"00"]) {
+                           [[NSNotificationCenter defaultCenter]postNotificationName:@"enterairplanemode" object:readString];
+                        }else{
+                            [Toast showToastMessage:@"Failed to enter airplane mode, please unplug the USB and try again"];
+                        }
         }
         else if ([readString hasPrefix:@"55550a020"]){
         //            self.bluetoohh_type = LOOKING_CAR_Bluetooth;
@@ -1075,7 +1092,7 @@ return sixTeenString;
         }
         readString = [self getIMEI:readString];
         
-        NSLog(@"IMEI值为 == %@",readString);
+//        NSLog(@"IMEI值为 == %@",readString);
         NSString * strippedBbox = [readString stringByReplacingOccurrencesOfString:@"[^0-9]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [readString length])];
         IMEI =[self stringFromHexString:strippedBbox];
         NSMutableString * reverseString = [NSMutableString string];
@@ -1244,6 +1261,11 @@ return sixTeenString;
 }
 - (NSString *)getIMEIHash{
     return IMEIHash;
+}
+- (NSString *)gettimestr:(NSString *)string{
+    string = [self hexStringFromString:string] ;
+    TIMEString = [string stringByReplacingOccurrencesOfString:@"000000" withString:@""];
+    return TIMEString;
 }
 //sha1加密方式
 - (NSString *) sha1:(NSString *)input

@@ -8,7 +8,8 @@
 
 #import "NetworkingManger.h"
 #import "LoginController.h"
-@interface NetworkingManger ()
+
+@interface NetworkingManger ()<TVONotificationDelegate>
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 

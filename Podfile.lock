@@ -17,23 +17,23 @@ PODS:
     - FBSDKLoginKit/Login (= 7.1.1)
   - FBSDKLoginKit/Login (7.1.1):
     - FBSDKCoreKit (~> 7.1.1)
-  - GoogleMaps (3.10.0):
-    - GoogleMaps/Maps (= 3.10.0)
-  - GoogleMaps/Base (3.10.0)
-  - GoogleMaps/Maps (3.10.0):
+  - GoogleMaps (3.8.0):
+    - GoogleMaps/Maps (= 3.8.0)
+  - GoogleMaps/Base (3.8.0)
+  - GoogleMaps/Maps (3.8.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.10.0):
-    - GoogleMaps/Base (= 3.10.0)
-  - IQKeyboardManager (6.5.6)
-  - JCore (2.3.4)
-  - JPush (3.3.6):
+  - GooglePlaces (3.8.0):
+    - GoogleMaps/Base (= 3.8.0)
+  - IQKeyboardManager (6.5.5)
+  - JCore (2.2.2)
+  - JPush (3.3.0):
     - JCore (< 3.0.0, >= 2.0.0)
-  - JXCategoryView (1.5.6)
+  - JXCategoryView (1.5.3)
   - JZLocationConverter (1.0.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
-  - MJExtension (3.2.2)
-  - MJRefresh (3.5.0)
+  - MJExtension (3.2.1)
+  - MJRefresh (3.3.1)
   - ReactiveObjC (3.1.1)
   - SDWebImage (5.5.2):
     - SDWebImage/Core (= 5.5.2)
@@ -96,23 +96,23 @@ SPEC CHECKSUMS:
   BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
   FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
   FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
-  GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
-  GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
-  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
-  JCore: 8aa29dc57ba3730dd9fe7544ce1a4e1cbe221135
-  JPush: a401b946dcc76b37335422487201bc1ecc8dd296
-  JXCategoryView: 603ccd8277a89b1a73e9cedb9d8ed4b294576008
+  GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
+  GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  JCore: 2e6690b41b1b59c4a768e0a3187c311911c02ca8
+  JPush: 65cd9d8cb050b6d8c95736517d846fac2f53c134
+  JXCategoryView: 64fbdf3d1bbc8087ebd0443dd3b49855000aca6e
   JZLocationConverter: 3d816bee6484aed9c155a6045a02ce444833e2f0
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
-  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
+  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TwilioVoice: 8a85ce501ce9fe8900b79beb6a87ebf8c2d5dc1a
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: ebb449741aaef4cb0ebbc9936996327c496495bd
+PODFILE CHECKSUM: 8c932cafc9c5dcf3ef58f4e71e96ad745742661e
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.9.3

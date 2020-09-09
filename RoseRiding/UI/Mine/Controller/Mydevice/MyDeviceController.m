@@ -180,7 +180,7 @@
     return head;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%@",self.currentDevice.equipment);
+//    NSLog(@"%@",self.currentDevice.equipment);
     if (indexPath.section == 0) {
         BikeDeviceModel * model= self.MySelfBikeList[indexPath.row];
         self.currentDevice = model;

@@ -25,6 +25,8 @@
 
 @property (nonatomic , strong)NSMutableArray *secondInterVal;
 
+@property (nonatomic , strong)NSMutableArray *timesecond;
+
 @property (nonatomic , strong)NSString *begin;
 
 @property (nonatomic , strong)NSString *end;
@@ -64,7 +66,20 @@
     [self.timeSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_time"] boolValue]];
     [self.timeInterValSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_timeinterval"] boolValue]];
     self.timeIntervallabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_timeinterval_str"] == nil ? @"5mins":[[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_timeinterval_str"];
-    self.timeLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_time_str"] == nil ? @"00:00-00:00":[[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_time_str"];
+    self.timeLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_time_str"] == nil ? @"5s":[[NSUserDefaults standardUserDefaults] objectForKey:@"beeper_time_str"];
+}
+- (NSMutableArray *)timesecond{
+    if (!_timesecond) {
+        _timesecond = [NSMutableArray array];
+        for (int i = 5; i<256; i++) {
+            if (i % 5 == 0 && i % 10 != 0) {
+                NSString * str = [NSString stringWithFormat:@"%ds",i];
+                [_timesecond addObject:str];
+            }
+            
+        }
+    }
+    return _timesecond;
 }
 - (NSMutableArray *)timeInterVal{
     if (!_timeInterVal) {
@@ -108,32 +123,46 @@
 }
 - (void)selectTimeOrTimeInterVal:(UITapGestureRecognizer *)gesture{
     if (gesture.view == self.timeLabel) {
-        Dialog()
-        .wEventOKFinishSet(^(id anyID, id otherData) {
-            self.begin = [NSString stringWithFormat:@"%@:%@",anyID[0],anyID[1]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                Dialog()
-                .wEventOKFinishSet(^(id anyID, id otherData) {
-                    self.end = [NSString stringWithFormat:@"%@:%@",anyID[0],anyID[1]];
-                    self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",self.begin,self.end];
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@-%@",self.begin,self.end] forKey:@"beeper_time_str"];
-                })
-                .wTypeSet(DialogTypePickSelect)
-                .wDataSet(@[self.hourInterVal,
-                            self.secondInterVal])
-                .wTitleSet(@"Select end time")
-                .wOKTitleSet(@"OK")
-                .wCancelTitleSet(@"Cancel")
-                .wStart();
-            });
-        })
-        .wTypeSet(DialogTypePickSelect)
-        .wDataSet(@[self.hourInterVal,
-                    self.secondInterVal])
-        .wTitleSet(@"Select begin time")
-        .wOKTitleSet(@"Sure")
-        .wCancelTitleSet(@"Cancle")
-        .wStart();
+      /**  Dialog()
+            .wEventOKFinishSet(^(id anyID, id otherData) {
+                self.begin = [NSString stringWithFormat:@"%@:%@",anyID[0],anyID[1]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    Dialog()
+                    .wEventOKFinishSet(^(id anyID, id otherData) {
+                        self.end = [NSString stringWithFormat:@"%@:%@",anyID[0],anyID[1]];
+                        self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",self.begin,self.end];
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@-%@",self.begin,self.end] forKey:@"beeper_time_str"];
+                    })
+                    .wTypeSet(DialogTypePickSelect)
+                    .wDataSet(@[self.hourInterVal,
+                                self.secondInterVal])
+                    .wTitleSet(@"Select end time")
+                    .wOKTitleSet(@"OK")
+                    .wCancelTitleSet(@"Cancel")
+                    .wStart();
+                });
+            })
+            .wTypeSet(DialogTypePickSelect)
+            .wDataSet(@[self.hourInterVal,
+                        self.secondInterVal])
+            .wTitleSet(@"Select begin time")
+            .wOKTitleSet(@"Sure")
+            .wCancelTitleSet(@"Cancle")
+            .wStart();*/
+        Dialog().wTypeSet(DialogTypeSheet)
+               .wDataSet(self.timesecond)
+               .wTitleSet(@"Select Beeping time")
+               //完成操作事件
+               .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
+                   [[NSUserDefaults standardUserDefaults] setObject:anyID forKey:@"beeper_time_str"];
+                   [[GYBabyBluetoothManager sharedManager] gettimestr:[NSString stringWithFormat:@"%d",[anyID intValue]]];
+                   [[GYBabyBluetoothManager sharedManager] writeState:BEEP_TIME_INTERVAL];
+                   self.timeLabel.text = anyID;
+               })
+               .wOKTitleSet(@"Sure")
+               .wCancelTitleSet(@"Cancle")
+               .wParentVCSet(self)
+               .wStart();
     }else{
         Dialog().wTypeSet(DialogTypeSheet)
         .wDataSet(self.timeInterVal)

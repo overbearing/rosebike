@@ -18,6 +18,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <WebKit/WebKit.h>
+#import <UMShare/UMShare.h>
 #import <AuthenticationServices/AuthenticationServices.h>
 //#import <Twitter/Twitter.h>
 //#import <FirebaseAuth/FirebaseAuth.h>
@@ -342,27 +343,27 @@ else if (btn == self.twitterBtn) {
 }
 // 在需要进行获取用户信息的UIViewController中加入如下代码
 
-//- (void)getAuthWithUserInfoFromTwitter
-//{
-//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Twitter currentViewController:self completion:^(id result, NSError *error) {
-//        if (error) {
-//            NSLog(@"%@",error);
-//        } else {
-//            UMSocialUserInfoResponse *resp = result;
-//
-//            // 授权信息
-//            NSLog(@"Twitter uid: %@", resp.uid);
-//            NSLog(@"Twitter accessToken: %@", resp.accessToken);
-//
-//            // 用户信息
-//            NSLog(@"Twitter name: %@", resp.name);
-//            NSLog(@"Twitter iconurl: %@", resp.iconurl);
-//
-//            // 第三方平台SDK源数据
-//            NSLog(@"Twitter originalResponse: %@", resp.originalResponse);
-//        }
-//    }];
-//}
+- (void)getAuthWithUserInfoFromTwitter
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Twitter currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+
+            // 授权信息
+            NSLog(@"Twitter uid: %@", resp.uid);
+            NSLog(@"Twitter accessToken: %@", resp.accessToken);
+
+            // 用户信息
+            NSLog(@"Twitter name: %@", resp.name);
+            NSLog(@"Twitter iconurl: %@", resp.iconurl);
+
+            // 第三方平台SDK源数据
+            NSLog(@"Twitter originalResponse: %@", resp.originalResponse);
+        }
+    }];
+}
 //- (void)getUserInfoWithResult:(NSString*)userId{
 //    NSDictionary*params = @{@"fields":@"id,name,picture"};
 //    FBSDKGraphRequest * request = [[FBSDKGraphRequest alloc]initWithGraphPath:userId parameters:params HTTPMethod:@"GET"];

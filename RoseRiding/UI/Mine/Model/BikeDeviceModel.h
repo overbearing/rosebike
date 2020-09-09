@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign)int      status ;  //1：未授权2：已授权
 @property (nonatomic , assign)BOOL is_autolock;
 @property (nonatomic , strong)NSString *mac_id; //设备的物理地址
+@property (nonatomic , strong)NSString * version; //当前版本号
+@property (nonatomic , strong)NSString * lastversion; //最新版本号
 
 @end
 

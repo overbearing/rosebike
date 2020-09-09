@@ -92,6 +92,10 @@
 		048FF92B24B30517003C5C56 /* timeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF92924B30517003C5C56 /* timeTableViewCell.m */; };
 		048FF92C24B30517003C5C56 /* timeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048FF92A24B30517003C5C56 /* timeTableViewCell.xib */; };
 		049AEFCA247A824D006D08FC /* AuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 049AEFC9247A824D006D08FC /* AuthModel.m */; };
+		04A3186E24C19B22002242D8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0451031424BC0CAF008696CB /* FBSDKLoginKit.framework */; };
+		04A3186F24C19B22002242D8 /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0451031424BC0CAF008696CB /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04A3187124C19B23002242D8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0451031524BC0CB0008696CB /* FBSDKCoreKit.framework */; };
+		04A3187224C19B23002242D8 /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0451031524BC0CB0008696CB /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04A86B8F24C28D22005B95BB /* englishCountryJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04A86B8E24C28D22005B95BB /* englishCountryJson.txt */; };
 		04A86B9124C2A4F3005B95BB /* chineseCountryJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04A86B9024C2A4F3005B95BB /* chineseCountryJson.txt */; };
 		04AB998124BEDF1400EFF470 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F6158524B7FDD300FECC7A /* Accounts.framework */; };
@@ -117,8 +121,10 @@
 		04D9633524895B39005D3B63 /* MsgDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9633324895B39005D3B63 /* MsgDetailCell.m */; };
 		04D9633624895B39005D3B63 /* MsgDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D9633424895B39005D3B63 /* MsgDetailCell.xib */; };
 		04D96339248963B8005D3B63 /* MsgDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D96338248963B8005D3B63 /* MsgDetailModel.m */; };
+		04DDEF1024C1721F006DCF5D /* UMShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDEF0F24C1721F006DCF5D /* UMShare.framework */; };
 		04DDEF2E24C172B2006DCF5D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDEF2D24C172B2006DCF5D /* WebKit.framework */; };
 		04DDEF3124C17599006DCF5D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDEF3024C17599006DCF5D /* CoreData.framework */; };
+		04DDEF3724C17E4E006DCF5D /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDEF3624C17E4E006DCF5D /* UMCommon.framework */; };
 		04EAE79C249284E300354B13 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EAE79B249284E300354B13 /* libc++.tbd */; };
 		04EAE7A8249285AD00354B13 /* RidingViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAE7A0249285AD00354B13 /* RidingViewContrller.m */; };
 		04EAE7A9249285AD00354B13 /* RidingTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EAE7A2249285AD00354B13 /* RidingTopView.xib */; };
@@ -127,8 +133,7 @@
 		04EAE7AC249285AD00354B13 /* RidingTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAE7A6249285AD00354B13 /* RidingTopView.m */; };
 		04F6158224B7FD6A00FECC7A /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F6158124B7FD6A00FECC7A /* libiconv.tbd */; };
 		04F6158424B7FD8800FECC7A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F6158324B7FD8800FECC7A /* libsqlite3.0.tbd */; };
-		38168A8F25071DD90044DD2A /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38168A8E25071DD90044DD2A /* CallKit.framework */; };
-		38168A9125072ECD0044DD2A /* TwilioVoice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38168A9025072ECD0044DD2A /* TwilioVoice.framework */; };
+		12989CEEFDA666E6307F5FA8 /* libPods-RoseRidingTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D798ECD10A509246C254D929 /* libPods-RoseRidingTests.a */; };
 		384C0C5924D2D833008C5AE2 /* popularTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 384C0C5724D2D833008C5AE2 /* popularTableViewCell.m */; };
 		384C0C5A24D2D833008C5AE2 /* popularTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384C0C5824D2D833008C5AE2 /* popularTableViewCell.xib */; };
 		384C0C5E24D41606008C5AE2 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 384C0C5D24D41606008C5AE2 /* CityModel.m */; };
@@ -140,11 +145,11 @@
 		3868236124E392F200FAC8DF /* RecoredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3868235F24E392F200FAC8DF /* RecoredTableViewCell.xib */; };
 		3868236424E3C84300FAC8DF /* Ridinghistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3868236324E3C84300FAC8DF /* Ridinghistory.m */; };
 		38790F8A24D144220024A06D /* popularcityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38790F8824D144220024A06D /* popularcityViewController.m */; };
-		3899454725064A7D0073B7EE /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3899454625064A7D0073B7EE /* Twitter.framework */; };
 		38AA997D24CC502800E1B37D /* NSString+ZXXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AA997C24CC502800E1B37D /* NSString+ZXXExtension.m */; };
 		38B9CAC124DCEB2D006252E8 /* recordsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B9CAC024DCEB2D006252E8 /* recordsView.m */; };
 		38B9CAC324DCEB47006252E8 /* recordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38B9CAC224DCEB47006252E8 /* recordsView.xib */; };
 		38F3E05325024BA500D02256 /* historyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3E05225024BA500D02256 /* historyModel.m */; };
+		4630EFD24DA7CCD814509743 /* libPods-RoseRiding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BEDD2971B296F8F8686CAE /* libPods-RoseRiding.a */; };
 		61C947A52445A07D0082B0A2 /* UserDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C947A42445A07D0082B0A2 /* UserDeviceInfo.m */; };
 		61C947A82446DEEF0082B0A2 /* AddNewDeviceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C947A72446DEEF0082B0A2 /* AddNewDeviceAlertView.m */; };
 		61C947AA2446DF150082B0A2 /* AddNewDeviceAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C947A92446DF150082B0A2 /* AddNewDeviceAlertView.xib */; };
@@ -248,7 +253,7 @@
 		8DE70D9724435FE00034E923 /* WorkModelListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE70D9524435FE00034E923 /* WorkModelListCell.xib */; };
 		8DFC7420243F665100886422 /* DeviceMangerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC741E243F665100886422 /* DeviceMangerCell.m */; };
 		8DFC7421243F665100886422 /* DeviceMangerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DFC741F243F665100886422 /* DeviceMangerCell.xib */; };
-		E7006A69CE47BE3B44152A9B /* Pods_RoseRiding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F8D35B37FF72C73F3F9D53 /* Pods_RoseRiding.framework */; };
+		ABA384289B8532EC232DDF5C /* libPods-RoseRidingUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7046F840B18D7640D0369B /* libPods-RoseRidingUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +280,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04A3186F24C19B22002242D8 /* FBSDKLoginKit.framework in Embed Frameworks */,
+				04A3187224C19B23002242D8 /* FBSDKCoreKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +448,8 @@
 		0444883524C2E82200E6469B /* HelloMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloMapViewController.m; sourceTree = "<group>"; };
 		04448CC324C2F91800E6469B /* RoseRiding-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RoseRiding-Bridging-Header.h"; sourceTree = "<group>"; };
 		04448CC424C2F91900E6469B /* title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = title.swift; sourceTree = "<group>"; };
+		0451031424BC0CAF008696CB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0451031524BC0CB0008696CB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		0467ED5924BC121500826E57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0467EE7A24BC447C00826E57 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		0467EE7C24BC44CC00826E57 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -468,9 +477,11 @@
 		04D9633424895B39005D3B63 /* MsgDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgDetailCell.xib; sourceTree = "<group>"; };
 		04D96337248963B8005D3B63 /* MsgDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDetailModel.h; sourceTree = "<group>"; };
 		04D96338248963B8005D3B63 /* MsgDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDetailModel.m; sourceTree = "<group>"; };
+		04DDEF0F24C1721F006DCF5D /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMShare.framework; sourceTree = "<group>"; };
 		04DDEF2D24C172B2006DCF5D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		04DDEF2F24C172DA006DCF5D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		04DDEF3024C17599006DCF5D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		04DDEF3624C17E4E006DCF5D /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
 		04EAE7992492845800354B13 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		04EAE79B249284E300354B13 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		04EAE79F249285AD00354B13 /* RidingViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RidingViewContrller.h; sourceTree = "<group>"; };
@@ -485,8 +496,6 @@
 		04F6158324B7FD8800FECC7A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		04F6158524B7FDD300FECC7A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		1FA407B227B9C4C5ECE88FD7 /* Pods-RoseRiding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRiding.debug.xcconfig"; path = "Target Support Files/Pods-RoseRiding/Pods-RoseRiding.debug.xcconfig"; sourceTree = "<group>"; };
-		38168A8E25071DD90044DD2A /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
-		38168A9025072ECD0044DD2A /* TwilioVoice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwilioVoice.framework; path = Pods/TwilioVoice/TwilioVoice.framework; sourceTree = "<group>"; };
 		384C0C5624D2D833008C5AE2 /* popularTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = popularTableViewCell.h; sourceTree = "<group>"; };
 		384C0C5724D2D833008C5AE2 /* popularTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = popularTableViewCell.m; sourceTree = "<group>"; };
 		384C0C5824D2D833008C5AE2 /* popularTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = popularTableViewCell.xib; sourceTree = "<group>"; };
@@ -506,7 +515,6 @@
 		3868236324E3C84300FAC8DF /* Ridinghistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ridinghistory.m; sourceTree = "<group>"; };
 		38790F8724D144220024A06D /* popularcityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = popularcityViewController.h; sourceTree = "<group>"; };
 		38790F8824D144220024A06D /* popularcityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = popularcityViewController.m; sourceTree = "<group>"; };
-		3899454625064A7D0073B7EE /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		38AA997B24CC502600E1B37D /* NSString+ZXXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZXXExtension.h"; sourceTree = "<group>"; };
 		38AA997C24CC502800E1B37D /* NSString+ZXXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZXXExtension.m"; sourceTree = "<group>"; };
 		38B9CABF24DCEB2D006252E8 /* recordsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = recordsView.h; sourceTree = "<group>"; };
@@ -514,12 +522,13 @@
 		38B9CAC224DCEB47006252E8 /* recordsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = recordsView.xib; sourceTree = "<group>"; };
 		38F3E05125024BA500D02256 /* historyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyModel.h; sourceTree = "<group>"; };
 		38F3E05225024BA500D02256 /* historyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyModel.m; sourceTree = "<group>"; };
+		390BD310B2E351AA58882C51 /* Pods-RoseRidingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRidingUITests.debug.xcconfig"; path = "Target Support Files/Pods-RoseRidingUITests/Pods-RoseRidingUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E7046F840B18D7640D0369B /* libPods-RoseRidingUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoseRidingUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C947A32445A07D0082B0A2 /* UserDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDeviceInfo.h; sourceTree = "<group>"; };
 		61C947A42445A07D0082B0A2 /* UserDeviceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDeviceInfo.m; sourceTree = "<group>"; };
 		61C947A62446DEEF0082B0A2 /* AddNewDeviceAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddNewDeviceAlertView.h; sourceTree = "<group>"; };
 		61C947A72446DEEF0082B0A2 /* AddNewDeviceAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddNewDeviceAlertView.m; sourceTree = "<group>"; };
 		61C947A92446DF150082B0A2 /* AddNewDeviceAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewDeviceAlertView.xib; sourceTree = "<group>"; };
-		82F8D35B37FF72C73F3F9D53 /* Pods_RoseRiding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoseRiding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0AC74F247304260081D8B5 /* YBPopupMenuDeviceOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuDeviceOrientationManager.h; sourceTree = "<group>"; };
 		8D0AC750247304260081D8B5 /* YBPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu.h; sourceTree = "<group>"; };
 		8D0AC751247304260081D8B5 /* YBRectConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
@@ -702,7 +711,12 @@
 		8DFC741D243F665100886422 /* DeviceMangerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceMangerCell.h; sourceTree = "<group>"; };
 		8DFC741E243F665100886422 /* DeviceMangerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceMangerCell.m; sourceTree = "<group>"; };
 		8DFC741F243F665100886422 /* DeviceMangerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceMangerCell.xib; sourceTree = "<group>"; };
+		B3D66A4EA7C6CA2CE5F4579E /* Pods-RoseRidingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRidingTests.debug.xcconfig"; path = "Target Support Files/Pods-RoseRidingTests/Pods-RoseRidingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC6F772C5E83C6924DAFF8D4 /* Pods-RoseRiding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRiding.release.xcconfig"; path = "Target Support Files/Pods-RoseRiding/Pods-RoseRiding.release.xcconfig"; sourceTree = "<group>"; };
+		D798ECD10A509246C254D929 /* libPods-RoseRidingTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoseRidingTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA7A19319163279FDC2CE898 /* Pods-RoseRidingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRidingTests.release.xcconfig"; path = "Target Support Files/Pods-RoseRidingTests/Pods-RoseRidingTests.release.xcconfig"; sourceTree = "<group>"; };
+		F1BEDD2971B296F8F8686CAE /* libPods-RoseRiding.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoseRiding.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F456F0FBC83BFA90030720D7 /* Pods-RoseRidingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRidingUITests.release.xcconfig"; path = "Target Support Files/Pods-RoseRidingUITests/Pods-RoseRidingUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -714,30 +728,31 @@
 				04AB99A324BEDF3200EFF470 /* Security.framework in Frameworks */,
 				043ED20E248563C6008B47CA /* libz.tbd in Frameworks */,
 				04AB998F24BEDF2100EFF470 /* CoreTelephony.framework in Frameworks */,
+				04DDEF1024C1721F006DCF5D /* UMShare.framework in Frameworks */,
 				04F6158424B7FD8800FECC7A /* libsqlite3.0.tbd in Frameworks */,
 				04AB999D24BEDF2E00EFF470 /* UIKit.framework in Frameworks */,
-				38168A8F25071DD90044DD2A /* CallKit.framework in Frameworks */,
 				04AB999B24BEDF2C00EFF470 /* SafariServices.framework in Frameworks */,
 				04AEE8BD24C7E6B000125081 /* AuthenticationServices.framework in Frameworks */,
 				04AB998924BEDF1C00EFF470 /* CoreFoundation.framework in Frameworks */,
 				04F6158224B7FD6A00FECC7A /* libiconv.tbd in Frameworks */,
 				04AB99A124BEDF3100EFF470 /* SystemConfiguration.framework in Frameworks */,
+				04A3186E24C19B22002242D8 /* FBSDKLoginKit.framework in Frameworks */,
 				04AEE8BE24C852ED00125081 /* UserNotifications.framework in Frameworks */,
 				04AB998124BEDF1400EFF470 /* Accounts.framework in Frameworks */,
 				04DDEF2E24C172B2006DCF5D /* WebKit.framework in Frameworks */,
+				04DDEF3724C17E4E006DCF5D /* UMCommon.framework in Frameworks */,
 				04AB998724BEDF1B00EFF470 /* CFNetwork.framework in Frameworks */,
+				04A3187124C19B23002242D8 /* FBSDKCoreKit.framework in Frameworks */,
 				04AB999324BEDF2500EFF470 /* Foundation.framework in Frameworks */,
-				3899454725064A7D0073B7EE /* Twitter.framework in Frameworks */,
 				04AB998524BEDF1900EFF470 /* Bugly.framework in Frameworks */,
 				04AB999924BEDF2900EFF470 /* MapKit.framework in Frameworks */,
-				38168A9125072ECD0044DD2A /* TwilioVoice.framework in Frameworks */,
 				04AB999724BEDF2800EFF470 /* GoogleSignInDependencies.framework in Frameworks */,
+				4630EFD24DA7CCD814509743 /* libPods-RoseRiding.a in Frameworks */,
 				04AB999524BEDF2600EFF470 /* GoogleSignIn.framework in Frameworks */,
 				04AB998324BEDF1800EFF470 /* AdSupport.framework in Frameworks */,
 				04AB998D24BEDF1F00EFF470 /* CoreLocation.framework in Frameworks */,
 				04DDEF3124C17599006DCF5D /* CoreData.framework in Frameworks */,
 				04AB998B24BEDF1E00EFF470 /* CoreGraphics.framework in Frameworks */,
-				E7006A69CE47BE3B44152A9B /* Pods_RoseRiding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +760,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12989CEEFDA666E6307F5FA8 /* libPods-RoseRidingTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +768,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA384289B8532EC232DDF5C /* libPods-RoseRidingUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,6 +946,10 @@
 		043ED1802484D6D2008B47CA /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04DDEF3624C17E4E006DCF5D /* UMCommon.framework */,
+				04DDEF0F24C1721F006DCF5D /* UMShare.framework */,
+				0451031524BC0CB0008696CB /* FBSDKCoreKit.framework */,
+				0451031424BC0CAF008696CB /* FBSDKLoginKit.framework */,
 				048FF93024B41DF2003C5C56 /* GoogleSignIn.framework */,
 				048FF92F24B41DF2003C5C56 /* GoogleSignInDependencies.framework */,
 				04EAE7992492845800354B13 /* Bugly.framework */,
@@ -1319,8 +1340,6 @@
 		0B0E36D14008D604DB5D30AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38168A8E25071DD90044DD2A /* CallKit.framework */,
-				3899454625064A7D0073B7EE /* Twitter.framework */,
 				04AEE8BC24C7E6B000125081 /* AuthenticationServices.framework */,
 				04DDEF3024C17599006DCF5D /* CoreData.framework */,
 				04DDEF2F24C172DA006DCF5D /* libsqlite3.tbd */,
@@ -1343,9 +1362,10 @@
 				043ED2012485633C008B47CA /* SystemConfiguration.framework */,
 				043ED1FF2485632D008B47CA /* CoreTelephony.framework */,
 				043ED1FD24856323008B47CA /* CoreFoundation.framework */,
-				38168A9025072ECD0044DD2A /* TwilioVoice.framework */,
 				043ED1FB2485631A008B47CA /* CFNetwork.framework */,
-				82F8D35B37FF72C73F3F9D53 /* Pods_RoseRiding.framework */,
+				F1BEDD2971B296F8F8686CAE /* libPods-RoseRiding.a */,
+				D798ECD10A509246C254D929 /* libPods-RoseRidingTests.a */,
+				3E7046F840B18D7640D0369B /* libPods-RoseRidingUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1370,6 +1390,10 @@
 			children = (
 				1FA407B227B9C4C5ECE88FD7 /* Pods-RoseRiding.debug.xcconfig */,
 				BC6F772C5E83C6924DAFF8D4 /* Pods-RoseRiding.release.xcconfig */,
+				B3D66A4EA7C6CA2CE5F4579E /* Pods-RoseRidingTests.debug.xcconfig */,
+				DA7A19319163279FDC2CE898 /* Pods-RoseRidingTests.release.xcconfig */,
+				390BD310B2E351AA58882C51 /* Pods-RoseRidingUITests.debug.xcconfig */,
+				F456F0FBC83BFA90030720D7 /* Pods-RoseRidingUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1832,6 +1856,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DAD1F35241E74AD0088ACA8 /* Build configuration list for PBXNativeTarget "RoseRidingTests" */;
 			buildPhases = (
+				1DA86FC30EBAC2E41F8454DF /* [CP] Check Pods Manifest.lock */,
 				8DAD1F1A241E74AD0088ACA8 /* Sources */,
 				8DAD1F1B241E74AD0088ACA8 /* Frameworks */,
 				8DAD1F1C241E74AD0088ACA8 /* Resources */,
@@ -1850,6 +1875,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DAD1F38241E74AD0088ACA8 /* Build configuration list for PBXNativeTarget "RoseRidingUITests" */;
 			buildPhases = (
+				5A7E91244643FE84B51C8C37 /* [CP] Check Pods Manifest.lock */,
 				8DAD1F25241E74AD0088ACA8 /* Sources */,
 				8DAD1F26241E74AD0088ACA8 /* Frameworks */,
 				8DAD1F27241E74AD0088ACA8 /* Resources */,
@@ -1870,7 +1896,10 @@
 		8DAD1EFB241E74A90088ACA8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1200;
+				KnownAssetTags = (
+					New,
+				);
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = MR_THT;
 				TargetAttributes = {
 					8DAD1F02241E74A90088ACA8 = {
@@ -1996,7 +2025,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"",
 			);
 			outputFileListPaths = (
 			);
@@ -2004,9 +2032,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-
-";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		1DA86FC30EBAC2E41F8454DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoseRidingTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		22CB52AC0942E81F3B8085E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2045,6 +2093,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A7E91244643FE84B51C8C37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoseRidingUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		65049B387484AF2111414CE6 /* [CP] Embed Pods Frameworks */ = {
@@ -2414,6 +2484,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2456,7 +2527,6 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/ios-x86_64-maccatalyst",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/ios-i386_x86_64-simulator",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/UMSocialUI",
-					"$(PROJECT_DIR)/Pods/TwilioVoice",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoseRiding/APP/RoseRidingHeader.h";
@@ -2601,7 +2671,6 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/ios-x86_64-maccatalyst",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/ios-i386_x86_64-simulator",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/UMSocialUI",
-					"$(PROJECT_DIR)/Pods/TwilioVoice",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoseRiding/APP/RoseRidingHeader.h";
@@ -2709,6 +2778,7 @@
 		};
 		8DAD1F36241E74AD0088ACA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3D66A4EA7C6CA2CE5F4579E /* Pods-RoseRidingTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2729,6 +2799,7 @@
 		};
 		8DAD1F37241E74AD0088ACA8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA7A19319163279FDC2CE898 /* Pods-RoseRidingTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2749,6 +2820,7 @@
 		};
 		8DAD1F39241E74AD0088ACA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 390BD310B2E351AA58882C51 /* Pods-RoseRidingUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2767,6 +2839,7 @@
 		};
 		8DAD1F3A241E74AD0088ACA8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F456F0FBC83BFA90030720D7 /* Pods-RoseRidingUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
