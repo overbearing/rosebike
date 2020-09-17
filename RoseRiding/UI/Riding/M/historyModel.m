@@ -9,7 +9,7 @@
 #import "historyModel.h"
 
 @implementation historyModel
-//+(NSDictionary *)mj_replacedKeyFromPropertyName{
-//    return @{@"h1":@"h1",@"h2":@"h2",@"h3":@"h3"};
-//}
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+   return @{@"Id":@"id"};
+}
 @end

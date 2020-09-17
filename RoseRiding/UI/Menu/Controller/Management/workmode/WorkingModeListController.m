@@ -95,7 +95,7 @@
                 }else{
                     [self enterInstall];
                 }
-                NSLog(@"进入安装模式");
+//                NSLog(@"进入安装模式");
             }else if (indexPath.row == 4) {
                  if (![[MyDevicemanger shareManger].mainDevice.is_default isEqualToString:@"2" ] ||[[MyDevicemanger shareManger].mainDevice.Id isEqualToString:@"0"]   ) {
                            [Toast showToastMessage:[GlobalControlManger enStr:AIRMODE geStr:AIRMODE] inview:self.view interval:1];
@@ -120,7 +120,7 @@
         if (![result[@"msg"]isEqualToString:@""]) {
             [Toast showToastMessage:result[@"msg"]];
         }
-        if ([result[@"code"]isEqualToString:@"1"]) {
+        if ([result[@"code"] intValue] == 1) {
              [self getCurrentWorkMode];
         }
           
@@ -184,9 +184,16 @@
      }];
      UIAlertAction *sexWoman = [UIAlertAction actionWithTitle:[GlobalControlManger enStr: @"OK"geStr: @"OK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
-//         [[GYBabyBluetoothManager sharedManager] writeState:CLOSE_CAR_THIEF_Bluetooth];
-//         [[GYBabyBluetoothManager sharedManager] writeState:CLOSE_ROLLOVER_Bluetooth];
-//         [[GYBabyBluetoothManager sharedManager] writeState:CLOSE_VIBRATION_Bluetooth];
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       [[GYBabyBluetoothManager sharedManager]writeState:CLOSE_CAR_THIEF_Bluetooth];
+           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                          [[GYBabyBluetoothManager sharedManager]writeState:CLOSE_CAR_Anti_theft_mode];
+       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       [[GYBabyBluetoothManager sharedManager]writeState:CLOSE_VIBRATION_Bluetooth];
+       });
+       });
+       });
+       [[GYBabyBluetoothManager sharedManager]writeState:CLOSE_ROLLOVER_Bluetooth];
        
      }];
     

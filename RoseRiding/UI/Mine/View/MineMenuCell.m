@@ -35,7 +35,7 @@
     switch (indexPath.row) {
         case 0:
         {
-            self.name.text = [GlobalControlManger enStr:@"MyBikes" geStr: @"MyBikes"];
+            self.name.text = [GlobalControlManger enStr:@"My Bikes" geStr: @"My Bikes"];
             self.icon.image = [UIImage imageNamed:@"mine_device"];
             self.tip.hidden = YES;
         }

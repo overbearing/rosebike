@@ -160,7 +160,7 @@ uint8_t equalHash(uint8_t *array1, uint8_t *array2, uint8_t len) {
     //2.1-设备连接过滤器
     [self.babyBluetooth setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
         //不自动连接
-        return NO;
+        return YES;
     }];
 //    
     //3-设置扫描到设备的委托
@@ -337,7 +337,7 @@ uint8_t equalHash(uint8_t *array1, uint8_t *array2, uint8_t len) {
 - (void)startScanPeripheral {
     self.babyBluetooth.scanForPeripherals().begin();
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog(@"30");
+//        NSLog(@"30");
         if (self.peripheralArr.count == 0) {
                [[NSNotificationCenter defaultCenter] postNotificationName:GYBabyBluetoothManagerNoDeviceFound object:nil];
         }
@@ -431,6 +431,38 @@ uint8_t equalHash(uint8_t *array1, uint8_t *array2, uint8_t len) {
                      forCharacteristic:self.writeCharacteristic
                                   type:CBCharacteristicWriteWithoutResponse];
 }
+/**
+ 2.4.6.6 电子围栏
+ 请求：0x2F,0x0001, 0x06, 0x08, 0x00, 0x01, 0x01,0x00, 0x00C3, 0x52, 0x0209A9AB ,
+ 0x067D52DF , 0x00000064 , 0x00001234, 0x00005678,0x01
+ 回复：0x2F,0x0001,0x06,0x01
+ 注：有关字段含义同标准协议-二进制文档中设置电子围栏部分(4.4 小节)
+ typedef struct
+ {
+ u8 region; //0x08 圆形区域
+ u8 set_property; //设置属性(0-更新区域、1-追加区域、2-修改区域) 最好传 0，
+ 直接将这个区域的数据更新
+ u8 num; //区域个数，一般设为 1 个区域
+ u8 id; //区域 ID 只能是 0~2
+ u8 set_flag; //电子围栏有效与否标志位 直接写 0 即可，是 mcu 根据数据
+ 的有效性来设置的，app 侧不用关注
+ u16 attribute; //区域属性
+ bit0 1-根据时间,设为 1 时下面的起始和结束时间才有效
+ bit1 1-限速，设为 1 时下面的最高速度才有效
+ bit2~bit5 保留写 0 即可
+ bit6 0-北纬 1-南纬
+ bit7 0-东经 1-西经
+ bit8~15 保留
+ u8 max_speed; //最高速度
+ u32 center_latitude; //中心点纬度 获取到手机的经纬度后直接乘以 10^6
+ u32 center_longtitude; //中心点经度
+ BLE&APP 通讯协议 秘密▲
+ 12页共22页
+ u32 radius; //半径
+ u32 start_time; //起始时间
+ u32 end_time; //结束时间
+ } electronic_Fence;
+ */
 -(void)writeState:(BluetoothType)type widthFence:(NSString*)fence andLng:(NSString*)lng andLat:(NSString*)lat andImei:(NSString*)imei{
     NSString * str;
     NSString * fen;
@@ -471,7 +503,7 @@ uint8_t equalHash(uint8_t *array1, uint8_t *array2, uint8_t len) {
         NSInteger ints = [self contentCheckValue:[self convertHexStrToData:str]];
         str = [NSString stringWithFormat:@"%@%lxAAAA",str,(long)ints];
         
-//        NSLog(@"%@",str);
+        NSLog(@"%@",str);
 //        NSLog(@"%@,%@,%@,%@",Lat,Lng,fen,str);
    }
     if (str != nil) {

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSString *Id;
 @property (nonatomic , strong)NSString *character;
 @property (nonatomic , strong)NSString *name;
+@property (nonatomic , strong)NSString *h_id;
 
 @end
 

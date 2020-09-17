@@ -9,6 +9,7 @@
 #import "HotQuestionController.h"
 #import "HotQuestionCell.h"
 #import "HelpModel.h"
+#import "HelpdetailViewController.h"
 @interface HotQuestionController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tableView;
@@ -64,7 +65,12 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HelpModel * model = self.list[indexPath.row];
+    HelpdetailViewController * VC = [[HelpdetailViewController alloc]init];
+    VC.title = model.name;
+    VC.str = model.textimg;
 
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)loadData{
         [[NetworkingManger shareManger] postDataWithUrl:host(@"api/problem") para:@{@"id":@"1",@"token":[UserInfo shareUserInfo].token} success:^(NSDictionary * _Nonnull result) {
@@ -76,6 +82,7 @@
                 return;
             }
             NSMutableArray *temp  = [HelpModel mj_objectArrayWithKeyValuesArray:result[@"data"]];
+//            NSLog(@"%@",result[@"data"]);
             if (temp.count < 10) {
                 //TODO no more data
             }

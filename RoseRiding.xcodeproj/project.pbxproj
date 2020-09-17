@@ -134,6 +134,7 @@
 		04F6158224B7FD6A00FECC7A /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F6158124B7FD6A00FECC7A /* libiconv.tbd */; };
 		04F6158424B7FD8800FECC7A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F6158324B7FD8800FECC7A /* libsqlite3.0.tbd */; };
 		12989CEEFDA666E6307F5FA8 /* libPods-RoseRidingTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D798ECD10A509246C254D929 /* libPods-RoseRidingTests.a */; };
+		38351F0825109D7C00D4476C /* HelpdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38351F0725109D7C00D4476C /* HelpdetailViewController.m */; };
 		384C0C5924D2D833008C5AE2 /* popularTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 384C0C5724D2D833008C5AE2 /* popularTableViewCell.m */; };
 		384C0C5A24D2D833008C5AE2 /* popularTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384C0C5824D2D833008C5AE2 /* popularTableViewCell.xib */; };
 		384C0C5E24D41606008C5AE2 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 384C0C5D24D41606008C5AE2 /* CityModel.m */; };
@@ -496,6 +497,8 @@
 		04F6158324B7FD8800FECC7A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		04F6158524B7FDD300FECC7A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		1FA407B227B9C4C5ECE88FD7 /* Pods-RoseRiding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoseRiding.debug.xcconfig"; path = "Target Support Files/Pods-RoseRiding/Pods-RoseRiding.debug.xcconfig"; sourceTree = "<group>"; };
+		38351F0625109D7C00D4476C /* HelpdetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpdetailViewController.h; sourceTree = "<group>"; };
+		38351F0725109D7C00D4476C /* HelpdetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpdetailViewController.m; sourceTree = "<group>"; };
 		384C0C5624D2D833008C5AE2 /* popularTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = popularTableViewCell.h; sourceTree = "<group>"; };
 		384C0C5724D2D833008C5AE2 /* popularTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = popularTableViewCell.m; sourceTree = "<group>"; };
 		384C0C5824D2D833008C5AE2 /* popularTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = popularTableViewCell.xib; sourceTree = "<group>"; };
@@ -784,6 +787,8 @@
 				8D7BA0CD24363B7600CCE6AD /* UserAgreementController.m */,
 				0426D5A9248914A50097BC50 /* HelpController.m */,
 				0426D5AA248914A50097BC50 /* HelpController.h */,
+				38351F0625109D7C00D4476C /* HelpdetailViewController.h */,
+				38351F0725109D7C00D4476C /* HelpdetailViewController.m */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -1841,7 +1846,6 @@
 				37A78B0DAB5A8E9635970286 /* [CP] Copy Pods Resources */,
 				04224A2924A4ACE900FF63DD /* ShellScript */,
 				04A3187024C19B22002242D8 /* Embed Frameworks */,
-				65049B387484AF2111414CE6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2117,23 +2121,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		65049B387484AF2111414CE6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RoseRiding/Pods-RoseRiding-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2157,6 +2144,7 @@
 				043ED1F92484D6D2008B47CA /* NSString+Encryption.m in Sources */,
 				04D96339248963B8005D3B63 /* MsgDetailModel.m in Sources */,
 				8D0AC75D247304260081D8B5 /* YBPopupMenuAnimationManager.m in Sources */,
+				38351F0825109D7C00D4476C /* HelpdetailViewController.m in Sources */,
 				8D9ED322243A30F600B8A696 /* LinkDeviceCell.m in Sources */,
 				0426D611248914C60097BC50 /* EditWorkScheduleController.m in Sources */,
 				8D11AFDF245D7BC300D23EFE /* UIImage+LX.m in Sources */,
@@ -2499,7 +2487,7 @@
 				CODE_SIGN_ENTITLEMENTS = RoseRiding/RoseRiding.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 145;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RMRDRVGK27;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2543,7 +2531,7 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 1.3.7.2;
+				MARKETING_VERSION = 1.3.7.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2643,7 +2631,7 @@
 				CODE_SIGN_ENTITLEMENTS = RoseRiding/RoseRiding.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 145;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RMRDRVGK27;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2687,7 +2675,7 @@
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/RoseRiding/Public/Lib/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 1.3.7.2;
+				MARKETING_VERSION = 1.3.7.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

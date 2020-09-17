@@ -74,7 +74,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noDeviceFound:) name:GYBabyBluetoothManagerNoDeviceFound object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlert) name:GYBabyBluetoothManagerActivate object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changebutton:) name:BabyNotificationAtDidUpdateValueForCharacteristic object:nil];
-    [[GYBabyBluetoothManager sharedManager].babyBluetooth cancelAllPeripheralsConnection];
+//    [[GYBabyBluetoothManager sharedManager].babyBluetooth cancelAllPeripheralsConnection];
 }
 - (void)Timered:(NSTimer*)timer {
     if (sec < 60) {

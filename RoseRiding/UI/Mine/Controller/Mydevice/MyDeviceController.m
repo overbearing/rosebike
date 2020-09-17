@@ -55,7 +55,7 @@
     [super viewWillAppear:animated];
     [self loadMyDevice];
     if (self.currentDevice != nil && !self.currentDevice.isConnecting && [self.currentDevice.activation isEqualToString:@"3"] ) {
-        [self deailAutoConnect];
+//        [self deailAutoConnect];
     }
 }
 
@@ -241,7 +241,7 @@
                        if ([MyDevicemanger shareManger].mainDevice == nil) {
                            if ([m.is_default isEqualToString:@"2"]) {
                                self.currentDevice = m;
-                               [self deailAutoConnect];
+//                               [self deailAutoConnect];
                            }
                        }
                    }
@@ -480,22 +480,22 @@
     for (GYPeripheralInfo *info in peripheralInfoArr) {
 //        NSLog(@"name = ---------------->%@",info.peripheral.name);
         if (info.peripheral.state == CBPeripheralStateConnected) {
-           [[GYBabyBluetoothManager sharedManager].babyBluetooth cancelPeripheralConnection:info.peripheral];
+           [[GYBabyBluetoothManager sharedManager].babyBluetooth AutoReconnectCancel:info.peripheral];
         }
        
     }
-    self.bluetoothList = peripheralInfoArr;
-    if (self.isAutoConnect) {
-        for (GYPeripheralInfo *info in peripheralInfoArr) {
-            if ([[self macstring:info.advertisementData] isEqualToString:self.currentDevice.mac_id]) {
-                //连接蓝牙
-                 self.currentConnectDevice = info;
-                [self.babyMgr connectPeripheral:info.peripheral];
-                 [Toast showToastMessage:[GlobalControlManger enStr:AUTO_CONNECTING geStr:AUTO_CONNECTING] inview:self.view interval:1];
-            }
-            
-        }
-    }
+//    self.bluetoothList = peripheralInfoArr;
+//    if (self.isAutoConnect) {
+//        for (GYPeripheralInfo *info in peripheralInfoArr) {
+//            if ([[self macstring:info.advertisementData] isEqualToString:self.currentDevice.mac_id]) {
+//                //连接蓝牙
+//                 self.currentConnectDevice = info;
+//                [self.babyMgr connectPeripheral:info.peripheral];
+//                 [Toast showToastMessage:[GlobalControlManger enStr:AUTO_CONNECTING geStr:AUTO_CONNECTING] inview:self.view interval:1];
+//            }
+//            
+//        }
+//    }
 }
 
 //更新蓝牙状态

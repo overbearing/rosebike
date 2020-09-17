@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface historyModel : NSObject
+@property (nonatomic , strong)NSString *Id;
 @property (nonatomic , strong)NSString *h1;
 @property (nonatomic , strong)NSString *h2;
 @property (nonatomic , strong)NSString *h3;

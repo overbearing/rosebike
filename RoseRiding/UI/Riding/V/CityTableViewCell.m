@@ -29,6 +29,6 @@
 }
 - (void)setModel:(CityModel *)model{
     self.name.text = model.name;
-//     NSLog(@"%@",model.name);
+    
 }
 @end

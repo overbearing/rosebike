@@ -29,7 +29,7 @@
 - (void)setupUI{
     WKWebViewConfiguration *configure = [[WKWebViewConfiguration alloc] init];
     self.webview = [[WKWebView alloc] initWithFrame:CGRectMake(0, kNavHeight, UIWidth, UIHeight - kNavHeight) configuration:configure];
-    [self.webview  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://rose.leopardtech.co.uk/user_agreement.html"]]];
+    [self.webview  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.leopardtech.co.uk/license-agreement/"]]];
     [self.view addSubview:self.webview];
 }
 

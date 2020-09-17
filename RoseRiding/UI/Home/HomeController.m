@@ -14,7 +14,9 @@
 #import "LoginController.h"
 #import "BlueBindingViewController.h"
 #import <UserNotifications/UserNotifications.h>
-
+#import <GMUHeatmapTileLayer.h>
+#import <GMUWeightedLatLng.h>
+//#import <gmuh>
 @interface HomeController ()<GMSMapViewDelegate,CLLocationManagerDelegate>{
      float sec;
     float second;
@@ -38,6 +40,7 @@
 @property (nonatomic,assign) BOOL autolock;
 @property (nonatomic,assign) BOOL isShow;
 @property (nonatomic,strong)GMSMapView *mapView;
+@property (nonatomic,strong)GMUHeatmapTileLayer * heatMapLayer;
 @property (nonatomic,strong)GMSMarker *marker;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,assign)BOOL firstLocationUpdate;
@@ -79,7 +82,11 @@
 @property (nonatomic, strong) NSDictionary *currentLocationDetailInfo;
 @property (nonatomic, strong) UILocalNotification *localNotification;
 @end
+
+static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-binding";
 @implementation HomeController
+
+
 {
     int times;
 }
@@ -253,6 +260,36 @@
         }];
     return;
 }
+
+
+#pragma mark - Networking
+
+- (NSString*) createDeviceTokenString:(NSData*) deviceToken {
+    const unsigned char *tokenChars = deviceToken.bytes;
+
+    NSMutableString *tokenString = [NSMutableString string];
+    for (int i=0; i < deviceToken.length; i++) {
+        NSString *hex = [NSString stringWithFormat:@"%02x", tokenChars[i]];
+        [tokenString appendString:hex];
+    }
+    return tokenString;
+}
+
+-(void) registerDevice:(NSData *) deviceToken identity:(NSString *) identity {
+  // Create a POST request to the /register endpoint with device variables to register for Twilio Notifications
+    
+ NSString * url = host(@"users/twilioregister");
+  NSString *deviceTokenString = [self createDeviceTokenString:deviceToken];
+  NSDictionary *params = @{@"identity": identity,
+                           @"endpoint": [NSString stringWithFormat:@"%@,%@", identity, deviceTokenString],
+                        @"bindingType": @"apn",
+                            @"address": deviceTokenString};
+    [[NetworkingManger shareManger] postDataWithUrl:url para:params success:^(NSDictionary * _Nonnull result) {
+//        NSLog(@"twilio-----%@",result);
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
+}
 - (void)poweroff{
 
     [self.reconnect setFireDate:[NSDate distantFuture ]];
@@ -274,7 +311,6 @@
             }else {
                 if([[[NSUserDefaults standardUserDefaults]objectForKey:@"isfirstconnect"]integerValue]>0 && self.isLock == NO && self.isShow) {
                     [self showAlert];
-                    NSLog(@"lllll");
                     UILocalNotification *localNotice = [UILocalNotification new];
                                  //                localNotice.fireDate = [NSDate dateWithTimeIntervalSinceNow:5.0];
                     localNotice.alertBody = [GlobalControlManger enStr:@"If you want to automatically enter anti-theft mode, please tap 'Menu -> Anti-theft' and turn on 'Auto-lock or not'." geStr:@"If you want to automatically enter anti-theft mode, please tap 'Menu -> Anti-theft' and turn on 'Auto-lock or not'."];
@@ -316,6 +352,7 @@
       }
       }
 //    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
 }
 
 //盗车结束通知
@@ -399,8 +436,7 @@
     if (notify.object[@"type"] != nil) {
          if ([notify.object[@"type"]integerValue] == 19) {
                [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
-           }
-           if ([notify.object[@"type"]integerValue] == 18) {
+           }else  if ([notify.object[@"type"]integerValue] == 18) {
                [self.workMode setTitle:[GlobalControlManger enStr:@"Sleep Mode" geStr:@"Sleep Mode"] forState:UIControlStateNormal];
            }
     }
@@ -517,7 +553,7 @@
         }];
 }
 - (void)showconnect{
-    [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
+//    [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
     [self.indicate_connect setTitle:[GlobalControlManger enStr:@"Connected" geStr:@"Connected"] forState:UIControlStateNormal];
     self.currentDeviceInfo.isConnecting = YES;
 //    [self.indicate_lock setTitleColor:[UIColor colorWithHexString:@"#4b4b4b"] forState:UIControlStateNormal];
@@ -741,7 +777,14 @@
             loginVC.islogout = NO;
              loginVC.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:loginVC animated:YES completion:nil];
+        }else{
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            if ([UserInfo shareUserInfo].userid != nil) {
+               [self registerDevice:appDelegate.deviceToken identity:[NSString stringWithFormat:@"imei_%@",[UserInfo shareUserInfo].userid]];
+            }
+
         }
+       
         return;
     }
     NSArray *imageNameArray =  @[@"startup1",@"startup2",@"startup3"];
@@ -907,6 +950,38 @@
     self.mapView.padding = UIEdgeInsetsMake(0, 0, 225, 0);
     self.mapView.myLocationEnabled = YES;
     self.isreloadlocation = YES;
+    self.heatMapLayer = [[GMUHeatmapTileLayer alloc] init];
+        NSMutableArray* colors = @[].mutableCopy;
+        [colors addObject:[UIColor colorWithHexString:@"#FFD800"]];
+        [colors addObject:[UIColor
+                           colorWithHexString:@"#F03F05"]];
+    //赋值热力图的权重色值，权重从低到高
+        self.heatMapLayer.gradient = [[GMUGradient alloc] initWithColors:colors startPoints:@[@0.01,@0.5] colorMapSize:256];
+    //透明度，设置太高会遮住地图，太低会看不清
+        self.heatMapLayer.opacity =0.7;
+    //热力图半径，设置太高热力图会比较大，根据需求来自己调
+        self.heatMapLayer.radius =25;
+    NSOperationQueue* queue = [NSOperationQueue new];
+        NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
+            NSMutableArray* locationArr =@[].mutableCopy;
+//            for (HeatMapLocation* location in self.locationCollection.orderCoordinates) {
+//    //将经纬度和权重添加到数组中。intensity是权重
+//                [locationArr addObject:[[GMUWeightedLatLng alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.lat, location.lon) intensity:0.666]];
+//            }
+//            for (HeatMapLocation* location in self.locationCollection.cancelCoordinates) {
+//                [locationArr addObject:[[GMUWeightedLatLng alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.lat, location.lon) intensity:1]];
+//            }
+//            for (HeatMapLocation* location in self.locationCollection.openCoordinates) {
+//                [locationArr addObject:[[GMUWeightedLatLng alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.lat, location.lon) intensity:0.333]];
+//            }
+           //GMUWeightedLatLng
+           dispatch_async(dispatch_get_main_queue(), ^{
+               self.heatMapLayer.weightedData = locationArr;
+               self.heatMapLayer.map =self.mapView;
+          });
+        }];
+        [queue addOperation:operation];
+
 //    [self lockbike];
 //    CLLocationCoordinate2D position =  CLLocationCoordinate2DMake(51.5, -0.127);
 //    GMSMarker *marker = [GMSMarker markerWithPosition:position];
@@ -1213,7 +1288,6 @@
                            [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
                        }
                    }
-                   
                    [MyDevicemanger shareManger].mainDevice.is_autolock = is_effect == 1?NO:YES;
 //                   NSLog(@"electric%@",[data objectForKey:@"electric"]);
                                      if ([[data objectForKey:@"electric"] integerValue] > 75 && [[data objectForKey:@"electric"] integerValue] <= 100) {

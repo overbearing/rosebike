@@ -32,20 +32,24 @@
 
 #endif
 //@import NMAKit;
-@interface AppDelegate ()<JPUSHRegisterDelegate,ASAuthorizationControllerPresentationContextProviding,TVONotificationDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate,ASAuthorizationControllerPresentationContextProviding>{
+    
+    int count;
+}
 @property (nonatomic) BOOL isLaunchedByNotification;
 @property (nonatomic,strong)MessageListController * mess;
 @property (nonatomic,strong)MainTabbarController * MTabbar;
 @property (nonatomic,strong)NSString * msgid;
+@property (nonatomic,strong)NSString * oldmsg;
 @end
 @implementation AppDelegate
 static NSString * const UMkey = @"5f112d48978eea08cad1355a";
 static NSString * const kFacebookAppID = @"273200134099388";
 static NSString * const kClientID =
 @"1013931763401-1cqb0uoo3g8funn8d8p2jdoh4aap9j5h.apps.googleusercontent.com";
-static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?oauth_token=1260152678191112193-vwOYR7q87vbgVSziZaW1Q08yH1neFP";
+static NSString * const token = @"4b33973b3bd96d5aba6417ddcacc9dbb";
+static NSString * const twitterID = @"https://api.twitter.com/oauth/authorize?oauth_token=1260152678191112193-vwOYR7q87vbgVSziZaW1Q08yH1neFP";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     sleep(2);
     [self registerAPN];
         // UMConfigure 通用设置，请参考SDKs集成做统一初始化。
@@ -145,8 +149,10 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
             if (self.notDic[@"msg_id"]!= nil) {
                  self.msgid = self.notDic[@"msg_id"];
                            [self recivetime];
+            }else{
+                self.msgid = nil;
             }
-            [self badgenumber];
+//            [self badgenumber];
             if (self.notDic) {
                 
                [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:self.notDic];
@@ -265,7 +271,12 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   /// Required - 注册 DeviceToken
   [JPUSHService registerDeviceToken:deviceToken];
-   
+   static dispatch_once_t once;
+   // Register the device only once
+   dispatch_once(&once,^ {
+     self.deviceToken = deviceToken;
+//     NSLog(@"deviceToken: %@", deviceToken);
+   });
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -280,6 +291,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if (userInfo[@"msg_id"]!= nil) {
         self.msgid = userInfo[@"msg_id"];
         [self recivetime];
+    }else{
+        self.msgid = nil;
     }
     
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
@@ -301,7 +314,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         badge += 1;
         [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
         [JPUSHService setBadge:badge];
-   
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
   // Required
@@ -309,12 +321,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if (userInfo[@"msg_id"]!= nil) {
           self.msgid = userInfo[@"msg_id"];
           [self recivetime];
+    }else{
+        self.msgid = nil;
     }
   
 //    NSLog(@"ios10userinfo%@",userInfo);
   if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
     [JPUSHService handleRemoteNotification:userInfo];
-      NSLog(@"iOS 10 点击通知栏收到远程通知:%@",userInfo);
+//      NSLog(@"iOS 10 点击通知栏收到远程通知:%@",userInfo);
       
        [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
       
@@ -337,13 +351,13 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
     if (userInfo[@"msg_id"]!= nil) {
           self.msgid = userInfo[@"msg_id"];
           [self recivetime];
+    }else{
+        self.msgid = nil;
     }
   if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
       [JPUSHService handleRemoteNotification:userInfo];
      
        [self badgenumber];
-      
-     
                    //第二种情况后台挂起时
                    MessageListController * VC = [[MessageListController alloc] init];
 //                   [VC requestSetWaring];
@@ -381,10 +395,47 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
   // Required, iOS 7 Support
   [JPUSHService handleRemoteNotification:userInfo];
   completionHandler(UIBackgroundFetchResultNewData);
+    NSLog(@"The notification message is: %@", [userInfo valueForKeyPath:@"aps.alert"]);
+//       UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Notification"
+//                                                                       message:[userInfo valueForKeyPath:@"aps.alert"]
+//                                                                preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction* okButton = [UIAlertAction actionWithTitle:@"OK"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * action) {
+//                                                           [alert dismissViewControllerAnimated:YES completion:nil];
+//                                                         }];
+//        
+//        [alert addAction:okButton];
+//        
+//        [self.window.rootViewController presentViewController:alert
+//                                                     animated:YES
+//                                                   completion:nil];
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
   // Required, For systems with less than or equal to iOS 6
-  [JPUSHService handleRemoteNotification:userInfo];
+  
+
+-(void) application:(UIApplication *) application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"The notification message is: %@", [userInfo valueForKeyPath:@"aps.alert"]);
+//    UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Notification"
+//                                                                    message:[userInfo valueForKeyPath:@"aps.alert"]
+//                                                             preferredStyle:UIAlertControllerStyleAlert];
+//     
+//     UIAlertAction* okButton = [UIAlertAction actionWithTitle:@"OK"
+//                                                        style:UIAlertActionStyleDefault
+//                                                      handler:^(UIAlertAction * action) {
+//                                                        [alert dismissViewControllerAnimated:YES completion:nil];
+//                                                      }];
+//     
+//     [alert addAction:okButton];
+//     
+//     [self.window.rootViewController presentViewController:alert
+//                                                  animated:YES
+//                                                completion:nil];
+
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application{
     [[NSNotificationCenter defaultCenter]postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
@@ -393,14 +444,40 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
 {
 //    NSLog(@"点击了接收到了本地通知");
 //    NSLog(@"%@",notification);
+    
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"checktheBluetooth" object:nil];
 }
+UIBackgroundTaskIdentifier taskId;
+
 - (void)applicationDidEnterBackground:(UIApplication *)application{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"closethetimer" object:nil];
+    //开启一个后台任务
+    taskId = [application beginBackgroundTaskWithExpirationHandler:^{
+
+        //结束指定的任务
+        [application endBackgroundTask:taskId];
+    }];
+
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 //    [[GYBabyBluetoothManager sharedManager].babyBluetooth cancelAllPeripheralsConnection];
 //    [[GYBabyBluetoothManager sharedManager] stopScanPeripheral];
+}
+- (void)timerAction:(NSTimer *)timer {
+    count++;
+    if (count % 500 == 0) {
+        UIApplication *application = [UIApplication sharedApplication];
+        //结束旧的后台任务
+        [application endBackgroundTask:taskId];
+
+        //开启一个新的后台
+        taskId = [application beginBackgroundTaskWithExpirationHandler:NULL];
+    }
+    if (self.msgid != self.oldmsg) {
+        [self recivetime];
+        self.oldmsg = self.msgid;
+    }
 }
 -(void)applicationWillTerminate:(UIApplication *)application {
     [Toast showToastMessage:@"退出"];
@@ -427,6 +504,7 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
                            [[UserInfo shareUserInfo] setToken: userInfo[@"token"]];
                            [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",[result[@"data"] objectForKey:@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
                            } seq:1];
+//                           self.deviceToken = [token dataUsingEncoding:NSUTF8StringEncoding];
                        }
                        if (callback) {
                            callback();
@@ -500,6 +578,14 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
     NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
     return timeString;
 }
+#pragma mark - Notifications setup
+
+- (void) application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+  [application registerForRemoteNotifications];
+}
+
+
+
 @end
 
 

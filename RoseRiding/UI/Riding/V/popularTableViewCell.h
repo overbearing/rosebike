@@ -11,7 +11,7 @@
 #import "historyModel.h"
 
 @protocol popularTableViewCellDelegate <NSObject>
-- (void)clickTest:(NSString *)tag;
+- (void)clickTest:(NSString *_Nonnull)tag;
 @end
 
 NS_ASSUME_NONNULL_BEGIN

@@ -11,6 +11,7 @@
 #import "UserAgreementController.h"
 #import "HotQuestionController.h"
 
+
 @interface HelpController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tableView;

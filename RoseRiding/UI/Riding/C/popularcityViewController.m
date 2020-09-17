@@ -31,6 +31,7 @@ API_AVAILABLE(ios(13.0))
 @property (nonatomic , strong)NSString * lng;
 @property (nonatomic , strong)NSString * keyword;
 @property (nonatomic , strong)NSString * level;
+@property (nonatomic , strong)NSString * cityid;
 @property (nonatomic , assign)BOOL iscount;
 @property (nonatomic , assign)BOOL isearch;
 @property (nonatomic , assign)BOOL iscancel;
@@ -57,6 +58,7 @@ API_AVAILABLE(ios(13.0))
     self.iscount = NO;
     self.lat = @"";
     self.lng = @"";
+    self.cityid = @"";
     self.barStyle = NavigationBarStyleWhite;
     [self loadpopularcity];
     [self initUI];
@@ -201,9 +203,10 @@ API_AVAILABLE(ios(13.0))
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":@""} success:^(NSDictionary * _Nonnull result) {
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":@"",@"id":self.cityid
+    } success:^(NSDictionary * _Nonnull result) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        NSLog(@"result--------%@",result[@"data"][@"h_addr"]);
+        NSLog(@"result--------%@",result[@"data"]);
         if (result[@"data"][@"h_addr"] != nil) {
             self.historyCity = [historyModel mj_objectWithKeyValues:result[@"data"][@"h_addr"]];
         }
@@ -215,6 +218,8 @@ API_AVAILABLE(ios(13.0))
                                for (NSDictionary * dic in result[@"data"][@"areas"]) {
                                    CityModel * model = [[CityModel alloc]init];
                                    model.name = dic[@"addr"];
+                                   model.Id = dic[@"id"];
+                                   model.h_id = dic[@"h_id"];
                                    [self.dataArray addObject:model];
                                    [self.searchArray addObject:dic];
                                }
@@ -222,7 +227,7 @@ API_AVAILABLE(ios(13.0))
                                     [self setUpTableSection];
                                }else{
                                    [self.tableview reloadData];
-                                   [Toast showToastMessage:@"No such place" inview:self.view];
+                                   [Toast showToastMessage:@"no addresses searched in this city" inview:self.view];
                                    return;
                                }
                            }
@@ -317,7 +322,7 @@ API_AVAILABLE(ios(13.0))
     kWeakSelf
     if (textField == weakSelf.search) {
         [textField becomeFirstResponder];
-        
+        self.iscancel = NO;
 //        [weakSelf presentViewController:weakSelf.searchController animated:YES completion:nil];
     }
 }
@@ -343,24 +348,21 @@ API_AVAILABLE(ios(13.0))
         if (!self.iscancel) {
              self.keyword = self.search.text;
             //       self.iscount = YES;
+            self.cityid = @"";
                    [self.sectionTitlesArray removeAllObjects];
                    [self.sectionArray removeAllObjects];
                    [self.hotCity removeAllObjects];
                    [self.dataArray removeAllObjects];
                    [self loadpopularcity];
-                   [self.search resignFirstResponder];
-                   self.search.text = @"";
+//                   [self.search resignFirstResponder];
+//                   self.search.text = @"";
         }
-       
        }
-   
 }
 - (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
   didAutocompleteWithPlace:(GMSPlace *)place {
     _searchController.active = NO;
     // Do something with the selected place.
-   
-   
 }
 - (void)cancelsearch{
     self.iscancel = YES;
@@ -369,6 +371,7 @@ API_AVAILABLE(ios(13.0))
     self.keyword = @"";
     self.setting.userInteractionEnabled = NO;
     [self.setting setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.cityid = @"";
     //       self.iscount = YES;
            [self.sectionTitlesArray removeAllObjects];
            [self.sectionArray removeAllObjects];
@@ -397,6 +400,7 @@ API_AVAILABLE(ios(13.0))
         cell.delegate = self;
         if (indexPath.row == 0) {
             cell.title.text = @"Used City";
+            
 //            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"] != nil) {
 //                cell.history = [[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"];
 //            }
@@ -404,11 +408,27 @@ API_AVAILABLE(ios(13.0))
             if (self.historyCity != nil) {
                 historyModel * model = self.historyCity;
                 cell.model = model;
+                cell.click = ^{
+                    self.cityid = model.Id;
+                };
             }
-            
         }else{
+            UIButton * btn = cell.firstcity;
+            UIButton * btn2 = cell.secondcity;
+            UIButton * btn3 = cell.thirdcity;
             cell.title.text = @"Popular City";
             cell.hotcity = self.hotCity;
+            cell.click = ^{
+                if (btn.selected) {
+                    self.cityid = self.hotCity[0].Id;
+                }
+                if (btn2.selected) {
+                    self.cityid = self.hotCity[1].Id;
+                }
+                if (btn3.selected) {
+                    self.cityid = self.hotCity[2].Id;
+                }
+            };
         }
         return cell;
     }else{
@@ -422,6 +442,7 @@ API_AVAILABLE(ios(13.0))
         if (self.sectionArray.count > 0) {
             CityModel * model = self.sectionArray[section-1][row];
             cell.model = model;
+            
         }
         
         return cell;
@@ -455,14 +476,22 @@ API_AVAILABLE(ios(13.0))
     self.search.text = tag;
      [self.setting setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
     _setting.userInteractionEnabled = YES;
-    RidingViewContrller * vc = [[RidingViewContrller alloc]init];
-    [vc.topView.startBtn setUserInteractionEnabled:YES];
-    vc.isjump = YES;
-    vc.name = tag;
-    if (tag.isNotBlank) {
-         [self.navigationController pushViewController:vc animated:YES];
-    }
-   
+//    RidingViewContrller * vc = [[RidingViewContrller alloc]init];
+//    [vc.topView.startBtn setUserInteractionEnabled:YES];
+    self.keyword = tag;
+     [self.sectionTitlesArray removeAllObjects];
+                      [self.sectionArray removeAllObjects];
+                      [self.hotCity removeAllObjects];
+                      [self.dataArray removeAllObjects];
+                      [self loadpopularcity];
+//                      [self.search resignFirstResponder];
+//                      self.search.text = @"";
+//    vc.isjump = YES;
+//    vc.name = tag;
+//    if (tag.isNotBlank) {
+//         [self.navigationController pushViewController:vc animated:YES];
+//    }
+//
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -515,20 +544,32 @@ API_AVAILABLE(ios(13.0))
          
     }else{
         if (self.sectionArray.count > 0) {
-                 CityModel * model = self.sectionArray[section-1][row];
-       
+            CityModel * model = self.sectionArray[section-1][row];
+            NSLog(@"id---------------%@",model.Id);
+            self.cityid = model.Id;
              self.search.text = model.name;
-                                        [self.setting setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
-                                       _setting.userInteractionEnabled = YES;
-                                       RidingViewContrller * vc = [[RidingViewContrller alloc]init];
-                                       [vc.topView.startBtn setUserInteractionEnabled:YES];
-                                       vc.isjump = YES;
-                                 vc.name = model.name;
-             if (model.name.isNotBlank) {
-                                       [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            return;
-        }
+             [self.setting setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
+             _setting.userInteractionEnabled = YES;
+            if (model.h_id == nil) {
+               [self.sectionTitlesArray removeAllObjects];
+                                    [self.sectionArray removeAllObjects];
+                                    [self.hotCity removeAllObjects];
+                                    [self.dataArray removeAllObjects];
+                                    [self loadpopularcity];
+//                                    [self.search resignFirstResponder];
+//                                    self.search.text = @"";
+            }else{
+                 RidingViewContrller * vc = [[RidingViewContrller alloc]init];
+                                                       [vc.topView.startBtn setUserInteractionEnabled:YES];
+                                                       vc.isjump = YES;
+                                                 vc.name = model.name;
+                             if (model.name.isNotBlank) {
+                                                       [self.navigationController pushViewController:vc animated:YES];
+                        }else{
+                            return;
+                        }
+            }
+//
                 
              }
     }

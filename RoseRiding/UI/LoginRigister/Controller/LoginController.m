@@ -488,6 +488,17 @@ else if (btn == self.twitterBtn) {
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
 }
+
+- (NSString*) createDeviceTokenString:(NSData*) deviceToken {
+    const unsigned char *tokenChars = deviceToken.bytes;
+
+    NSMutableString *tokenString = [NSMutableString string];
+    for (int i=0; i < deviceToken.length; i++) {
+        NSString *hex = [NSString stringWithFormat:@"%02x", tokenChars[i]];
+        [tokenString appendString:hex];
+    }
+    return tokenString;
+}
 - (void)loginAction{
     //三目运算处理
     NSString *url = host(@"login/login");
@@ -495,7 +506,9 @@ else if (btn == self.twitterBtn) {
         [Toast showToastMessage:@"Password is invalid"];
         return;;
     }
-    NSDictionary *para = @{@"email":self.userNameField.textField.text,@"password":self.passwordField.textField.text};
+     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSString *deviceTokenString = [self createDeviceTokenString:appDelegate.deviceToken];
+    NSDictionary *para = @{@"email":self.userNameField.textField.text,@"password":self.passwordField.textField.text, @"address": deviceTokenString};
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NetworkingManger shareManger] postDataWithUrl:url para:para success:^(NSDictionary * _Nonnull result) {
           [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -626,7 +639,7 @@ else if (btn == self.twitterBtn) {
 }
 
 - (void)loginButtonDidLogOut:(nonnull FBSDKLoginButton *)loginButton {
-    NSLog(@"退出登录");
+//    NSLog(@"退出登录");
 }
 
 - (void)dealloc{

@@ -47,7 +47,7 @@ CFBundleDisplayName = "Leopard Bikes";
 /**
  profile
  */
-"MyBikes" = "Meine Fahrräder";
+"My Bikes" = "Meine Fahrräder";
 "message" = "Botschaft";
 "Messages" = "Mitteilungen";
 "help" = "Hilfe";

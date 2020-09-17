@@ -155,21 +155,29 @@
             if (self.list.count == 0) {
                self.lastLocation.text = @"Unknown";
             }else{
-                for (BikeDeviceModel * m in self.list) {
-                    if ([MyDevicemanger shareManger].mainDevice == nil) {
-                        if ([m.is_default isEqualToString:@"2"]) {
-                            [MyDevicemanger shareManger].mainDevice = m;
-                        }else{
-                            [MyDevicemanger shareManger].mainDevice = self.list.lastObject;
-                        }
-                    }else{
-                        [MyDevicemanger shareManger].mainDevice = self.list.lastObject;
-                    }
-                }
-                if ([[MyDevicemanger shareManger].mainDevice.activation isEqualToString:@"3"]) {
-                     [self requestWaring];
-                }
-            }            
+                for (BikeDeviceModel *m in self.list) {
+                                    if ([MyDevicemanger shareManger].mainDevice == nil) {
+                                      if ([m.activation isEqualToString:@"3"]) { //发现主设备
+                                        self.currentbike = m;
+                //                          [MyDevicemanger shareManger].mainDevice = m;
+                //                          if ([m.mac_id isEqualToString:self.currentDeviceInfo.mac_id]) {
+                                
+                //                          NSLog(@"发现主设备");
+                                      }else{
+                                          self.currentbike = self.list.firstObject;
+                                      }
+                                    }else{
+                                        if ([m.activation isEqualToString:@"3"] && [m.is_default isEqualToString:@"2"] && [m.Id isEqualToString:[MyDevicemanger shareManger].mainDevice.Id]){
+                                            self.currentbike = m;
+                //                          [MyDevicemanger shareManger].mainDevice = m;
+                                        }else{
+                                            self.currentbike = self.list.firstObject;
+                //                            [MyDevicemanger shareManger].mainDevice = self.list.lastObject;
+                                        }
+                                    }
+                                }
+            }
+            [self requestWaring];
         }else{
             if (![msg isEqualToString:@""]) {
                 [Toast showToastMessage:msg];
@@ -571,10 +579,10 @@
     NSString * strid = [MyDevicemanger shareManger].mainDevice.Id;
     NSLog(@"%@",strid);
 //    NSLog(@"%@",self.areaString);
-    if (self.Longdevice == nil || self.Longdevice == nil ||self.areaString == nil) {
+    if (self.Longdevice == nil || self.Longdevice == nil ||self.areaString == nil || [MyDevicemanger shareManger].mainDevice.device_imei == nil) {
         return;
     }
-    NSDictionary *para = @{@"imei":self.deviceimei,@"electronic_fence":self.areaString,@"lng":self.Longdevice,@"lat":self.Latdevice};
+    NSDictionary *para = @{@"imei":[MyDevicemanger shareManger].mainDevice.device_imei,@"electronic_fence":self.areaString,@"lng":self.Longdevice,@"lat":self.Latdevice};
        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
        [[NetworkingManger shareManger] postDataWithUrl:url para:para success:^(NSDictionary * _Nonnull result) {
            [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -596,6 +604,7 @@
 //设置报警信息
 -(void)requestSetWaring
 {
+    
     NSString *url = host(@"users/setDevicemsg");
     NSMutableDictionary *para =[[NSMutableDictionary alloc] init];
     [para setValue:[UserInfo shareUserInfo].token forKey:@"token"];

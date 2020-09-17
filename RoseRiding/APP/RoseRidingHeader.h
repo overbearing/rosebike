@@ -48,6 +48,6 @@
 //#import <WMZDialog.h>
 #import "WMZDialog.h"
 #import "JPUSHService.h"
-#import <TwilioVoice/TwilioVoice.h>
-
+//#import <TwilioVoice/TwilioVoice.h>
+#import "AppDelegate.h"
 #endif /* RoseRidingHeader_h */

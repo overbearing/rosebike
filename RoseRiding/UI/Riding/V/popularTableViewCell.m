@@ -102,5 +102,8 @@
     if ([self.delegate respondsToSelector:@selector(clickTest:)]) {
         [self.delegate clickTest:sender.currentTitle];
     }
+     if (self.click) {
+        self.click();
+     }
 }
 @end

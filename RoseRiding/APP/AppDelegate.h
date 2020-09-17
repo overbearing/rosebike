@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic)NSMutableDictionary * notDic;
+@property (nonatomic, strong) NSData *deviceToken;
 + (void)initWithAppkey:(NSString *)appKey channel:(NSString *)channel;
 @end
 

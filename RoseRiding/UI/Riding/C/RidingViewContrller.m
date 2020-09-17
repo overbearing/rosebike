@@ -240,6 +240,7 @@ if (!self.isCurrenPageBluetoothOperation) {
             [weakSelf starLoaction];
             weakSelf.beginRiddingTimeInver = [weakSelf getcurrenttime];
             [[NSUserDefaults standardUserDefaults]setObject:weakSelf.beginRiddingTimeInver forKey:@"starttime"];
+            [weakSelf updatedistance];
             [weakSelf.timer setFireDate:[NSDate distantPast]];
 //            [weakSelf.uploadtimer setFireDate:[NSDate distantPast]];
             
@@ -357,10 +358,11 @@ if (!self.isCurrenPageBluetoothOperation) {
      [self presentViewController:self.searchController animated:YES completion:nil];
 }
 - (void)loadpopularcity{
-//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
+    NSLog(@"/**%@\n%@\n%d\n%@\n*/",self.country,self.keyword,self.iscount,self.h2);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2,@"postcode":self.postcode,@"country":self.country} success:^(NSDictionary * _Nonnull result) {
+//        NSLog(@"%@",self.h2);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
        
     } fail:^(NSError * _Nonnull error) {
@@ -477,8 +479,9 @@ if (!self.isCurrenPageBluetoothOperation) {
 - (void)setSearchVC{
     self.resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
     GMSAutocompleteFilter *autocompleteFilter = [[GMSAutocompleteFilter alloc] init];
-    NSLocale *currentLocalestr = [NSLocale currentLocale];
-       NSString * countryCode = [currentLocalestr objectForKey:NSLocaleCountryCode];
+//    NSLocale *currentLocalestr = [NSLocale currentLocale];
+//       NSString * countryCode = [currentLocalestr objectForKey:NSLocaleCountryCode];
+    NSString * countryCode = @"GB";
     autocompleteFilter.type = kGMSPlacesAutocompleteTypeFilterNoFilter;
     autocompleteFilter.country = countryCode;
     self.resultsViewController.autocompleteFilter = autocompleteFilter;
@@ -498,17 +501,16 @@ if (!self.isCurrenPageBluetoothOperation) {
     _searchController.hidesNavigationBarDuringPresentation = NO;
     if (self.isjump) {
            [self presentViewController:self.searchController animated:YES completion:nil];
-        
-       }
+    }
 }
-
 // Handle the user's selection.
 - (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
   didAutocompleteWithPlace:(GMSPlace *)place {
     _searchController.active = NO;
 //    NSLog(@"%@",[NSString replaceUnicode:place.formattedAddress]);
     NSString * str = [ NSString replaceUnicode:place.formattedAddress];
-    self.keyword = str;
+    self.keyword = [NSString stringWithFormat:@"%@%@",place.name,str];
+    NSLog(@"*******%f%f",place.coordinate.latitude,place.coordinate.longitude);
     [self loadCurentLocation:[NSString stringWithFormat:@"%f",place.coordinate.latitude ] andlng:[NSString stringWithFormat:@"%f",place.coordinate.longitude]];
     // Do something with the selected place.
     if (place.name.isNotBlank) {
@@ -713,6 +715,8 @@ didFailAutocompleteWithError:(NSError *)error {
 - (NSString *)loadCurentLocation:(NSString *)lat andlng:(NSString* )lng{
 //    NSString * lattt = @"51.3026";
 //    NSString * longgg = @"0.0739";
+//    NSString * lattt = @"52.50056";
+//       NSString * longgg = @"13.39889";
     NSString * lattt = @"";
     NSString * longgg = @"";
     if (lat.isNotBlank && lng.isNotBlank) {
