@@ -34,7 +34,10 @@
     [setting addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [setting setImage:[UIImage imageNamed:@"icon_settings_black_"] forState:UIControlStateNormal];
     [self.navView addSubview:setting];
-    
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(loginSuccess)
+                                                   name:@"loginSuccess"
+                                                 object:nil];
     [RACObserve([UserInfo shareUserInfo], Id) subscribeNext:^(id  _Nullable x) {
         if (x == nil) {
             NSLog(@"弹出登录");
@@ -63,7 +66,9 @@
          }
      }];
 }
-
+- (void)loginSuccess{
+    [self upDateHeadData];
+}
 - (void)setupUI{
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
@@ -124,11 +129,16 @@
 - (void)Logout{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:[GlobalControlManger enStr:@"logout" geStr:@"logout"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-        } seq:1];
-//        NSMutableArray * account = [[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"];
+//        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//        } seq:1];
+        NSMutableArray * account = [[[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"] mutableCopy ];
+        for (int i =0 ; i<account.count; i++) {
+            if ([account[i][@"userid"] isEqualToString:[UserInfo shareUserInfo].userid]) {
+                [account removeObjectAtIndex:i];
+            }
+        }
 //        [[[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"] remo];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accounts"];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accounts"];
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isfirstconnect"];
         [[GYBabyBluetoothManager sharedManager]stopScanPeripheral];
         LoginController *loginVC = [LoginController new];
@@ -142,7 +152,7 @@
 }
 - (void)upDateHeadData{
     self.headView.nick.text = [UserInfo shareUserInfo].nickname;
-    [self.headView.headImg sd_setImageWithURL:[NSURL URLWithString:[UserInfo shareUserInfo].headimg] placeholderImage:[UIImage imageNamed:@""]];
+    [self.headView.headImg sd_setImageWithURL:[NSURL URLWithString:[UserInfo shareUserInfo].headimg] placeholderImage:[UIImage imageNamed:@"defaulticon"]];
 }
 
 - (void)rightButtonClick:(UIButton *)button{
@@ -156,7 +166,6 @@ return nil;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 return nil;
 }
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 if ([cell respondsToSelector:@selector(setSeparatorInset:)])
@@ -197,5 +206,7 @@ if ([cell respondsToSelector:@selector(setLayoutMargins:)])
     UserInfoController *VC = [UserInfoController new];
     [self.navigationController pushViewController:VC animated:YES];
 }
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 @end

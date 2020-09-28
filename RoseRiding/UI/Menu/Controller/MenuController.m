@@ -77,6 +77,7 @@
     [self AIRPLANEWaring];
      [[NSNotificationCenter defaultCenter]postNotificationName:@"air" object:nil userInfo:nil];
 }
+#pragma mark //加载设备列表
 - (void)loadMyDevice{
     
     NSString *url = host(@"bicycle/equimentList");

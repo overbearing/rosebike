@@ -227,6 +227,7 @@
             [Toast showToastMessage:[GlobalControlManger enStr:@"No device" geStr:@"No device"]];
             }
         }
+    #pragma mark //配对要激活的设备
     cell.add = ^{
 //        NSLog(@"%@",self.activeBike.equipment);
          self.timer= [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(Timered:) userInfo:nil repeats:YES];

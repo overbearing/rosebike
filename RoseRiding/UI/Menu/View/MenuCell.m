@@ -50,19 +50,25 @@
                 self.menuIcon.image = [UIImage imageNamed:@""];
             }
                 break;
-//            case 3:
-//            {
-//                self.menuTitle.text = @"Accounts";
-//                self.menuIcon.image = [UIImage imageNamed:@""];
-//            }
-//                break;
             case 3:
+            {
+                self.menuTitle.text = [GlobalControlManger enStr:@"Accounts" geStr: @"Accounts"];
+                self.menuIcon.image = [UIImage imageNamed:@""];
+            }
+                break;
+            case 4:
             {
                 self.menuTitle.text = [GlobalControlManger enStr:@"reset password" geStr:@"reset password"];
                 self.menuIcon.image = [UIImage imageNamed:@""];
             }
                 break;
-                
+               
+            case 5:
+            {
+                self.menuTitle.text = [GlobalControlManger enStr:@"Delete account" geStr:@"Delete account"];
+                self.menuIcon.image = [UIImage imageNamed:@""];
+            }
+                break;
             default:
                 break;
         }

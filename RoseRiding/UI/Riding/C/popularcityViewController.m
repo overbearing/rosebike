@@ -42,7 +42,7 @@ API_AVAILABLE(ios(13.0))
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong)NSMutableArray * searchArray;
 @property (nonatomic, strong)NSMutableArray <hotCityModel *>*hotCity;
-@property (nonatomic, strong)historyModel*historyCity;
+@property (nonatomic, strong)NSMutableArray <historyModel*>*historyCity;
 @property (nonatomic, strong) NSString *address;
 
 
@@ -73,6 +73,12 @@ API_AVAILABLE(ios(13.0))
         _dataArray = [NSMutableArray new];
     }
     return _dataArray;
+}
+- (NSMutableArray *)historyCity{
+    if (!_historyCity) {
+        _historyCity = [NSMutableArray new];
+    }
+    return _historyCity;
 }
 - (NSMutableArray *)hotCity{
     if (!_hotCity) {
@@ -187,8 +193,8 @@ API_AVAILABLE(ios(13.0))
             if (!self->currentCity) {
                 self->currentCity = [GlobalControlManger enStr:@"Unable to locate the current city" geStr:@"Unable to locate the current city"] ;
             }
-            NSLog(@"%@",self->currentCity); //这就是当前的城市
-            NSLog(@"%@",placeMark.name);//具体地址:  xx市xx区xx街道
+//            NSLog(@"%@",self->currentCity); //这就是当前的城市
+//            NSLog(@"%@",placeMark.name);//具体地址:  xx市xx区xx街道
         }
         else if (error == nil && placemarks.count == 0) {
             NSLog(@"No location and error return");
@@ -199,6 +205,7 @@ API_AVAILABLE(ios(13.0))
         [self.tableview reloadData];
    }];
 }
+#pragma mark //加载热门城市列表
 - (void)loadpopularcity{
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"]);
     NSString * url = host(@"bicycle/historyList");
@@ -207,13 +214,20 @@ API_AVAILABLE(ios(13.0))
     } success:^(NSDictionary * _Nonnull result) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"result--------%@",result[@"data"]);
-        if (result[@"data"][@"h_addr"] != nil) {
-            self.historyCity = [historyModel mj_objectWithKeyValues:result[@"data"][@"h_addr"]];
+         NSMutableArray * arr = [[NSMutableArray alloc]init];
+        if (result[@"data"][@"h_addr"][@"h1"] != nil) {
+            [arr addObject:result[@"data"][@"h_addr"][@"h1"]];
         }
+        if (result[@"data"][@"h_addr"][@"h2"] != nil) {
+            [arr addObject:result[@"data"][@"h_addr"][@"h2"]];
+        }
+        if (result[@"data"][@"h_addr"][@"h3"] != nil) {
+            [arr addObject:result[@"data"][@"h_addr"][@"h3"]];
+        }
+         self.historyCity = [historyModel mj_objectArrayWithKeyValuesArray:arr];
         if([result[@"code"] intValue]==1){
             if (result[@"data"] != nil) {
-                
-                 self.hotCity = [hotCityModel mj_objectArrayWithKeyValuesArray:result[@"data"][@"hotAreas"]];
+            self.hotCity = [hotCityModel mj_objectArrayWithKeyValuesArray:result[@"data"][@"hotAreas"]];
                            if (result[@"data"][@"areas"] != nil) {
                                for (NSDictionary * dic in result[@"data"][@"areas"]) {
                                    CityModel * model = [[CityModel alloc]init];
@@ -400,35 +414,10 @@ API_AVAILABLE(ios(13.0))
         cell.delegate = self;
         if (indexPath.row == 0) {
             cell.title.text = @"Used City";
-            
-//            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"] != nil) {
-//                cell.history = [[NSUserDefaults standardUserDefaults]objectForKey:@"historylocation"];
-//            }
-//            NSLog(@"%@",self.historyCity);
-            if (self.historyCity != nil) {
-                historyModel * model = self.historyCity;
-                cell.model = model;
-                cell.click = ^{
-                    self.cityid = model.Id;
-                };
-            }
+            cell.hiscity = self.historyCity;
         }else{
-            UIButton * btn = cell.firstcity;
-            UIButton * btn2 = cell.secondcity;
-            UIButton * btn3 = cell.thirdcity;
             cell.title.text = @"Popular City";
             cell.hotcity = self.hotCity;
-            cell.click = ^{
-                if (btn.selected) {
-                    self.cityid = self.hotCity[0].Id;
-                }
-                if (btn2.selected) {
-                    self.cityid = self.hotCity[1].Id;
-                }
-                if (btn3.selected) {
-                    self.cityid = self.hotCity[2].Id;
-                }
-            };
         }
         return cell;
     }else{
@@ -452,7 +441,7 @@ API_AVAILABLE(ios(13.0))
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if (self.historyCity != nil) {
+            if (self.historyCity.count>0) {
                 return 80;
             }else{
                 return 0;
@@ -479,6 +468,18 @@ API_AVAILABLE(ios(13.0))
 //    RidingViewContrller * vc = [[RidingViewContrller alloc]init];
 //    [vc.topView.startBtn setUserInteractionEnabled:YES];
     self.keyword = tag;
+    for (hotCityModel * model in self.hotCity) {
+        if ([model.addr isEqualToString:tag]) {
+            self.cityid = model.Id;
+//            NSLog(@"%@",self.cityid);
+        }
+    }
+    for (historyModel * model in self.historyCity) {
+         if ([model.addr isEqualToString:tag]) {
+                    self.cityid = model.Id;
+        //            NSLog(@"%@",self.cityid);
+                }
+    }
      [self.sectionTitlesArray removeAllObjects];
                       [self.sectionArray removeAllObjects];
                       [self.hotCity removeAllObjects];

@@ -62,10 +62,9 @@
     NSMutableDictionary * dics = [[NSMutableDictionary alloc] initWithDictionary:dic];
     //统一添加一个TOKEN
   
-       if ([UserInfo shareUserInfo].token.length != 0) {
+       if ([UserInfo shareUserInfo].token != nil) {
            [dics setValue:[UserInfo shareUserInfo].token forKey:@"token"];
 //           NSLog(@"token--------------%@",[UserInfo shareUserInfo].token);
-       }else{
        }
     [dics setValue:@"leopard_dev" forKey:@"app_name"];
     if([Languagemanger shareManger].isEn){
@@ -85,9 +84,9 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
-            if ([[responseObject objectForKey:@"code"] intValue] == 10000) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"loginfailed" object:nil];
-            }
+//            if ([[responseObject objectForKey:@"code"] intValue] == 10000) {
+//                [[NSNotificationCenter defaultCenter]postNotificationName:@"loginfailed" object:nil];
+//            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (fail) {

@@ -37,6 +37,7 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.table];
 }
+#pragma mark //获取骑行记录
 - (void)loadrecord{
     if ([MyDevicemanger shareManger].mainDevice.Id == nil) {
             return;

@@ -72,7 +72,7 @@
         [weakSelf changeHeadImg];
     };
     headView.nick.text = [UserInfo shareUserInfo].nickname;
-    [headView.headImg sd_setImageWithURL:[NSURL URLWithString:[UserInfo shareUserInfo].headimg] placeholderImage:[UIImage imageNamed:@""]];
+    [headView.headImg sd_setImageWithURL:[NSURL URLWithString:[UserInfo shareUserInfo].headimg] placeholderImage:[UIImage imageNamed:@"defaulticon"]];
     self.tableView.tableHeaderView = headView;
     self.tableView.scrollEnabled = NO;
     [headView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
@@ -331,12 +331,14 @@ if ([cell respondsToSelector:@selector(setLayoutMargins:)])
               return;
           }
           [UserInfo shareUserInfo].headimg = result[@"data"][@"headimg"];
-          [self.headView.headImg sd_setImageWithURL:[NSURL URLWithString:result[@"data"][@"headimg"]] placeholderImage:nil];
+          [self.headView.headImg sd_setImageWithURL:[NSURL URLWithString:result[@"data"][@"headimg"]] placeholderImage:[UIImage imageNamed:@"defaulticon"]];
       } fail:^(NSError * _Nonnull error) {
           
       }];
 }
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 @end

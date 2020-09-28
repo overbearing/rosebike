@@ -43,7 +43,7 @@
 	<key>FacebookAppID</key>
 	<string>273200134099388</string>
 	<key>FacebookDisplayName</key>
-	<string>RoseBikes</string>
+	<string>Leopard IoT</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
@@ -92,6 +92,7 @@
 		<string>bluetooth-central</string>
 		<string>fetch</string>
 		<string>location</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

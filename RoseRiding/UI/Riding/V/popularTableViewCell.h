@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^popularTableViewCellClick)(void);
 @interface popularTableViewCell : UITableViewCell
 @property (nonatomic , strong)NSMutableArray <hotCityModel *>*hotcity;
-@property (nonatomic , strong)historyModel * model;
+@property (nonatomic , strong)NSMutableArray <historyModel *>*hiscity;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UIButton *firstcity;
 @property (weak, nonatomic) IBOutlet UIButton *secondcity;

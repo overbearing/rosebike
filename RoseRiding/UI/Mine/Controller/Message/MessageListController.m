@@ -97,7 +97,7 @@
 }
 - (void)jpushNotificationCenter:(NSNotification*)notify{
 //
-    if ([notify.object[@"type"] isEqual:@"16"] || [notify.object[@"type"] isEqual:@"17"]) {
+    if ([notify.object[@"type"] isEqual:@"18"] || [notify.object[@"type"] isEqual:@"19"]) {
         [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshUI" object:nil userInfo:nil];
     }
 }
@@ -495,7 +495,7 @@
         NSInteger  badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
         if (badge -1>=0) {
             [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge-1];
-            [JPUSHService setBadge:badge-1];
+//            [JPUSHService setBadge:badge-1];
         }
         if (self.list.count>0) {
         
@@ -563,7 +563,7 @@
                 NSInteger badge = [result[@"msg"] integerValue];
                
                 [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
-                [JPUSHService setBadge:badge];
+//                [JPUSHService setBadge:badge];
                 self.messagenumber = [result[@"msg"] integerValue];
              
                 if ([self.list[0].msgtype isEqualToString:@"4"]||[self.list[0].msgtype isEqualToString:@"6"]) {

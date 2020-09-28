@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoginController : RootViewController
 @property (nonatomic,strong) GIDSignInButton *login_gl;
 @property (nonatomic,assign) BOOL  islogout;
+- (void)loginAction;
 @end
 
 NS_ASSUME_NONNULL_END

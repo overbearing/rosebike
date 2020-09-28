@@ -22,6 +22,9 @@
 }
 @property (nonatomic,strong)GMSMapView *mapView;
 @property (nonatomic,strong)GMSPlace *place;
+@property (nonatomic,strong)NSMutableArray <GMSMarker *>*markers;
+@property (nonatomic,strong)NSMutableArray * arrMarkerData;
+@property (nonatomic,strong)NSMutableArray * dataarray;
 @property (nonatomic,strong)UIView *maskView;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,assign)BOOL firstLocationUpdate;
@@ -143,9 +146,21 @@
      [self setSearchVC];
     [self initUI];
     [self starLoaction];
+    
    
 }
-
+- (NSMutableArray *)arrMarkerData{
+    if (!_arrMarkerData) {
+        _arrMarkerData = [NSMutableArray new];
+    }
+    return _arrMarkerData;
+}
+- (NSMutableArray *)dataarray{
+    if (!_dataarray) {
+        _dataarray = [NSMutableArray new];
+    }
+    return _dataarray;
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
@@ -240,7 +255,7 @@ if (!self.isCurrenPageBluetoothOperation) {
             [weakSelf starLoaction];
             weakSelf.beginRiddingTimeInver = [weakSelf getcurrenttime];
             [[NSUserDefaults standardUserDefaults]setObject:weakSelf.beginRiddingTimeInver forKey:@"starttime"];
-            [weakSelf updatedistance];
+//            [weakSelf updatedistance];
             [weakSelf.timer setFireDate:[NSDate distantPast]];
 //            [weakSelf.uploadtimer setFireDate:[NSDate distantPast]];
             
@@ -258,7 +273,7 @@ if (!self.isCurrenPageBluetoothOperation) {
                  weakSelf.level = @"1";
                  weakSelf.iscount = YES;
                  [weakSelf loadpopularcity];
-                     [weakSelf gogoogleWithaddress:weakSelf.name];
+                [weakSelf gogoogleWithaddress:weakSelf.name];
              }
                 return;
             }
@@ -358,16 +373,106 @@ if (!self.isCurrenPageBluetoothOperation) {
      [self presentViewController:self.searchController animated:YES completion:nil];
 }
 - (void)loadpopularcity{
-    NSLog(@"/**%@\n%@\n%d\n%@\n*/",self.country,self.keyword,self.iscount,self.h2);
+//    NSLog(@"/**%@\n%@\n%d\n%@\n*/",self.country,self.keyword,self.iscount,self.h2);
     NSString * url = host(@"bicycle/historyList");
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2,@"postcode":self.postcode,@"country":self.country} success:^(NSDictionary * _Nonnull result) {
-//        NSLog(@"%@",self.h2);
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"keywords":self.keyword ,@"province":self.province,@"level": self.level,@"type":[Languagemanger shareManger].isEn?@"1":@"2",@"count":self.iscount?@"1":@"2",@"city":self.h2,@"postcode":self.postcode,@"country":self.country,@"id":@""} success:^(NSDictionary * _Nonnull result) {
+//        NSLog(@"%@",result);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
        
     } fail:^(NSError * _Nonnull error) {
          [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+}
+-(NSMutableArray<GMSMarker *> *)markers{
+    if (!_markers) {
+        _markers = [NSMutableArray new];
+    }
+    return _markers;
+}
+#pragma mark 历史骑行位置
+- (void)loadrecord{
+      
+    if ([MyDevicemanger shareManger].mainDevice.Id == nil) {
+            return;
+       }
+    NSString * url = host(@"bicycle/cycling");
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[NetworkingManger shareManger] postDataWithUrl:url para:@{@"id":[MyDevicemanger shareManger].mainDevice.Id,@"start_time":@"" ,@"end_time":@"",@"status":@"2"} success:^(NSDictionary * _Nonnull result) {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if ([result[@"code"] intValue]== 1) {
+            if (result[@"data"] != nil) {
+//                [self.mapView clear];
+                NSMutableArray * data = [result[@"data"]mutableCopy ];
+                for (int i=0; i<data.count ;i++) {
+                    NSMutableArray * gps = [[self arrayWithJsonString:data[i][@"gps_data"]] mutableCopy];
+                    [self.dataarray addObject:gps];
+                }
+//                NSLog(@"%@",self.dataarray);
+                for (int j=0 ;j<self.dataarray.count;j++) {
+                                       for (int k=0; k<[self.dataarray[j] count ]; k++) {
+                                           for (int l=0; l<[self.dataarray[j][k] count]; l++) {
+                                               if (l==0) {
+                                                   NSDictionary * dict = @{@"position": [[CLLocation alloc]initWithLatitude:[self.dataarray[j][k][l+1] floatValue] longitude:[self.dataarray[j][k][l] floatValue]]};
+                                                    [self.arrMarkerData addObject:dict];
+                                               }
+                                           }
+                                       }
+                                   }
+            }
+            [self showhistory];
+        }
+       
+    } fail:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
+- (void)showhistory{
+        for (NSDictionary* dictt in self.arrMarkerData){
+                                GMSMarker *marker = [[GMSMarker alloc] init];
+                                marker.icon = [UIImage imageNamed:@"point"];
+                                marker.position = [(CLLocation*)dictt[@"position"] coordinate];
+                                marker.appearAnimation = kGMSMarkerAnimationPop;
+                             marker.map = _mapView;
+                         }
+}
+#pragma mark -json串转换成字典
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+#pragma mark -json串转换成数组
+- (id)arrayWithJsonString:(NSString *)jsonString{
+    
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingMutableContainers
+                                                    error:&err];
+    
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return arr;
+    
 }
 /*
 - (void)showAlert{
@@ -474,14 +579,15 @@ if (!self.isCurrenPageBluetoothOperation) {
 //        _mapView.camera = [GMSCameraPosition cameraWithTarget:self.currentLocation.coordinate
 //        zoom:16];
     }
+    [self loadrecord];
     
 }
 - (void)setSearchVC{
     self.resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
     GMSAutocompleteFilter *autocompleteFilter = [[GMSAutocompleteFilter alloc] init];
-//    NSLocale *currentLocalestr = [NSLocale currentLocale];
-//       NSString * countryCode = [currentLocalestr objectForKey:NSLocaleCountryCode];
-    NSString * countryCode = @"GB";
+    NSLocale *currentLocalestr = [NSLocale currentLocale];
+       NSString * countryCode = [currentLocalestr objectForKey:NSLocaleCountryCode];
+//    NSString * countryCode = @"GB";
     autocompleteFilter.type = kGMSPlacesAutocompleteTypeFilterNoFilter;
     autocompleteFilter.country = countryCode;
     self.resultsViewController.autocompleteFilter = autocompleteFilter;
@@ -509,8 +615,8 @@ if (!self.isCurrenPageBluetoothOperation) {
     _searchController.active = NO;
 //    NSLog(@"%@",[NSString replaceUnicode:place.formattedAddress]);
     NSString * str = [ NSString replaceUnicode:place.formattedAddress];
-    self.keyword = [NSString stringWithFormat:@"%@%@",place.name,str];
-    NSLog(@"*******%f%f",place.coordinate.latitude,place.coordinate.longitude);
+    self.keyword = str;
+//    NSLog(@"*******%f%f",place.coordinate.latitude,place.coordinate.longitude);
     [self loadCurentLocation:[NSString stringWithFormat:@"%f",place.coordinate.latitude ] andlng:[NSString stringWithFormat:@"%f",place.coordinate.longitude]];
     // Do something with the selected place.
     if (place.name.isNotBlank) {
@@ -601,7 +707,7 @@ didFailAutocompleteWithError:(NSError *)error {
 //    }
 //}
 - (void)gogoogleWithaddress:(NSString *) name{
-    NSLog(@"%@",name);
+//    NSLog(@"%@",name);
     NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?saddr=&daddr=%@&directionsmode=bicycling",name] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
       if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
@@ -728,11 +834,11 @@ didFailAutocompleteWithError:(NSError *)error {
         self.currentLocationDetailInfo = [result[@"results"] firstObject];
          NSString *currentLocationName = @"";
          NSArray *locationinfos = [[self.currentLocationDetailInfo[@"address_components"] reverseObjectEnumerator] allObjects];
-        NSLog(@"%@",locationinfos);
+//        NSLog(@"%@",locationinfos);
         for (NSDictionary *dic in locationinfos) {
             if ([dic[@"types"] containsObject:@"postal_code"]){
                 self.postcode = dic[@"long_name"];
-                NSLog(@"%@",self.postcode);
+//                NSLog(@"%@",self.postcode);
 //                return;
                 continue;
             }
@@ -742,7 +848,7 @@ didFailAutocompleteWithError:(NSError *)error {
             }
             if ([dic[@"types"] containsObject:@"country"]) {
                 self.h1 = dic[@"long_name"];
-                self.country = dic[@"long_name"];
+                self.country = dic[@"short_name"];
             }
             if ([dic[@"types"] containsObject:@"locality"]) {
                 self.h2 = dic[@"long_name"];
@@ -819,10 +925,10 @@ didFailAutocompleteWithError:(NSError *)error {
     _Samplingaccount = 0;
     self.totalDistance = 0;
     self.bottomView.hour.text = @"00";
-           self.bottomView.minutes.text = @"00";
-           self.bottomView.seconds.text = @"00";
-            self.bottomView.distance.text = @"0.0km";
-            self.bottomView.speed.text = @"0.0km/h";
+    self.bottomView.minutes.text = @"00";
+    self.bottomView.seconds.text = @"00";
+    self.bottomView.distance.text = @"0.0km";
+    self.bottomView.speed.text = @"0.0km/h";
     self.place = nil;
    
 }
@@ -864,7 +970,7 @@ didFailAutocompleteWithError:(NSError *)error {
 }
 */
 - (void)upLoadEndData{
-    NSLog(@"%@",self.status);
+//    NSLog(@"%@",self.status);
     //上报结束骑行数据到服务端
     if ([MyDevicemanger shareManger].mainDevice.Id == nil) {
          return;

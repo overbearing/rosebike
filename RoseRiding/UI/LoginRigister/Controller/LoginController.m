@@ -40,7 +40,6 @@
 @property (nonatomic, strong) UIButton * facebookBtn;
 @property (nonatomic, strong) UIButton * twitterBtn;
 @property (nonatomic, strong) UIButton * appleBtn;
-
 @end
 
 @implementation LoginController
@@ -101,7 +100,7 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
     YJJTextField *userNameField = [YJJTextField yjj_textField];
     userNameField.maxLength = NSIntegerMax;
     userNameField.errorStr = @"*字数长度不得超过11位";
-    userNameField.placeholder = @"Email / Phonenumber";
+    userNameField.placeholder = @"Email";
     userNameField.placeHolderLabelColor = [UIColor colorWithHexString:@"#838383"];
     userNameField.lineDefaultColor = [UIColor colorWithHexString:@"#EDEDED"];
     userNameField.lineSelectedColor = [UIColor colorWithHexString:@"#EDEDED"];
@@ -257,18 +256,12 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
 //    [self.view addSubview:loginButton];
 }
 -(void)signInWithApple API_AVAILABLE(ios(13.0)){
-   
-        ASAuthorizationAppleIDProvider *provider = [[ASAuthorizationAppleIDProvider alloc]init];
-   
-   
-        ASAuthorizationAppleIDRequest * request = [provider createRequest];
-   
+    ASAuthorizationAppleIDProvider *provider = [[ASAuthorizationAppleIDProvider alloc]init];
+    ASAuthorizationAppleIDRequest * request = [provider createRequest];
     request.requestedScopes = @[ASAuthorizationScopeFullName,ASAuthorizationScopeEmail];
-    
     ASAuthorizationController *vc= [[ASAuthorizationController alloc]initWithAuthorizationRequests:@[request]];
     vc.delegate = self;
     vc.presentationContextProvider = self;
-    
     [vc performRequests];
 }
 - (void)handleClick:(UIButton *)btn{
@@ -291,7 +284,7 @@ static NSString * const  twitterID = @"https://api.twitter.com/oauth/authorize?o
                                                parameters:params
                                                HTTPMethod:@"GET"];
                  [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                     NSLog(@"00000--------------%@",result);
+//                     NSLog(@"00000--------------%@",result);
                      /*
                       {
                       "age_range" =     {
@@ -499,6 +492,24 @@ else if (btn == self.twitterBtn) {
     }
     return tokenString;
 }
+   
+- (void)registertwilio{
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        NSString *deviceTokenString = [self createDeviceTokenString:appDelegate.deviceToken];
+//        NSLog(@"%@,%@",deviceTokenString,[UserInfo shareUserInfo].token);
+        if ([UserInfo shareUserInfo].token == nil || deviceTokenString == nil) {
+            return;
+        }
+        NSString * url = host(@"users/twilioregister");
+        [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"address":deviceTokenString,@"token":[UserInfo shareUserInfo].token} success:^(NSDictionary * _Nonnull result) {
+            NSLog(@"%@",result);
+            [Toast showToastMessage:result[@"msg"] inview:self.view];
+            } fail:^(NSError * _Nonnull error) {
+                NSLog(@"%@",error);
+            }];
+    }
+
+
 - (void)loginAction{
     //三目运算处理
     NSString *url = host(@"login/login");
@@ -506,9 +517,9 @@ else if (btn == self.twitterBtn) {
         [Toast showToastMessage:@"Password is invalid"];
         return;;
     }
-     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSString *deviceTokenString = [self createDeviceTokenString:appDelegate.deviceToken];
-    NSDictionary *para = @{@"email":self.userNameField.textField.text,@"password":self.passwordField.textField.text, @"address": deviceTokenString};
+    NSString * email = self.userNameField.textField.text;
+    NSString * password = self.passwordField.textField.text;
+    NSDictionary *para = @{@"email":email,@"password":password, @"address": @""};
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NetworkingManger shareManger] postDataWithUrl:url para:para success:^(NSDictionary * _Nonnull result) {
           [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -520,35 +531,45 @@ else if (btn == self.twitterBtn) {
         if (stateCode == 1) {
             //成功获取datas保存用户信息
             [[UserInfo shareUserInfo] setUserData:result[@"data"]];
+//            [[UserInfo shareUserInfo] setToken: result[@"data"]];
+            [self registertwilio];
+//            NSLog(@"%@",result[@"data"]);
             //本地存储用户账号信息(判断账户信息是否存在，是更新，否写入)
-            [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",result[@"data"][@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-              } seq:1];
+//            [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",result[@"data"][@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//              } seq:1];
             NSMutableArray *localAccounts = [[[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"] mutableCopy];
             if (localAccounts == nil) {
                 localAccounts = [NSMutableArray array];
             }
             if (localAccounts.count == 0) {
-                NSMutableDictionary *dic = [result[@"data"] mutableCopy];
+                 NSMutableDictionary *dic = [result[@"data"] mutableCopy];
                 [dic setValue:@"1" forKey:@"isMain"];
+                [dic setValue:self.passwordField.textField.text forKey:@"pwd"];
                 [localAccounts addObject:dic];
             }else{
-                for (NSDictionary *userInfo in localAccounts) {
-                    if ([[UserInfo shareUserInfo].Id isEqual:userInfo[@"id"]]) {
-                        [localAccounts removeObject:userInfo];
-                        NSMutableDictionary *dic = [result[@"data"] mutableCopy];
-                        [dic setValue:@"1" forKey:@"isMain"];
-                        [localAccounts addObject:dic];
-                    }else{
-                        NSMutableDictionary *dic = [result[@"data"] mutableCopy];
-                        [dic setValue:@"1" forKey:@"isMain"];
-                        [localAccounts addObject:dic];
-                    }
+                 NSMutableDictionary *dic = [result[@"data"] mutableCopy];
+                for (int i = 0 ; i<localAccounts.count;i++) {
+                  if([dic[@"userid"] isEqualToString:localAccounts[i][@"userid"]]){
+                      [localAccounts removeObjectAtIndex:i];
+                      [dic setValue:@"1" forKey:@"isMain"];
+                      [dic setValue:self.passwordField.textField.text forKey:@"pwd"];
+                      [localAccounts insertObject:dic atIndex:i];
+                        [[NSUserDefaults standardUserDefaults] setObject:localAccounts forKey:@"accounts"];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                      return;
+                  }
+                   
                 }
+                 [dic setValue:@"1" forKey:@"isMain"];
+                   [dic setValue:self.passwordField.textField.text forKey:@"pwd"];
+                    [localAccounts addObject:dic];
             }
-            [[NSUserDefaults standardUserDefaults] setObject:localAccounts forKey:@"accounts"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+           
             //返回首页
-            [self dismissViewControllerAnimated:YES completion:nil];
+           [[NSUserDefaults standardUserDefaults] setObject:localAccounts forKey:@"accounts"];
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+                                  [self dismissViewControllerAnimated:YES completion:nil];
         }
     } fail:^(NSError * _Nonnull error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -560,57 +581,68 @@ else if (btn == self.twitterBtn) {
     if (account == nil) {
         return;
     }
+     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"account_type":type,@"account":account} success:^(NSDictionary * _Nonnull result) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSInteger stateCode = [result[@"code"] integerValue];        
         if (stateCode == 1) {
-            NSLog(@"%@",result);
+//            NSLog(@"%@",result);
             //成功获取datas保存用户信息
                        [[UserInfo shareUserInfo] setUserData:result[@"data"]];
+            [self registertwilio];
                        //本地存储用户账号信息(判断账户信息是否存在，是更新，否写入)
-                       [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",result[@"data"][@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-                         } seq:1];
+//                       [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",result[@"data"][@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//                         } seq:1];
                        NSMutableArray *localAccounts = [[[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"] mutableCopy];
                        if (localAccounts == nil) {
                            localAccounts = [NSMutableArray array];
                        }
                        if (localAccounts.count == 0) {
                            NSMutableDictionary *dic = [result[@"data"] mutableCopy];
+                           [dic setValue:type forKey:@"type"];
                            [dic setValue:@"1" forKey:@"isMain"];
                            [localAccounts addObject:dic];
                        }else{
-                           for (NSDictionary *userInfo in localAccounts) {
-                               if ([[UserInfo shareUserInfo].Id isEqual:userInfo[@"id"]]) {
-                                   [localAccounts removeObject:userInfo];
-                                   NSMutableDictionary *dic = [result[@"data"] mutableCopy];
-                                   [dic setValue:@"1" forKey:@"isMain"];
-                                   [localAccounts addObject:dic];
-                               }else{
-                                   NSMutableDictionary *dic = [result[@"data"] mutableCopy];
-                                   [dic setValue:@"1" forKey:@"isMain"];
-                                   [localAccounts addObject:dic];
-                               }
+                            NSMutableDictionary *dic = [result[@"data"] mutableCopy];
+                           for (int i = 0 ; i<localAccounts.count;i++) {
+                             if([dic[@"userid"] isEqualToString:localAccounts[i][@"userid"]]){
+                                 [localAccounts removeObjectAtIndex:i];
+                                 [dic setValue:@"1" forKey:@"isMain"];
+                                  [dic setValue:type forKey:@"type"];
+                                 [localAccounts insertObject:dic atIndex:i];
+                                   [[NSUserDefaults standardUserDefaults] setObject:localAccounts forKey:@"accounts"];
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+                                [self dismissViewControllerAnimated:YES completion:nil];
+                                   NSLog(@"登录已存在账号");
+                                 return;
+                             }
+                              
                            }
+                            [dic setValue:@"1" forKey:@"isMain"];
+//                              [dic setValue:self.passwordField.textField.text forKey:@"pwd"];
+                           [dic setValue:type forKey:@"type"];
+                               [localAccounts addObject:dic];
                        }
                        [[NSUserDefaults standardUserDefaults] setObject:localAccounts forKey:@"accounts"];
                        [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
                        //返回首页
                        [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            NSString * msg = [result objectForKey:@"msg"];
+            if (![msg isEqualToString:@""]) {
+                 [Toast showToastMessage:msg];
+            }
         }
-        NSString * msg = [result objectForKey:@"msg"];
-        if (![msg isEqualToString:@""]) {
-             [Toast showToastMessage:msg];
-        }
+        
        
     } fail:^(NSError * _Nonnull error) {
-        NSLog(@"error-------------------%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        NSLog(@"error-------------------%@",error); 
     }];
 }
 
 - (void)signIn:(GIDSignIn*)signIn didSignInForUser:(GIDGoogleUser*)user withError:(NSError*)error
 {
-    
-    NSLog(@"user %@",user);
-    NSLog(@"error %@",error);
     if (error != nil) {
          if (error.code == kGIDSignInErrorCodeHasNoAuthInKeychain) {
            NSLog(@"The user has not signed in before or they have since signed out.");
@@ -633,8 +665,8 @@ else if (btn == self.twitterBtn) {
 }
 
 - (void)loginButton:(nonnull FBSDKLoginButton *)loginButton didCompleteWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error {
-    NSLog(@"授权成功");
-    NSLog(@"result--------%@",result);
+//    NSLog(@"授权成功");
+//    NSLog(@"result--------%@",result);
 //     [self dsfLoginwithaccount:email andtype:@"2"];
 }
 
@@ -670,13 +702,13 @@ API_AVAILABLE(ios(13.0)){
         
         ASUserDetectionStatus realUserStatus = credential.realUserStatus;
          
-         NSLog(@"state: %@", state);
-         NSLog(@"userID: %@", userID);
-         NSLog(@"fullName: %@", fullName);
-         NSLog(@"email: %@", email);
-         NSLog(@"authorizationCode: %@", authorizationCode);
-         NSLog(@"identityToken: %@", identityToken);
-         NSLog(@"realUserStatus: %@", @(realUserStatus));
+//         NSLog(@"state: %@", state);
+//         NSLog(@"userID: %@", userID);
+//         NSLog(@"fullName: %@", fullName);
+//         NSLog(@"email: %@", email);
+//         NSLog(@"authorizationCode: %@", authorizationCode);
+//         NSLog(@"identityToken: %@", identityToken);
+//         NSLog(@"realUserStatus: %@", @(realUserStatus));
         if (userID != nil) {
             [self dsfLoginwithaccount:[NSString stringWithFormat:@"%@@apple.com",userID] andtype:@"3"];
         }

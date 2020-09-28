@@ -71,14 +71,20 @@
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
-- (void)setModel:(historyModel *)model{
+- (void)setHiscity:(NSMutableArray<historyModel *> *)hiscity{
     if ([self.title.text isEqualToString:@"Used City"]) {
-            self.firstcity.layer.borderWidth = model.h1 == nil?0:0.5;
-        self.secondcity.layer.borderWidth = model.h2 == nil?0:0.5;
-        self.thirdcity.layer.borderWidth = model.h3 == nil?0:0.5;
-        [self.firstcity setTitle:model.h1 forState:UIControlStateNormal];
-        [self.secondcity setTitle:model.h2 forState:UIControlStateNormal];
-        [self.thirdcity setTitle:model.h3 forState:UIControlStateNormal];
+           if (hiscity.count >0) {
+                [self.firstcity setTitle:hiscity[0].addr forState:UIControlStateNormal];
+                self.firstcity.layer.borderWidth = hiscity[0].addr == nil?0:0.5;
+            }
+            if(hiscity.count >1){
+                [self.secondcity setTitle:hiscity[1].addr forState:UIControlStateNormal];
+                 self.secondcity.layer.borderWidth = hiscity[1].addr == nil?0:0.5;
+            }
+            if(hiscity.count >2){
+                 self.thirdcity.layer.borderWidth = hiscity[2].addr == nil?0:0.5;
+                 [self.thirdcity setTitle:hiscity[2].addr forState:UIControlStateNormal];
+            }
     }
 
 }
@@ -102,8 +108,8 @@
     if ([self.delegate respondsToSelector:@selector(clickTest:)]) {
         [self.delegate clickTest:sender.currentTitle];
     }
-     if (self.click) {
-        self.click();
-     }
+//     if (self.click) {
+//        self.click();
+//     }
 }
 @end

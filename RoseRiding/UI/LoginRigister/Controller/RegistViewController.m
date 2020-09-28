@@ -31,6 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//   self.deviceTokenString = [self createDeviceTokenString:appDelegate.deviceToken];
       [self setupUI];
     [self setRACSignal];
     self.barStyle = NavigationBarStyleWhite;
@@ -44,6 +46,17 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
      [IQKeyboardManager sharedManager].enable = YES;
+}
+
+- (NSString*) createDeviceTokenString:(NSData*) deviceToken {
+    const unsigned char *tokenChars = deviceToken.bytes;
+
+    NSMutableString *tokenString = [NSMutableString string];
+    for (int i=0; i < deviceToken.length; i++) {
+        NSString *hex = [NSString stringWithFormat:@"%02x", tokenChars[i]];
+        [tokenString appendString:hex];
+    }
+    return tokenString;
 }
 - (void)setupUI
 {
@@ -333,9 +346,23 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
-
-
-
+#pragma mark //twilio注册
+- (void)registertwilio{
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSString *deviceTokenString = [self createDeviceTokenString:appDelegate.deviceToken];
+    NSLog(@"%@,%@",deviceTokenString,[UserInfo shareUserInfo].token);
+    
+    if ([UserInfo shareUserInfo].token == nil || deviceTokenString == nil) {
+        return;
+    }
+    NSString * url = host(@"users/twilioregister");
+    [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"address":deviceTokenString,@"token":[UserInfo shareUserInfo].token} success:^(NSDictionary * _Nonnull result) {
+        NSLog(@"%@",result);
+        [Toast showToastMessage:result[@"msg"] inview:self.view];
+        } fail:^(NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+}
 #pragma mark 提交注册
 - (void)subbmit{
     if (self.userNameField.textField.text.length == 0) {
@@ -389,6 +416,7 @@
         if (stateCode == 1) {
             //成功获取datas保存用户信息
             [[UserInfo shareUserInfo] setUserData:result[@"data"]];
+            [self registertwilio];
             //本地存储用户账号信息(判断账户信息是否存在，是更新，否写入)
             NSMutableArray *localAccounts = [[[NSUserDefaults standardUserDefaults] objectForKey:@"accounts"] mutableCopy];
             if (localAccounts == nil) {
@@ -400,7 +428,7 @@
                 [localAccounts addObject:dic];
             }else{
                 for (NSDictionary *userInfo in localAccounts) {
-                    if ([[UserInfo shareUserInfo].Id isEqualToString:[NSString stringWithFormat:@"%@",userInfo[@"id"]]]) {
+                    if ([[UserInfo shareUserInfo].Id isEqual:userInfo[@"id"]]) {
                         [localAccounts removeObject:userInfo];
                         NSMutableDictionary *dic = [result[@"data"] mutableCopy];
                         [dic setValue:@"1" forKey:@"isMain"];

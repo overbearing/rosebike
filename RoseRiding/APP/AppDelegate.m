@@ -313,7 +313,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
         badge += 1;
         [[UIApplication sharedApplication]setApplicationIconBadgeNumber:badge];
-        [JPUSHService setBadge:badge];
+//        [JPUSHService setBadge:badge];
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
   // Required
@@ -347,7 +347,7 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
   // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
-    
+       [self badgenumber];
     if (userInfo[@"msg_id"]!= nil) {
           self.msgid = userInfo[@"msg_id"];
           [self recivetime];
@@ -393,9 +393,11 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
   // Required, iOS 7 Support
-  [JPUSHService handleRemoteNotification:userInfo];
+//  [JPUSHService handleRemoteNotification:userInfo];
   completionHandler(UIBackgroundFetchResultNewData);
-    NSLog(@"The notification message is: %@", [userInfo valueForKeyPath:@"aps.alert"]);
+    NSLog(@"静默  The notification message is: %@", userInfo );
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
+       [self badgenumber];
 //       UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Notification"
 //                                                                       message:[userInfo valueForKeyPath:@"aps.alert"]
 //                                                                preferredStyle:UIAlertControllerStyleAlert];
@@ -418,8 +420,10 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
 
 -(void) application:(UIApplication *) application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
     
-    [JPUSHService handleRemoteNotification:userInfo];
-    NSLog(@"The notification message is: %@", [userInfo valueForKeyPath:@"aps.alert"]);
+//    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"The notification message is: %@", userInfo);
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
+       [self badgenumber];
 //    UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Notification"
 //                                                                    message:[userInfo valueForKeyPath:@"aps.alert"]
 //                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -448,6 +452,7 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"checktheBluetooth" object:nil];
+    
 }
 UIBackgroundTaskIdentifier taskId;
 
@@ -460,7 +465,7 @@ UIBackgroundTaskIdentifier taskId;
         [application endBackgroundTask:taskId];
     }];
 
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 //    [[GYBabyBluetoothManager sharedManager].babyBluetooth cancelAllPeripheralsConnection];
 //    [[GYBabyBluetoothManager sharedManager] stopScanPeripheral];
 }
@@ -477,6 +482,8 @@ UIBackgroundTaskIdentifier taskId;
     if (self.msgid != self.oldmsg) {
         [self recivetime];
         self.oldmsg = self.msgid;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:nil];
+
     }
 }
 -(void)applicationWillTerminate:(UIApplication *)application {
@@ -496,25 +503,26 @@ UIBackgroundTaskIdentifier taskId;
         return;
     }else{
         for (NSDictionary *userInfo in localAccounts) {
-               if ([userInfo[@"isMain"] isEqual:@"1"]) {
-                   [[NetworkingManger shareManger] postDataWithUrl:host(@"user/mesg") para:@{@"userid":userInfo[@"id"],@"token":userInfo[@"token"]} success:^(NSDictionary * _Nonnull result) {
-                       if ([result[@"code"] integerValue] != 1) {
-                       }else{
-                           [[UserInfo shareUserInfo] setUserData:result[@"data"]];
-                           [[UserInfo shareUserInfo] setToken: userInfo[@"token"]];
-                           [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",[result[@"data"] objectForKey:@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-                           } seq:1];
-//                           self.deviceToken = [token dataUsingEncoding:NSUTF8StringEncoding];
-                       }
-                       if (callback) {
-                           callback();
-                       }
-                       
-                   } fail:^(NSError * _Nonnull error) {
-                       if (callback) {
-                           callback();
-                       }
-                   }];
+            if ([userInfo[@"isMain"] isEqual:@"1"]) {
+                     [[NetworkingManger shareManger] postDataWithUrl:host(@"user/mesg") para:@{@"userid":userInfo[@"id"],@"token":userInfo[@"token"]} success:^(NSDictionary * _Nonnull result) {
+                                           if ([result[@"code"] integerValue] == 1) {
+                                               [[UserInfo shareUserInfo] setUserData:result[@"data"]];
+                                               [[UserInfo shareUserInfo] setToken: userInfo[@"token"]];
+                    //                           [JPUSHService setAlias:[NSString stringWithFormat:@"imei_%@",[result[@"data"] objectForKey:@"id"]] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                    //                           } seq:1];
+                    //                           self.deviceToken = [token dataUsingEncoding:NSUTF8StringEncoding];
+                    //                           return;
+                                           }
+                                           if (callback) {
+                                               callback();
+                                           }
+                    //                       return;
+                                       } fail:^(NSError * _Nonnull error) {
+                                           if (callback) {
+                                               callback();
+                                           }
+                                       }];
+                 return;
                }
            }
     }
@@ -563,6 +571,7 @@ UIBackgroundTaskIdentifier taskId;
 }
 - (void)recivetime{
     NSString * url = host(@"users/p_time");
+    
     [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"id":self.msgid,@"time":[self currentTimeStr]} success:^(NSDictionary * _Nonnull result) {
 //        if (result[@"msg"]!= nil) {
 ////            [Toast showToastMessage:result[@"msg"]];

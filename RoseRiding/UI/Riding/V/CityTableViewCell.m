@@ -29,6 +29,5 @@
 }
 - (void)setModel:(CityModel *)model{
     self.name.text = model.name;
-    
 }
 @end

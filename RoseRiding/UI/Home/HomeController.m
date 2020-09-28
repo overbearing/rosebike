@@ -80,15 +80,20 @@
 @property (nonatomic, strong) NSString *currentlocation;
 @property (nonatomic, strong) NSString * bluename;
 @property (nonatomic, strong) NSDictionary *currentLocationDetailInfo;
+@property (nonatomic, strong) NSMutableArray * hisarray;
 @property (nonatomic, strong) UILocalNotification *localNotification;
 @end
 
 static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-binding";
 @implementation HomeController
-
-
 {
     int times;
+}
+-(NSMutableArray *)hisarray{
+    if (!_hisarray) {
+        _hisarray = [NSMutableArray new];
+    }
+    return  _hisarray;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -260,8 +265,16 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         }];
     return;
 }
-
-
+#pragma mark //Traffic accident
+- (void)accident{
+    NSString * url = host(@"api/accident");
+    [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"year":@"2018",@"type":@""} success:^(NSDictionary * _Nonnull result) {
+        NSLog(@"%@",result);
+        } fail:^(NSError * _Nonnull error) {
+           NSLog(@"%@",error
+                 );
+        }];
+}
 #pragma mark - Networking
 
 - (NSString*) createDeviceTokenString:(NSData*) deviceToken {
@@ -290,8 +303,8 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         
     }];
 }
+#pragma mark //关闭蓝牙
 - (void)poweroff{
-
     [self.reconnect setFireDate:[NSDate distantFuture ]];
 //      times = 5;
         [self requestWaring];
@@ -342,6 +355,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
      loginVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:loginVC animated:YES completion:nil];
 }
+#pragma mark //震动指令回复提醒
 - (void)Vibartion:(NSNotification*)notify{
 //     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if ([self.currentDeviceInfo.activation isEqualToString:@"3"]) {
@@ -378,6 +392,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
 //    [self loadlocation];
 //    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+#pragma mark //自动重连
 - (void)reconnect:(NSTimer*)timer{
     if (times> 0) {
         if (second < 30) {
@@ -431,12 +446,15 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
 //        }
 //    }
 }
+#pragma mark //收到通知显示状态
 - (void)jpushNotificationCenter:(NSNotification*)notify{
-    [self loadMyDevice];
+//    NSLog(@"%@",notify);
+//    [self loadMyDevice];
+    [self requestWaring];
     if (notify.object[@"type"] != nil) {
          if ([notify.object[@"type"]integerValue] == 19) {
                [self.workMode setTitle:[GlobalControlManger enStr:@"Normal Mode" geStr:@"Normal Mode"] forState:UIControlStateNormal];
-           }else  if ([notify.object[@"type"]integerValue] == 18) {
+           }else if ([notify.object[@"type"]integerValue] == 18) {
                [self.workMode setTitle:[GlobalControlManger enStr:@"Sleep Mode" geStr:@"Sleep Mode"] forState:UIControlStateNormal];
            }
     }
@@ -444,6 +462,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
 //    NSLog(@"%@",notify.object[@"type"]);
 //    [];
 }
+#pragma mark //连接蓝牙状态电量更新
 - (void)batteryLevelUpDate:(NSNotification *)notify{
     if ([notify.object integerValue] == 0) {
         self.batteryLevel = BatteryLevel1;
@@ -460,6 +479,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         [self setbuttonImage];
     }
 }
+#pragma mark //盗车指令回复提醒
 - (void)setcartheftsuccess:(NSNotification *)notify{
 //    NSLog(@"notify-----------%@",notify.object);
 //     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -472,6 +492,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
     }
 //    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+#pragma mark //翻车指令回复提醒
 - (void)setcarRolloversuccess:(NSNotification *)notify{
 //    NSLog(@"notify-----------%@",notify.object);
 //     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -734,6 +755,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
     [super viewWillAppear:animated];
 //    [self starLoaction];
     [self loadMyDevice];
+//    [self loadhislocation];
     self.isreloadlocation = NO;
     if(![[[NSUserDefaults standardUserDefaults]objectForKey:@"autolock"]isEqualToString:@"1"]) {
         self.isShow = YES;
@@ -934,6 +956,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
 }
 #pragma mark------//加载地图
 - (void)initUI{
+    [self accident];
     self.indicate_connect.userInteractionEnabled = NO;
     self.indicate_lock.userInteractionEnabled = NO;
     self.workMode.userInteractionEnabled = NO;
@@ -1031,7 +1054,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         // 获取最新定位
         CLLocation*location = locations.lastObject;
         // 打印位置信息
-        NSLog(@"经度：%.2f, 纬度：%.2f", location.coordinate.latitude,location.coordinate.longitude);
+//        NSLog(@"经度：%.2f, 纬度：%.2f", location.coordinate.latitude,location.coordinate.longitude);
         self.lat = [NSString stringWithFormat:@"%.6f",location.coordinate.latitude];
         self.lng = [NSString stringWithFormat:@"%.6f",location.coordinate.longitude];
         // 停止定位
@@ -1046,8 +1069,42 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
                                                                                zoom:16];
 //        [self.mapView clear];
         [self loadlocation];
-       
+        
     }
+}
+- (void)loadhislocation{
+    NSString * url = host(@"bicycle/eq_gps");
+    if ([MyDevicemanger shareManger].mainDevice.device_imei == nil) {
+//        NSLog(@"没有主设备");
+        return;
+    }
+    [[NetworkingManger shareManger]postDataWithUrl:url para:@{@"id":[MyDevicemanger shareManger].mainDevice.device_imei,@"time":@""} success:^(NSDictionary * _Nonnull result) {
+//        NSLog(@"历史位置%@",result);
+        if ([result[@"code"]intValue]==1) {
+            if (result[@"data"] != nil) {
+                for (NSDictionary * dic  in result[@"data"]) {
+                    NSDictionary * dict = @{@"position": [[CLLocation alloc]initWithLatitude:[dic[@"lat"] floatValue] longitude:[dic[@"lng"] floatValue]]};
+                    [self.hisarray addObject:dict];
+                }
+                [self showhistory];
+            }
+        }
+//        NSLog(@"%@",result[@"msg"]);
+    } fail:^(NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+- (void)showhistory{
+    if (self.hisarray == nil) {
+        return;
+    }
+        for (NSDictionary* dictt in self.hisarray){
+                                GMSMarker *marker = [[GMSMarker alloc] init];
+                                marker.icon = [UIImage imageNamed:@"point"];
+                                marker.position = [(CLLocation*)dictt[@"position"] coordinate];
+                                marker.appearAnimation = kGMSMarkerAnimationPop;
+                             marker.map = _mapView;
+                         }
 }
 #pragma mark------//加载设备列表
 - (void)loadMyDevice{
@@ -1064,7 +1121,6 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         NSInteger stateCode = [result[@"code"] integerValue];
         NSString *msg = result[@"msg"];
         if (stateCode == 1) {
-          
 //            NSLog(@"equimentList%@",result[@"data"][@"list"]);
             self.list = [BikeDeviceModel mj_objectArrayWithKeyValuesArray:result[@"data"][@"list"]];
             [MyDevicemanger shareManger].Devices = [self.list mutableCopy];
@@ -1104,8 +1160,10 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
                 }
                  self.area.text = self.currentDeviceInfo.equipment;
                 [MyDevicemanger shareManger].mainDevice = self.currentDeviceInfo;
+                [self loadlocation];
+//                return;
             }
-            
+           
 //              [self loadlocation];
         }else{
             if (![msg isEqualToString:@""]) {
@@ -1158,7 +1216,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
     NSString *requestUrl = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@,%@&key=AIzaSyABQXPBUnlE_DzVKG7ga0ZJhx9QmlygldU",lattt,longgg];
     [[NetworkingManger shareManger] postDataWithUrl:requestUrl para:nil success:^(NSDictionary * _Nonnull result) {
         self.currentLocationDetailInfo = [result[@"results"] firstObject];
-        NSLog(@"%@",result);
+//        NSLog(@"%@",result);
          NSString *currentLocationName = @"";
          NSArray *locationinfos = [[self.currentLocationDetailInfo[@"address_components"] reverseObjectEnumerator] allObjects];
         for (NSDictionary *dic in locationinfos) {
@@ -1191,6 +1249,9 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
         if (self.currentDeviceInfo.Id == nil) {
             return;
         }
+    if ([UserInfo shareUserInfo].token == nil) {
+        return;
+    }
 //        NSLog(@"%@",self.currentDeviceInfo.Id);
         NSString *url = host(@"users/deviceSet");
         NSMutableDictionary *para =[[NSMutableDictionary alloc] init];
@@ -1233,6 +1294,8 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
                                self->_mapView.camera = [GMSCameraPosition cameraWithTarget:self.coordinate2D
                                zoom:16];
                            }
+                           [self loadhislocation];
+                           
                            }else{
                                if (![msg isEqualToString:@""]) {
 //                                   NSLog(@"deviceSet--------------%@",msg);
@@ -1240,6 +1303,7 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
                                }
                            }
                                 });
+                   
                        } fail:^(NSError * _Nonnull error) {
                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                        }];
@@ -1255,6 +1319,9 @@ static NSString *serverURL = @"http://rose.leopardtech.co.uk.twil.io/register-bi
     }
 //  self.firstLocationUpdate = NO;
     if (self.currentDeviceInfo.Id.length == 0) {
+        return;
+    }
+    if ([UserInfo shareUserInfo].token.length == 0) {
         return;
     }
 //    NSLog(@"%@",self.currentDeviceInfo.Id);
