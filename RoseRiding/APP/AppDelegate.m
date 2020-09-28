@@ -297,7 +297,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
      [[NSNotificationCenter defaultCenter]postNotificationName:@"jpushNotificationCenter" object:userInfo];
   if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-       [JPUSHService handleRemoteNotification:userInfo];
+//       [JPUSHService handleRemoteNotification:userInfo];
       
     //从通知界面直接进入应用
       
@@ -355,7 +355,7 @@ completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个�
         self.msgid = nil;
     }
   if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-      [JPUSHService handleRemoteNotification:userInfo];
+//      [JPUSHService handleRemoteNotification:userInfo];
      
        [self badgenumber];
                    //第二种情况后台挂起时
